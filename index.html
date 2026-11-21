@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gibson ES-335 UK Deal Radar</title>
+  <!-- Google Fonts: Inter (shadcn UI) + Kaushan Script (Vintage Headstock Script) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kaushan+Script&display=swap" rel="stylesheet">
+  <!-- Lucide Icons (shadcn standard) -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Leaflet Map (for interactive UK Deal Map modal) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            headstock: ['"Kaushan Script"', 'cursive'],
+          },
+          colors: {
+            background: '#0B0908',
+            foreground: '#F5EFE6',
+            card: '#13100E',
+            'card-foreground': '#F5EFE6',
+            popover: '#171311',
+            primary: '#E59A28',
+            'primary-foreground': '#0B0908',
+            secondary: '#1D1714',
+            'secondary-foreground': '#F5EFE6',
+            muted: '#1A1512',
+            'muted-foreground': '#A69A8E',
+            accent: '#231C18',
+            'accent-foreground': '#F5EFE6',
+            border: '#2A221D',
+            input: '#2A221D',
+            ring: '#E59A28',
+            cherry: '#D9483B',
+          },
+          borderRadius: {
+            lg: '0.625rem',
+            md: '0.5rem',
+            sm: '0.375rem',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      background-color: #0B0908;
+      color: #F5EFE6;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    /* Subtle Vintage Sunburst nitrocellulose wash at top of canvas */
+    .sunburst-ambient {
+      background-image:
+        radial-gradient(ellipse 65% 420px at 18% 0%, rgba(229, 154, 40, 0.11), rgba(180, 62, 26, 0.05) 45%, transparent 78%),
+        radial-gradient(ellipse 45% 320px at 85% 0%, rgba(168, 44, 30, 0.07), transparent 72%);
+    }
+    /* Aged mother-of-pearl headstock script */
+    .gibson-script {
+      font-family: 'Kaushan Script', cursive;
+      letter-spacing: -0.02em;
+      background: linear-gradient(180deg, #FFFDF9 0%, #F5EFE6 55%, #DFCFAF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 10px rgba(229, 154, 40, 0.18));
+    }
+    /* shadcn-style Range Slider */
+    input[type="range"].shadcn-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: #231C18;
+      border-radius: 9999px;
+      outline: none;
+      border: 1px solid #2A221D;
+    }
+    input[type="range"].shadcn-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: #F5EFE6;
+      border: 2px solid #E59A28;
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+    input[type="range"].shadcn-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 0 4px rgba(229, 154, 40, 0.22);
+    }
+    input[type="range"].shadcn-slider:focus-visible::-webkit-slider-thumb {
+      box-shadow: 0 0 0 4px rgba(229, 154, 40, 0.35);
+    }
+    input[type="range"].shadcn-slider::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 9999px;
+      background: #F5EFE6;
+      border: 2px solid #E59A28;
+      cursor: pointer;
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #13100E; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #2A221D; border-radius: 9999px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #3D3129; }
+    /* Dark Vintage Sunburst Leaflet Popup Overrides */
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip {
+      background: #13100E !important;
+      color: #F5EFE6 !important;
+      border: 1px solid #2A221D !important;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75) !important;
+    }
+    .leaflet-popup-content { margin: 10px 12px !important; }
+    .leaflet-container a.leaflet-popup-close-button { color: #A69A8E !important; }
+    .leaflet-container a.leaflet-popup-close-button:hover { color: #F5EFE6 !important; }
+  </style>
+</head>
+<body class="bg-background text-foreground min-h-screen antialiased sunburst-ambient">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
+
+    <!-- Top Navigation & Hub Switcher -->
+    <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-5 border-b border-border pb-6">
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-card/80 px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>Live UK Feed • Indie Shops, eBay UK, Reverb &amp; Gumtree</span>
+        </div>
+
+        <h1 class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <span class="gibson-script text-4xl sm:text-5xl leading-none pr-1">Gibson</span>
+          <span class="text-xl sm:text-2xl font-semibold tracking-tight text-foreground/90">ES-335 Deal Radar</span>
+        </h1>
+
+        <p class="text-muted-foreground text-sm max-w-2xl">
+          Automated valuation, era decoding, and true landed cost comparison across Hull &amp; Somerset.
+        </p>
+      </div>
+
+      <!-- Dual Hub Tabs & Action Buttons -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        <!-- shadcn TabsList -->
+        <div class="inline-flex h-10 items-center justify-center rounded-lg bg-secondary p-1 border border-border text-xs font-medium" role="tablist">
+          <button id="hubHull" role="tab" class="hub-btn inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 bg-primary text-primary-foreground font-semibold shadow-sm transition-all">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+            <span>Hull HQ</span>
+            <span class="opacity-70 font-normal">HU1</span>
+          </button>
+          <button id="hubSomerset" role="tab" class="hub-btn inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 text-muted-foreground hover:text-foreground transition-all">
+            <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+            <span>Somerset</span>
+            <span class="opacity-60 font-normal">TA8</span>
+          </button>
+        </div>
+
+        <!-- shadcn Outline Button: UK Deal Map Modal -->
+        <button id="openMapBtn" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-border bg-card px-3.5 text-xs font-medium text-foreground shadow-sm hover:bg-accent hover:border-primary/40 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+          <i data-lucide="map" class="w-3.5 h-3.5 text-primary"></i>
+          <span>UK Map</span>
+        </button>
+
+        <!-- shadcn Outline Button: Scan Live Deals -->
+        <button id="scanNowBtn" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-border bg-card px-3.5 text-xs font-medium text-foreground shadow-sm hover:bg-accent hover:border-[#3D3129] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50">
+          <i id="scanSpinner" data-lucide="refresh-cw" class="w-3.5 h-3.5 text-primary"></i>
+          <span id="scanBtnText">Scan Live Deals</span>
+        </button>
+
+        <!-- shadcn Outline Button: 60s Checklist -->
+        <button id="openChecklistBtn" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-border bg-card px-3.5 text-xs font-medium text-foreground shadow-sm hover:bg-accent hover:border-[#3D3129] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+          <i data-lucide="clipboard-check" class="w-3.5 h-3.5 text-primary"></i>
+          <span>60s Checklist</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Interactive Travel, Fuel & Price Sliders (shadcn Card) -->
+    <section class="rounded-xl border border-border bg-card text-card-foreground shadow-sm">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border px-5 py-3.5">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4 text-primary"></i>
+          <h2 class="text-sm font-semibold tracking-tight text-foreground">Trip, Valuation &amp; Price Parameters</h2>
+          <span id="activeHubBadge" class="inline-flex items-center rounded-md border border-primary/30 bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">
+            Hub: Hull HQ (HU1)
+          </span>
+        </div>
+        <span class="text-xs text-muted-foreground">Recalculates True Landed Cost in real-time</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-5 text-xs">
+        <!-- Max Price Slider -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label for="priceSlider" class="font-medium text-muted-foreground">Max Asking Price</label>
+            <span id="priceVal" class="font-semibold text-primary tabular-nums">£5,000+ (No Limit)</span>
+          </div>
+          <input type="range" id="priceSlider" min="1000" max="5000" value="5000" step="100" class="shadcn-slider">
+          <p class="text-[11px] text-muted-foreground/80">Filter asking prices from £1k to £5k+</p>
+        </div>
+
+        <!-- MPG Slider -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label for="mpgSlider" class="font-medium text-muted-foreground">Vehicle Economy</label>
+            <span id="mpgVal" class="font-semibold text-primary tabular-nums">38 MPG</span>
+          </div>
+          <input type="range" id="mpgSlider" min="25" max="60" value="38" class="shadcn-slider">
+          <p class="text-[11px] text-muted-foreground/80">UK Imperial gallons (4.546 L)</p>
+        </div>
+
+        <!-- Fuel Price Slider -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label for="fuelSlider" class="font-medium text-muted-foreground">UK Petrol Price</label>
+            <span id="fuelVal" class="font-semibold text-primary tabular-nums">£1.42 / L</span>
+          </div>
+          <input type="range" id="fuelSlider" min="1.20" max="1.85" value="1.42" step="0.01" class="shadcn-slider">
+          <p class="text-[11px] text-muted-foreground/80">Average UK forecourt rate</p>
+        </div>
+
+        <!-- Max Road Trip Hours -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <label for="driveSlider" class="font-medium text-muted-foreground">Max Driving Radius</label>
+            <span id="driveVal" class="font-semibold text-primary tabular-nums">3.0 Hours (4.5h for A+)</span>
+          </div>
+          <input type="range" id="driveSlider" min="1" max="5" value="3" step="0.5" class="shadcn-slider">
+          <p class="text-[11px] text-muted-foreground/80">Extends to 4.5h automatically for A+ steals</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live UK Marketplaces & Universal Importer Row -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <!-- 1-Click UK Marketplace Search Hubs (shadcn Card) -->
+      <section class="lg:col-span-7 rounded-xl border border-border bg-card shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-border px-5 py-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="store" class="w-4 h-4 text-primary"></i>
+            <h2 class="text-sm font-semibold tracking-tight text-foreground">Live UK Marketplace Search Hubs</h2>
+          </div>
+          <span class="text-[11px] text-muted-foreground">Direct filtered queries</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2.5 p-4 text-xs">
+          <a href="https://www.ebay.co.uk/sch/i.html?_nkw=gibson+es-335&_sacat=3858&LH_PrefLoc=1" target="_blank" rel="noopener noreferrer" class="group rounded-lg border border-border bg-background/60 p-3 text-center hover:bg-accent hover:border-primary/40 transition-all flex flex-col items-center gap-1.5">
+            <i data-lucide="tag" class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors"></i>
+            <span class="font-medium text-foreground">eBay UK</span>
+            <span class="text-[10px] text-muted-foreground">Nationwide</span>
+          </a>
+          <a href="https://reverb.com/uk/marketplace?query=gibson%20es-335&product_type=electric-guitars" target="_blank" rel="noopener noreferrer" class="group rounded-lg border border-border bg-background/60 p-3 text-center hover:bg-accent hover:border-primary/40 transition-all flex flex-col items-center gap-1.5">
+            <i data-lucide="music" class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors"></i>
+            <span class="font-medium text-foreground">Reverb UK</span>
+            <span class="text-[10px] text-muted-foreground">Live 335s</span>
+          </a>
+          <a id="fbMarketplaceLink" href="https://www.facebook.com/marketplace/hull/search?query=gibson%20335" target="_blank" rel="noopener noreferrer" class="group rounded-lg border border-border bg-background/60 p-3 text-center hover:bg-accent hover:border-primary/40 transition-all flex flex-col items-center gap-1.5">
+            <i data-lucide="users" class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors"></i>
+            <span id="fbMarketplaceText" class="font-medium text-foreground">Facebook</span>
+            <span id="fbMarketplaceSub" class="text-[10px] text-muted-foreground">Hull Radius</span>
+          </a>
+          <a id="gumtreeLink" href="https://www.gumtree.com/search?search_category=guitars&search_location=Hull&distance=100&q=gibson+335" target="_blank" rel="noopener noreferrer" class="group rounded-lg border border-border bg-background/60 p-3 text-center hover:bg-accent hover:border-primary/40 transition-all flex flex-col items-center gap-1.5">
+            <i data-lucide="trees" class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors"></i>
+            <span class="font-medium text-foreground">Gumtree</span>
+            <span id="gumtreeSub" class="text-[10px] text-muted-foreground">Hull 100mi</span>
+          </a>
+          <a href="https://jordanguitars.co.uk/search?type=product&q=335" target="_blank" rel="noopener noreferrer" class="group rounded-lg border border-border bg-background/60 p-3 text-center hover:bg-accent hover:border-primary/40 transition-all flex flex-col items-center gap-1.5">
+            <i data-lucide="gem" class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors"></i>
+            <span class="font-medium text-foreground">Jordan</span>
+            <span class="text-[10px] text-muted-foreground">Pre-Owned</span>
+          </a>
+          <a href="https://www.peachguitars.com/guitars/pre-owned-guitars/?search=335" target="_blank" rel="noopener noreferrer" class="group rounded-lg border border-border bg-background/60 p-3 text-center hover:bg-accent hover:border-primary/40 transition-all flex flex-col items-center gap-1.5">
+            <i data-lucide="award" class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors"></i>
+            <span class="font-medium text-foreground">Peach</span>
+            <span class="text-[10px] text-muted-foreground">Pre-Owned</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 1-Click Universal Deal Importer (shadcn Card) -->
+      <section class="lg:col-span-5 rounded-xl border border-border bg-card shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between border-b border-border px-5 py-3">
+          <div class="flex items-center gap-2">
+            <i data-lucide="link" class="w-4 h-4 text-primary"></i>
+            <h2 class="text-sm font-semibold tracking-tight text-foreground">1-Click Deal Importer</h2>
+          </div>
+          <span class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+            Reverb • Gumtree • FB
+          </span>
+        </div>
+
+        <form id="fbImportForm" class="p-4 space-y-2.5">
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input
+              type="url"
+              id="fbUrlInput"
+              placeholder="Paste Reverb, Gumtree or FB link..."
+              class="flex-1 h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+              required
+            >
+            <input
+              type="text"
+              id="fbLocInput"
+              placeholder="City / Postcode"
+              class="w-full sm:w-36 h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+              value=""
+            >
+          </div>
+          <button
+            type="submit"
+            id="fbImportBtn"
+            class="w-full h-9 inline-flex items-center justify-center gap-1.5 rounded-md bg-primary px-4 text-xs font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            <span>Import &amp; Calculate Landed Cost</span>
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <!-- Filter & Sort Bar (shadcn Toolbar) -->
+    <div class="rounded-xl border border-border bg-card px-4 py-3 text-xs shadow-sm space-y-3">
+      <!-- Top Row: Source Filter + Keyword Search + Count & Sort -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <!-- Source Filter Tabs -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-muted-foreground font-medium mr-1">Source</span>
+          <div class="inline-flex flex-wrap items-center gap-1 rounded-lg bg-secondary p-1 border border-border">
+            <button class="filter-source-btn rounded-md px-2.5 py-1 bg-primary text-primary-foreground font-semibold shadow-sm transition-all" data-source="all">All</button>
+            <button class="filter-source-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-source="indie">Indie Shops</button>
+            <button class="filter-source-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-source="ebay">eBay UK</button>
+            <button class="filter-source-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-source="reverb">Reverb</button>
+            <button class="filter-source-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-source="gumtree">Gumtree</button>
+          </div>
+        </div>
+
+        <!-- Keyword Search Input -->
+        <div class="relative flex-1 min-w-[200px] max-w-xs">
+          <i data-lucide="search" class="w-3.5 h-3.5 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search finish, year, shop (e.g. cherry, bigsby)..."
+            class="w-full h-8 rounded-md border border-input bg-background pl-8 pr-3 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+          >
+        </div>
+
+        <!-- Results Count, Shortlist, View Toggle & Sort Select -->
+        <div class="flex flex-wrap items-center gap-2.5 ml-auto">
+          <button id="shortlistFilterBtn" class="inline-flex h-8 items-center gap-1.5 rounded-md border border-border bg-secondary px-2.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+            <span>Shortlist</span>
+            <span id="shortlistCount" class="rounded bg-card px-1.5 py-0.2 text-[10px] font-semibold tabular-nums border border-border">0</span>
+          </button>
+
+          <button id="restoreHiddenBtn" class="hidden inline-flex h-8 items-center gap-1.5 rounded-md border border-border bg-secondary px-2.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors" title="Restore dismissed guitars">
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+            <span>Restore <span id="hiddenCount">0</span></span>
+          </button>
+
+          <!-- Card Grid vs Data Table View Switcher -->
+          <div class="inline-flex items-center rounded-md bg-secondary p-0.5 border border-border" role="group" aria-label="View Mode">
+            <button id="viewGridBtn" class="inline-flex h-7 items-center gap-1 rounded px-2 text-[11px] font-semibold bg-card text-foreground shadow-sm border border-border transition-all" title="Card Grid View">
+              <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">Cards</span>
+            </button>
+            <button id="viewTableBtn" class="inline-flex h-7 items-center gap-1 rounded px-2 text-[11px] font-medium text-muted-foreground hover:text-foreground transition-all" title="Compact Data Table View">
+              <i data-lucide="table-2" class="w-3.5 h-3.5"></i>
+              <span class="hidden sm:inline">Table</span>
+            </button>
+          </div>
+
+          <span id="resultsCountBadge" class="inline-flex items-center rounded-md border border-border bg-secondary px-2.5 py-1 text-[11px] font-medium text-muted-foreground tabular-nums">
+            Loading...
+          </span>
+          <div class="flex items-center gap-2">
+            <label for="sortSelect" class="text-muted-foreground font-medium">Sort</label>
+            <select id="sortSelect" class="h-8 rounded-md border border-input bg-background px-2.5 text-xs font-medium text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors">
+              <option value="true_cost_asc">Cheapest Landed Route</option>
+              <option value="grade">Deal Grade (A+ First)</option>
+              <option value="price_asc">Asking Price (Lowest)</option>
+              <option value="distance_asc">Shortest Drive</option>
+              <option value="days_desc">Longest on Market (Best Leverage)</option>
+              <option value="days_asc">Newest Listed</option>
+              <option value="year_desc">Newest Year</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Row: Brand Filter + Dexterity -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-2.5 border-t border-border">
+        <!-- Brand Filter Tabs -->
+        <div class="flex flex-wrap items-center gap-1.5">
+          <span class="text-muted-foreground font-medium mr-1">Brand</span>
+          <div class="inline-flex flex-wrap items-center gap-1 rounded-lg bg-secondary p-1 border border-border">
+            <button class="filter-brand-btn rounded-md px-2.5 py-1 bg-card text-foreground font-semibold shadow-sm border border-border transition-all" data-brand="all">All</button>
+            <button class="filter-brand-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-brand="Gibson USA">Gibson USA</button>
+            <button class="filter-brand-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-brand="Orville">Orville / ObG</button>
+            <button class="filter-brand-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-brand="Heritage">Heritage H-535</button>
+            <button class="filter-brand-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-brand="Tokai">Tokai Japan</button>
+          </div>
+        </div>
+
+        <!-- Market Activity Filter (New / Price Drops / 30+ Days) -->
+        <div class="inline-flex flex-wrap items-center gap-1 rounded-lg bg-secondary p-1 border border-border">
+          <span class="text-[11px] text-muted-foreground font-medium px-2">Activity</span>
+          <button class="filter-activity-btn rounded-md px-2.5 py-1 bg-card text-foreground font-semibold shadow-sm border border-border transition-all" data-activity="all">All</button>
+          <button class="filter-activity-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-activity="new">New Today</button>
+          <button class="filter-activity-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-emerald-300 transition-all" data-activity="drops">Price Drops</button>
+          <button class="filter-activity-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-primary transition-all" data-activity="stale">30+ Days</button>
+        </div>
+
+        <!-- Dexterity Segmented Control -->
+        <div class="inline-flex items-center gap-1 rounded-lg bg-secondary p-1 border border-border">
+          <span class="text-[11px] text-muted-foreground font-medium px-2">Dexterity</span>
+          <button class="filter-dex-btn inline-flex items-center gap-1 rounded-md px-2.5 py-1 bg-primary text-primary-foreground font-semibold shadow-sm transition-all" data-dex="right">
+            <span>Right-Handed</span>
+          </button>
+          <button class="filter-dex-btn inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground font-medium transition-all" data-dex="all">
+            <span>All</span>
+          </button>
+          <button class="filter-dex-btn inline-flex items-center gap-1.5 rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground font-medium transition-all" data-dex="left">
+            <span>Left-Handed</span>
+            <span class="rounded bg-purple-500/15 border border-purple-500/30 px-1.5 py-0.2 text-[10px] font-semibold text-purple-300">Lefty</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Deals Grid -->
+    <main id="listingsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Injected by app.js -->
+    </main>
+
+  </div>
+
+  <!-- On-Site 60-Second Inspection Dialog (shadcn Dialog) -->
+  <div id="checklistModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-card border border-border max-w-xl w-full rounded-xl shadow-2xl p-6 space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div class="flex items-start justify-between border-b border-border pb-4">
+        <div class="space-y-1">
+          <h3 class="text-base font-semibold tracking-tight text-foreground flex items-center gap-2">
+            <i data-lucide="clipboard-check" class="w-4 h-4 text-primary"></i>
+            <span>60-Second On-Site Inspection Guide</span>
+          </h3>
+          <p class="text-xs text-muted-foreground">Pre-handover checks before parting with cash or bank transfer</p>
+        </div>
+        <button id="closeChecklistBtn" class="rounded-md p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors" aria-label="Close">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-2.5 text-xs">
+        <div class="p-3.5 bg-background/70 rounded-lg border border-border space-y-1">
+          <div class="font-semibold text-primary flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/15 text-[11px] font-bold">1</span>
+            <span>Headstock Fracture / "Smile" Inspection</span>
+          </div>
+          <p class="text-muted-foreground leading-relaxed pl-7">
+            Run your fingers down the transition between the headstock and neck. Check under strong flashlight or UV for witness lines or overspray. A repaired headstock is an automatic −25% to −35% value reduction.
+          </p>
+        </div>
+
+        <div class="p-3.5 bg-background/70 rounded-lg border border-border space-y-1">
+          <div class="font-semibold text-primary flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/15 text-[11px] font-bold">2</span>
+            <span>Truss Rod Nut &amp; Thread Life</span>
+          </div>
+          <p class="text-muted-foreground leading-relaxed pl-7">
+            Authentic Gibson truss rod covers use <strong class="text-foreground">2 screws</strong> (replicas almost always use 3). Ensure the brass nut is not rounded off, buried beneath the wood, or out of adjustment thread.
+          </p>
+        </div>
+
+        <div class="p-3.5 bg-background/70 rounded-lg border border-border space-y-1">
+          <div class="font-semibold text-primary flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/15 text-[11px] font-bold">3</span>
+            <span>Neck Relief &amp; Lateral Twist Check</span>
+          </div>
+          <p class="text-muted-foreground leading-relaxed pl-7">
+            Sight down both edges of the fingerboard from bridge to headstock. Ensure neck relief is even on both treble and bass sides without a ski-jump or corkscrew twist.
+          </p>
+        </div>
+
+        <div class="p-3.5 bg-background/70 rounded-lg border border-border space-y-1">
+          <div class="font-semibold text-primary flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/15 text-[11px] font-bold">4</span>
+            <span>Fret Nibs &amp; Binding Quality</span>
+          </div>
+          <p class="text-muted-foreground leading-relaxed pl-7">
+            Original Gibson USA &amp; Orville by Gibson models feature binding nibs covering the fret ends. If the frets go over the binding, it has been refretted (inspect fretwork quality).
+          </p>
+        </div>
+
+        <div class="p-3.5 bg-background/70 rounded-lg border border-border space-y-1">
+          <div class="font-semibold text-primary flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/15 text-[11px] font-bold">5</span>
+            <span>Bridge Posts &amp; Hardware Spec</span>
+          </div>
+          <p class="text-muted-foreground leading-relaxed pl-7">
+            Real Gibson ABR-1 or Nashville bridges thread directly into the wood or standard Gibson bushings. Metric bridges with wide flathead screwdriver slots on top indicate counterfeit builds.
+          </p>
+        </div>
+      </div>
+
+      <div class="border-t border-border pt-4 flex justify-end">
+        <button id="dismissChecklistBtn" class="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 text-xs font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors">
+          Got It, Ready to Inspect
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive UK Deal Map Modal (shadcn Dialog) -->
+  <div id="mapModal" class="fixed inset-0 bg-black/85 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-6 hidden">
+    <div class="bg-card border border-border max-w-6xl w-full h-[88vh] rounded-xl shadow-2xl flex flex-col overflow-hidden">
+      <!-- Map Modal Header -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-border px-5 py-3.5 bg-card">
+        <div class="flex items-center gap-3">
+          <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/15 border border-primary/30 text-primary">
+            <i data-lucide="map" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold tracking-tight text-foreground">Interactive UK ES-335 Deal Map</h3>
+            <p id="mapSubtitle" class="text-[11px] text-muted-foreground">Showing filtered listings with live drive-time radius rings from Hull &amp; Somerset</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- Legend -->
+          <div class="hidden md:flex items-center gap-3 text-[11px] text-muted-foreground">
+            <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Grade A+</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> Grade A</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#A69A8E]"></span> Grade B+/B</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 ring-2 ring-blue-500/40"></span> Your Hubs</span>
+          </div>
+          <button id="closeMapBtn" class="rounded-md p-1.5 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors" aria-label="Close Map">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Leaflet Map Canvas -->
+      <div id="ukMapContainer" class="flex-1 w-full bg-background"></div>
+    </div>
+  </div>
+
+  <!-- Sonner-style Notification Toast -->
+  <div id="toast" class="fixed bottom-6 right-6 bg-popover border border-border text-foreground px-4 py-3 rounded-lg shadow-2xl text-xs font-medium flex items-center gap-2.5 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none z-50">
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
+    <span id="toastMsg">Offer message copied to clipboard!</span>
+  </div>
+
+  <script src="app.js?v=3.4"></script>
+  <script>
+    if (window.lucide) lucide.createIcons();
+  </script>
+</body>
+</html>
