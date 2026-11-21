@@ -1,0 +1,41 @@
+name: Gibson ES-335 Live Deal Scanner
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run UK Deal Scanner
+        env:
+          EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
+          EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          ALERT_EMAIL: lkberry137@gmail.com
+        run: python scanner.py
+
+      - name: Commit updated deals feed & history database
+        run: |
+          git config user.name "Gibson Deal Radar Bot"
+          git config user.email "actions@github.com"
+          git add deals.json deals.db
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto-scan: update UK ES-335 deals feed"
+            git push
+          fi
