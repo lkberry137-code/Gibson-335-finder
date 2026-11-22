@@ -3313,6 +3313,71 @@
     "previous_price": null
   },
   {
+    "id": "reverb_95846427",
+    "title": "Gibson ES-335 Diamond 2006 | White Pearl | Yamano Import",
+    "price": 9950.0,
+    "source": "Riffs on Toast",
+    "url": "https://reverb.com/item/95846427-gibson-es-335-diamond-2006-white-pearl-yamano-import",
+    "image_url": "https://rvb-img.reverb.com/i/s--O5b6lBOJ--/quality=medium-low,height=800,width=800,fit=contain,trim.top=394,trim.left=0,trim.width=4284,trim.height=4295/f0afb435-9bb8-463f-ab76-19623d748127.heic",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2006,
+    "era_badge": "\ud83d\udcc5 2006",
+    "era_boost": 0.0,
+    "era_notes": "Production year 2006",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-11-13T11:52:46-06:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a39996. Higher than competitive private/used rates.",
+          "true_landed_cost": 9996.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a39991. Higher than competitive private/used rates.",
+          "true_landed_cost": 9991.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-13T17:52:46+00:00",
+    "days_on_market": 9,
+    "is_new_today": false,
+    "initial_price": 9950.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
     "id": "reverb_104337729",
     "title": "Gibson ES-335 Block 2018 - Satin Cherry Repaired Neck",
     "price": 2000.0,
@@ -3703,6 +3768,396 @@
     "previous_price": null
   },
   {
+    "id": "reverb_99730823",
+    "title": "Gibson ES-335 Sixties Cherry 2024",
+    "price": 2159.1,
+    "source": "Reidys Home of Music",
+    "url": "https://reverb.com/item/99730823-gibson-es-335-sixties-cherry-2024",
+    "image_url": "https://rvb-img.reverb.com/i/s--DLlAOpex--/quality=medium-low,height=800,width=800,fit=contain/39352f9a-5f1c-4b14-a44e-410be78e24c9.jpeg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2024,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 7.95,
+    "shipping_carrier": "Seller Postage: \u00a37.95",
+    "published_at": "2026-10-13T05:52:04-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B+",
+          "badge_class": "bg-blue-600 text-white",
+          "verdict": "Grade B+ (Fair Market)",
+          "reason": "Landed at \u00a32205. Solid market price; worth an offer.",
+          "true_landed_cost": 2205.38,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B+",
+          "badge_class": "bg-blue-600 text-white",
+          "verdict": "Grade B+ (Fair Market)",
+          "reason": "Landed at \u00a32201. Solid market price; worth an offer.",
+          "true_landed_cost": 2200.55,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-13T10:52:04+00:00",
+    "days_on_market": 40,
+    "is_new_today": false,
+    "initial_price": 2159.1,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_104061153",
+    "title": "2023 Gibson Custom Shop ES-335 \u201961 Reissue VOS (DEMO VIDEO)",
+    "price": 3950.0,
+    "source": "Rolly's Guitars",
+    "url": "https://reverb.com/item/104061153-2023-gibson-custom-shop-es-335-61-reissue-vos-demo-video",
+    "image_url": "https://rvb-img.reverb.com/i/s--qqxarKoZ--/quality=medium-low,height=800,width=800,fit=contain/af760f5f-e0d8-4035-ab26-4463dbe94f69.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2023,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 50.0,
+    "shipping_carrier": "Seller Postage: \u00a350.00",
+    "published_at": "2026-11-12T10:50:07-06:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33996. Higher than competitive private/used rates.",
+          "true_landed_cost": 3996.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33991. Higher than competitive private/used rates.",
+          "true_landed_cost": 3991.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-12T16:50:07+00:00",
+    "days_on_market": 10,
+    "is_new_today": false,
+    "initial_price": 3950.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_104061283",
+    "title": "2023 Gibson Custom Shop ES-335 \u201961 Reissue VOS (DEMO VIDEO)",
+    "price": 4150.0,
+    "source": "Rolly's Guitars",
+    "url": "https://reverb.com/item/104061283-2023-gibson-custom-shop-es-335-61-reissue-vos-demo-video",
+    "image_url": "https://rvb-img.reverb.com/i/s--g2ixTwI8--/quality=medium-low,height=800,width=800,fit=contain/ce0195f2-b8bf-4135-b394-09de0661bc92.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2023,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 50.0,
+    "shipping_carrier": "Seller Postage: \u00a350.00",
+    "published_at": "2026-11-12T10:54:33-06:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34196. Higher than competitive private/used rates.",
+          "true_landed_cost": 4196.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34191. Higher than competitive private/used rates.",
+          "true_landed_cost": 4191.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-12T16:54:33+00:00",
+    "days_on_market": 10,
+    "is_new_today": false,
+    "initial_price": 4150.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_100010500",
+    "title": "2020 Gibson Custom Shop \u201959 ES-335 VOS \u2013 Natural",
+    "price": 3995.0,
+    "source": "Jordan Guitars Ltd",
+    "url": "https://reverb.com/item/100010500-2020-gibson-custom-shop-59-es-335-vos-natural",
+    "image_url": "https://rvb-img.reverb.com/i/s--gkhH8qAw--/quality=medium-low,height=800,width=800,fit=contain/4b8ef215-c5c7-4fc9-b89f-9334ed7a51d9.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2020,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 35.0,
+    "shipping_carrier": "Seller Postage: \u00a335.00",
+    "published_at": "2026-10-02T03:00:44-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34041. Higher than competitive private/used rates.",
+          "true_landed_cost": 4041.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34036. Higher than competitive private/used rates.",
+          "true_landed_cost": 4036.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-02T08:00:44+00:00",
+    "days_on_market": 51,
+    "is_new_today": false,
+    "initial_price": 3995.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_103496684",
+    "title": "2021 Gibson ES-335 in Cherry",
+    "price": 2349.0,
+    "source": "Fat Bottom Guitars",
+    "url": "https://reverb.com/item/103496684-2021-gibson-es-335-in-cherry",
+    "image_url": "https://rvb-img.reverb.com/i/s--5dMLwrus--/quality=medium-low,height=800,width=800,fit=contain/a984626c-7400-4c63-9269-f3eba80095fb.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2021,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-10-29T10:05:37-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-600 text-stone-200",
+          "verdict": "Grade B (Negotiate Down)",
+          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
+          "true_landed_cost": 2395.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-600 text-stone-200",
+          "verdict": "Grade B (Negotiate Down)",
+          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
+          "true_landed_cost": 2390.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-29T15:05:37+00:00",
+    "days_on_market": 24,
+    "is_new_today": false,
+    "initial_price": 2349.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_97812444",
+    "title": "Gibson ES-335 Dot 2020 - 2026 - Vintage Ebony",
+    "price": 2199.0,
+    "source": "South Wales Guitars",
+    "url": "https://reverb.com/item/97812444-gibson-es-335-dot-2020-2026-vintage-ebony",
+    "image_url": "https://rvb-img.reverb.com/i/s--nwAoPIe6--/quality=medium-low,height=800,width=800,fit=contain/de119272-6640-40d8-adff-26889f09393a.jpeg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2020,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 100.0,
+    "shipping_carrier": "Seller Postage: \u00a3100.00",
+    "published_at": "2026-06-02T19:39:45-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B+",
+          "badge_class": "bg-blue-600 text-white",
+          "verdict": "Grade B+ (Fair Market)",
+          "reason": "Landed at \u00a32245. Solid market price; worth an offer.",
+          "true_landed_cost": 2245.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B+",
+          "badge_class": "bg-blue-600 text-white",
+          "verdict": "Grade B+ (Fair Market)",
+          "reason": "Landed at \u00a32240. Solid market price; worth an offer.",
+          "true_landed_cost": 2240.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-06-03T00:39:45+00:00",
+    "days_on_market": 172,
+    "is_new_today": false,
+    "initial_price": 2199.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
     "id": "reverb_102027500",
     "title": "Gibson ES-335 DOT 2018 - Gloss Wine Red",
     "price": 2400.0,
@@ -3764,71 +4219,6 @@
     "days_on_market": 64,
     "is_new_today": false,
     "initial_price": 2400.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_95846427",
-    "title": "Gibson ES-335 Diamond 2006 | White Pearl | Yamano Import",
-    "price": 9950.0,
-    "source": "Riffs on Toast",
-    "url": "https://reverb.com/item/95846427-gibson-es-335-diamond-2006-white-pearl-yamano-import",
-    "image_url": "https://rvb-img.reverb.com/i/s--O5b6lBOJ--/quality=medium-low,height=800,width=800,fit=contain,trim.top=394,trim.left=0,trim.width=4284,trim.height=4295/f0afb435-9bb8-463f-ab76-19623d748127.heic",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2006,
-    "era_badge": "\ud83d\udcc5 2006",
-    "era_boost": 0.0,
-    "era_notes": "Production year 2006",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-11-13T11:52:46-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a39996. Higher than competitive private/used rates.",
-          "true_landed_cost": 9996.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a39991. Higher than competitive private/used rates.",
-          "true_landed_cost": 9991.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-13T17:52:46+00:00",
-    "days_on_market": 9,
-    "is_new_today": false,
-    "initial_price": 9950.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -4158,461 +4548,6 @@
     "previous_price": null
   },
   {
-    "id": "reverb_99730823",
-    "title": "Gibson ES-335 Sixties Cherry 2024",
-    "price": 2159.1,
-    "source": "Reidys Home of Music",
-    "url": "https://reverb.com/item/99730823-gibson-es-335-sixties-cherry-2024",
-    "image_url": "https://rvb-img.reverb.com/i/s--DLlAOpex--/quality=medium-low,height=800,width=800,fit=contain/39352f9a-5f1c-4b14-a44e-410be78e24c9.jpeg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2024,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 7.95,
-    "shipping_carrier": "Seller Postage: \u00a37.95",
-    "published_at": "2026-10-13T05:52:04-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "B+",
-          "badge_class": "bg-blue-600 text-white",
-          "verdict": "Grade B+ (Fair Market)",
-          "reason": "Landed at \u00a32205. Solid market price; worth an offer.",
-          "true_landed_cost": 2205.38,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "B+",
-          "badge_class": "bg-blue-600 text-white",
-          "verdict": "Grade B+ (Fair Market)",
-          "reason": "Landed at \u00a32201. Solid market price; worth an offer.",
-          "true_landed_cost": 2200.55,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-13T10:52:04+00:00",
-    "days_on_market": 40,
-    "is_new_today": false,
-    "initial_price": 2159.1,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_104061283",
-    "title": "2023 Gibson Custom Shop ES-335 \u201961 Reissue VOS (DEMO VIDEO)",
-    "price": 4150.0,
-    "source": "Rolly's Guitars",
-    "url": "https://reverb.com/item/104061283-2023-gibson-custom-shop-es-335-61-reissue-vos-demo-video",
-    "image_url": "https://rvb-img.reverb.com/i/s--g2ixTwI8--/quality=medium-low,height=800,width=800,fit=contain/ce0195f2-b8bf-4135-b394-09de0661bc92.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2023,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 50.0,
-    "shipping_carrier": "Seller Postage: \u00a350.00",
-    "published_at": "2026-11-12T10:54:33-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34196. Higher than competitive private/used rates.",
-          "true_landed_cost": 4196.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34191. Higher than competitive private/used rates.",
-          "true_landed_cost": 4191.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-12T16:54:33+00:00",
-    "days_on_market": 10,
-    "is_new_today": false,
-    "initial_price": 4150.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_104061153",
-    "title": "2023 Gibson Custom Shop ES-335 \u201961 Reissue VOS (DEMO VIDEO)",
-    "price": 3950.0,
-    "source": "Rolly's Guitars",
-    "url": "https://reverb.com/item/104061153-2023-gibson-custom-shop-es-335-61-reissue-vos-demo-video",
-    "image_url": "https://rvb-img.reverb.com/i/s--qqxarKoZ--/quality=medium-low,height=800,width=800,fit=contain/af760f5f-e0d8-4035-ab26-4463dbe94f69.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2023,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 50.0,
-    "shipping_carrier": "Seller Postage: \u00a350.00",
-    "published_at": "2026-11-12T10:50:07-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33996. Higher than competitive private/used rates.",
-          "true_landed_cost": 3996.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33991. Higher than competitive private/used rates.",
-          "true_landed_cost": 3991.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-12T16:50:07+00:00",
-    "days_on_market": 10,
-    "is_new_today": false,
-    "initial_price": 3950.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_100010500",
-    "title": "2020 Gibson Custom Shop \u201959 ES-335 VOS \u2013 Natural",
-    "price": 3995.0,
-    "source": "Jordan Guitars Ltd",
-    "url": "https://reverb.com/item/100010500-2020-gibson-custom-shop-59-es-335-vos-natural",
-    "image_url": "https://rvb-img.reverb.com/i/s--gkhH8qAw--/quality=medium-low,height=800,width=800,fit=contain/4b8ef215-c5c7-4fc9-b89f-9334ed7a51d9.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2020,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 35.0,
-    "shipping_carrier": "Seller Postage: \u00a335.00",
-    "published_at": "2026-10-02T03:00:44-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34041. Higher than competitive private/used rates.",
-          "true_landed_cost": 4041.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34036. Higher than competitive private/used rates.",
-          "true_landed_cost": 4036.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-02T08:00:44+00:00",
-    "days_on_market": 51,
-    "is_new_today": false,
-    "initial_price": 3995.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_103496684",
-    "title": "2021 Gibson ES-335 in Cherry",
-    "price": 2349.0,
-    "source": "Fat Bottom Guitars",
-    "url": "https://reverb.com/item/103496684-2021-gibson-es-335-in-cherry",
-    "image_url": "https://rvb-img.reverb.com/i/s--5dMLwrus--/quality=medium-low,height=800,width=800,fit=contain/a984626c-7400-4c63-9269-f3eba80095fb.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2021,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-10-29T10:05:37-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-stone-600 text-stone-200",
-          "verdict": "Grade B (Negotiate Down)",
-          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
-          "true_landed_cost": 2395.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-stone-600 text-stone-200",
-          "verdict": "Grade B (Negotiate Down)",
-          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
-          "true_landed_cost": 2390.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-29T15:05:37+00:00",
-    "days_on_market": 24,
-    "is_new_today": false,
-    "initial_price": 2349.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_97812444",
-    "title": "Gibson ES-335 Dot 2020 - 2026 - Vintage Ebony",
-    "price": 2199.0,
-    "source": "South Wales Guitars",
-    "url": "https://reverb.com/item/97812444-gibson-es-335-dot-2020-2026-vintage-ebony",
-    "image_url": "https://rvb-img.reverb.com/i/s--nwAoPIe6--/quality=medium-low,height=800,width=800,fit=contain/de119272-6640-40d8-adff-26889f09393a.jpeg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2020,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 100.0,
-    "shipping_carrier": "Seller Postage: \u00a3100.00",
-    "published_at": "2026-06-02T19:39:45-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "B+",
-          "badge_class": "bg-blue-600 text-white",
-          "verdict": "Grade B+ (Fair Market)",
-          "reason": "Landed at \u00a32245. Solid market price; worth an offer.",
-          "true_landed_cost": 2245.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "B+",
-          "badge_class": "bg-blue-600 text-white",
-          "verdict": "Grade B+ (Fair Market)",
-          "reason": "Landed at \u00a32240. Solid market price; worth an offer.",
-          "true_landed_cost": 2240.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-06-03T00:39:45+00:00",
-    "days_on_market": 172,
-    "is_new_today": false,
-    "initial_price": 2199.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_103966470",
-    "title": "Gibson ES-335 Custom Shop P90 2012 - Vintage Sunburst",
-    "price": 2100.0,
-    "source": "Vintage Gear",
-    "url": "https://reverb.com/item/103966470-gibson-es-335-custom-shop-p90-2012-vintage-sunburst",
-    "image_url": "https://rvb-img.reverb.com/i/s--tIeGGAUU--/quality=medium-low,height=800,width=800,fit=contain/55d7e9ec-8f67-44e8-9de6-06ed833805c1.jpeg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2012,
-    "era_badge": "\u26a0\ufe0f 2012 SPEC CHECK",
-    "era_boost": -0.5,
-    "era_notes": "Check for baked maple / laminated rosewood board",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 50.0,
-    "shipping_carrier": "Seller Postage: \u00a350.00",
-    "published_at": "2026-11-10T09:06:39-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "A",
-          "badge_class": "bg-teal-500 text-stone-950 font-bold",
-          "verdict": "Grade A (Prime Target)",
-          "reason": "Landed at \u00a32146. Well under \u00a32,200 average market floor.",
-          "true_landed_cost": 2146.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "A",
-          "badge_class": "bg-teal-500 text-stone-950 font-bold",
-          "verdict": "Grade A (Prime Target)",
-          "reason": "Landed at \u00a32141. Well under \u00a32,200 average market floor.",
-          "true_landed_cost": 2141.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-10T15:06:39+00:00",
-    "days_on_market": 12,
-    "is_new_today": false,
-    "initial_price": 2100.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "reverb_96658547",
     "title": "Gibson ES-335 '59 Reissue Historic Collection 2011 - Vintage Burst",
     "price": 3450.0,
@@ -4674,71 +4609,6 @@
     "days_on_market": 139,
     "is_new_today": false,
     "initial_price": 3450.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_75697379",
-    "title": "Gibson ES-335 Dot 1981 - Blonde Natural",
-    "price": 3800.0,
-    "source": "Federico's Shop",
-    "url": "https://reverb.com/item/75697379-gibson-es-335-dot-1981-blonde-natural",
-    "image_url": "https://rvb-img.reverb.com/i/s--7jSzCU5Y--/quality=medium-low,height=800,width=800,fit=contain/x646esx2iuv0fujoexte.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 1981,
-    "era_badge": "\ud83c\udfb8 NORLIN ERA",
-    "era_boost": 0.0,
-    "era_notes": "Check weight, 3-piece neck, volute",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 40.0,
-    "shipping_carrier": "Seller Postage: \u00a340.00",
-    "published_at": "2026-09-15T11:02:09-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33846. Higher than competitive private/used rates.",
-          "true_landed_cost": 3846.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33841. Higher than competitive private/used rates.",
-          "true_landed_cost": 3841.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-09-15T16:02:09+00:00",
-    "days_on_market": 68,
-    "is_new_today": false,
-    "initial_price": 3800.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -5064,6 +4934,136 @@
     "days_on_market": 185,
     "is_new_today": false,
     "initial_price": 3149.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_75697379",
+    "title": "Gibson ES-335 Dot 1981 - Blonde Natural",
+    "price": 3800.0,
+    "source": "Federico's Shop",
+    "url": "https://reverb.com/item/75697379-gibson-es-335-dot-1981-blonde-natural",
+    "image_url": "https://rvb-img.reverb.com/i/s--7jSzCU5Y--/quality=medium-low,height=800,width=800,fit=contain/x646esx2iuv0fujoexte.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1981,
+    "era_badge": "\ud83c\udfb8 NORLIN ERA",
+    "era_boost": 0.0,
+    "era_notes": "Check weight, 3-piece neck, volute",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 40.0,
+    "shipping_carrier": "Seller Postage: \u00a340.00",
+    "published_at": "2026-09-15T11:02:09-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33846. Higher than competitive private/used rates.",
+          "true_landed_cost": 3846.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33841. Higher than competitive private/used rates.",
+          "true_landed_cost": 3841.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-09-15T16:02:09+00:00",
+    "days_on_market": 68,
+    "is_new_today": false,
+    "initial_price": 3800.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_103966470",
+    "title": "Gibson ES-335 Custom Shop P90 2012 - Vintage Sunburst",
+    "price": 2100.0,
+    "source": "Vintage Gear",
+    "url": "https://reverb.com/item/103966470-gibson-es-335-custom-shop-p90-2012-vintage-sunburst",
+    "image_url": "https://rvb-img.reverb.com/i/s--tIeGGAUU--/quality=medium-low,height=800,width=800,fit=contain/55d7e9ec-8f67-44e8-9de6-06ed833805c1.jpeg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2012,
+    "era_badge": "\u26a0\ufe0f 2012 SPEC CHECK",
+    "era_boost": -0.5,
+    "era_notes": "Check for baked maple / laminated rosewood board",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 50.0,
+    "shipping_carrier": "Seller Postage: \u00a350.00",
+    "published_at": "2026-11-10T09:06:39-06:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "A",
+          "badge_class": "bg-teal-500 text-stone-950 font-bold",
+          "verdict": "Grade A (Prime Target)",
+          "reason": "Landed at \u00a32146. Well under \u00a32,200 average market floor.",
+          "true_landed_cost": 2146.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "A",
+          "badge_class": "bg-teal-500 text-stone-950 font-bold",
+          "verdict": "Grade A (Prime Target)",
+          "reason": "Landed at \u00a32141. Well under \u00a32,200 average market floor.",
+          "true_landed_cost": 2141.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-10T15:06:39+00:00",
+    "days_on_market": 12,
+    "is_new_today": false,
+    "initial_price": 2100.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -5523,25 +5523,25 @@
     "previous_price": null
   },
   {
-    "id": "reverb_84488063",
-    "title": "Gibson es-335 1963 reissue 2016 - Historic burst VOS",
-    "price": 3500.0,
-    "source": "Paul ",
-    "url": "https://reverb.com/item/84488063-gibson-es-335-1963-reissue-2016-historic-burst-vos",
-    "image_url": "https://rvb-img.reverb.com/i/s--n9Nhu8s_--/quality=medium-low,height=800,width=800,fit=contain/lsx93nlegetart6orqiy.jpg",
+    "id": "reverb_35737431",
+    "title": "Gibson ES-335 Dot 1982 Natural/Blonde",
+    "price": 3250.0,
+    "source": "Tower Guitars",
+    "url": "https://reverb.com/item/35737431-gibson-es-335-dot-1982-natural-blonde",
+    "image_url": "https://rvb-img.reverb.com/i/s--zF7wPtik--/quality=medium-low,height=800,width=800,fit=contain/nvuwbbw90spm4f3qje4u.jpg",
     "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 1963,
-    "era_badge": "\ud83d\udcc5 1963",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1982,
+    "era_badge": "\ud83c\udfb8 NORLIN ERA",
     "era_boost": 0.0,
-    "era_notes": "Production year 1963",
+    "era_notes": "Check weight, 3-piece neck, volute",
     "has_case": true,
     "has_repair": false,
     "is_left_handed": false,
     "shipping_available": true,
-    "shipping_cost": 35.0,
-    "shipping_carrier": "Seller Postage: \u00a335.00",
-    "published_at": "2026-09-27T11:34:51-05:00",
+    "shipping_cost": 30.0,
+    "shipping_carrier": "Seller Postage: \u00a330.00",
+    "published_at": "2020-09-12T09:40:14-05:00",
     "coords": [
       52.4772,
       -1.8986
@@ -5558,8 +5558,8 @@
           "grade": "C",
           "badge_class": "bg-stone-800 text-stone-400",
           "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33546. Higher than competitive private/used rates.",
-          "true_landed_cost": 3546.28,
+          "reason": "Landed at \u00a33296. Higher than competitive private/used rates.",
+          "true_landed_cost": 3296.28,
           "case_penalty": 0
         }
       },
@@ -5574,16 +5574,471 @@
           "grade": "C",
           "badge_class": "bg-stone-800 text-stone-400",
           "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33541. Higher than competitive private/used rates.",
-          "true_landed_cost": 3541.45,
+          "reason": "Landed at \u00a33291. Higher than competitive private/used rates.",
+          "true_landed_cost": 3291.45,
           "case_penalty": 0
         }
       }
     },
-    "first_seen": "2026-09-27T16:34:51+00:00",
-    "days_on_market": 56,
+    "first_seen": "2020-09-12T14:40:14+00:00",
+    "days_on_market": 2262,
     "is_new_today": false,
-    "initial_price": 3500.0,
+    "initial_price": 3250.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_98023797",
+    "title": "Gibson ES-335 Dot 1981 - 1985 - Natural",
+    "price": 3125.0,
+    "source": "Paulidorks",
+    "url": "https://reverb.com/item/98023797-gibson-es-335-dot-1981-1985-natural",
+    "image_url": "https://rvb-img.reverb.com/i/s---JFU2AEV--/quality=medium-low,height=800,width=800,fit=contain/b25e5ba7-cb85-4a23-b06d-60b068ac3599.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1981,
+    "era_badge": "\ud83c\udfb8 NORLIN ERA",
+    "era_boost": 0.0,
+    "era_notes": "Check weight, 3-piece neck, volute",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-06-09T07:42:43-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33171. Higher than competitive private/used rates.",
+          "true_landed_cost": 3171.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33166. Higher than competitive private/used rates.",
+          "true_landed_cost": 3166.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-06-09T12:42:43+00:00",
+    "days_on_market": 166,
+    "is_new_today": false,
+    "initial_price": 3125.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_103969353",
+    "title": "1989 Gibson ES-335 Studio - Cherry Red",
+    "price": 2625.0,
+    "source": "The Woodshed Guitars Ltd",
+    "url": "https://reverb.com/item/103969353-1989-gibson-es-335-studio-cherry-red",
+    "image_url": "https://rvb-img.reverb.com/i/s--TZx8Y9mX--/quality=medium-low,height=800,width=800,fit=contain/357e94b7-6f5e-486f-93cd-db6cc3b8d40c.webp",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Studio",
+    "year": 1989,
+    "era_badge": "\ud83d\udcc5 1989",
+    "era_boost": 0.0,
+    "era_notes": "Production year 1989",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 29.0,
+    "shipping_carrier": "Seller Postage: \u00a329.00",
+    "published_at": "2026-11-10T10:31:13-06:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-700 text-stone-300",
+          "verdict": "Grade B (General ES)",
+          "reason": "Landed at \u00a32671.",
+          "true_landed_cost": 2671.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-700 text-stone-300",
+          "verdict": "Grade B (General ES)",
+          "reason": "Landed at \u00a32666.",
+          "true_landed_cost": 2666.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-10T16:31:13+00:00",
+    "days_on_market": 12,
+    "is_new_today": false,
+    "initial_price": 2625.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_97993823",
+    "title": "GIBSON USA ES-335 Dot Reissue Semi-Hollow \"Vintage Sunburst + Rosewood\" (1995)",
+    "price": 3564.0,
+    "source": "Squealing Pig Guitars",
+    "url": "https://reverb.com/item/97993823-gibson-usa-es-335-dot-reissue-semi-hollow-vintage-sunburst-rosewood-1995",
+    "image_url": "https://rvb-img.reverb.com/i/s---nU9q27s--/quality=medium-low,height=800,width=800,fit=contain/de12375f-0750-4122-9b45-7eb7bd603ceb.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1995,
+    "era_badge": "\u2b50 GOOD WOOD (90s)",
+    "era_boost": 1.0,
+    "era_notes": "Honduran mahogany, early '57 Classics",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 29.95,
+    "shipping_carrier": "Seller Postage: \u00a329.95",
+    "published_at": "2026-06-11T03:41:54-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33610. Higher than competitive private/used rates.",
+          "true_landed_cost": 3610.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33605. Higher than competitive private/used rates.",
+          "true_landed_cost": 3605.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-06-11T08:41:54+00:00",
+    "days_on_market": 164,
+    "is_new_today": false,
+    "initial_price": 3564.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_95095600",
+    "title": "Gibson ES-335 Dot 1991 - 2014 - Figured Vintage Sunburst",
+    "price": 2359.0,
+    "source": "Talismanguitars.co.uk",
+    "url": "https://reverb.com/item/95095600-gibson-es-335-dot-1991-2014-figured-vintage-sunburst",
+    "image_url": "https://rvb-img.reverb.com/i/s--JHufbNXe--/quality=medium-low,height=800,width=800,fit=contain,trim.top=437,trim.left=0,trim.width=2627,trim.height=2620/ef4f9214-7ef6-4744-b8ab-78d559bac404.jpeg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1991,
+    "era_badge": "\u2b50 GOOD WOOD (90s)",
+    "era_boost": 1.0,
+    "era_notes": "Honduran mahogany, early '57 Classics",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 100.0,
+    "shipping_carrier": "Seller Postage: \u00a3100.00",
+    "published_at": "2026-10-25T04:26:54-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-600 text-stone-200",
+          "verdict": "Grade B (Negotiate Down)",
+          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
+          "true_landed_cost": 2405.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-600 text-stone-200",
+          "verdict": "Grade B (Negotiate Down)",
+          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
+          "true_landed_cost": 2400.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-25T09:26:54+00:00",
+    "days_on_market": 28,
+    "is_new_today": false,
+    "initial_price": 2359.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_94097280",
+    "title": "\u265aVintage\u265aRARE\u265a2002 Gibson ES-335 Dot Figured\u265a BEALE STREET BLUE \u265aAAA TIGER FLAME\u265a8.5LBS",
+    "price": 2595.0,
+    "source": "The Guitar Dept.",
+    "url": "https://reverb.com/item/94097280-vintage-rare-2002-gibson-es-335-dot-figured-beale-street-blue-aaa-tiger-flame-8-5lbs",
+    "image_url": "https://rvb-img.reverb.com/i/s--lQcH6EDn--/quality=medium-low,height=800,width=800,fit=contain/b2dd2f7c-bf5c-4770-9fd5-2e7acdadd6ac.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2002,
+    "era_badge": "\ud83d\udcc5 2002",
+    "era_boost": 0.0,
+    "era_notes": "Production year 2002",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 45.0,
+    "shipping_carrier": "Seller Postage: \u00a345.00",
+    "published_at": "2026-11-18T09:55:09-06:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a32641. Higher than competitive private/used rates.",
+          "true_landed_cost": 2641.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a32636. Higher than competitive private/used rates.",
+          "true_landed_cost": 2636.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-18T15:55:09+00:00",
+    "days_on_market": 4,
+    "is_new_today": false,
+    "initial_price": 2595.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_98505854",
+    "title": "Gibson ES-335 Dot, 1999 - Walnut, AAA Flame Top",
+    "price": 2499.0,
+    "source": "Nathan's Guitars",
+    "url": "https://reverb.com/item/98505854-gibson-es-335-dot-1999-walnut-aaa-flame-top",
+    "image_url": "https://rvb-img.reverb.com/i/s--mq2ArFFV--/quality=medium-low,height=800,width=800,fit=contain/2c1633a5-a5c1-4b89-bdba-ed5ef6202fc7.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1999,
+    "era_badge": "\u2b50 GOOD WOOD (90s)",
+    "era_boost": 1.0,
+    "era_notes": "Honduran mahogany, early '57 Classics",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-06-21T05:14:18-04:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-600 text-stone-200",
+          "verdict": "Grade B (Negotiate Down)",
+          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
+          "true_landed_cost": 2545.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-600 text-stone-200",
+          "verdict": "Grade B (Negotiate Down)",
+          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
+          "true_landed_cost": 2540.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-06-21T09:14:18+00:00",
+    "days_on_market": 154,
+    "is_new_today": false,
+    "initial_price": 2499.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_104543758",
+    "title": "Vintage 1995 Gibson ES 335 Dot Cherry Red w/ Orignal HSC",
+    "price": 2295.0,
+    "source": "GAS STATION GUITARS",
+    "url": "https://reverb.com/item/104543758-vintage-1995-gibson-es-335-dot-cherry-red-w-orignal-hsc",
+    "image_url": "https://rvb-img.reverb.com/i/s--C-BS55pI--/quality=medium-low,height=800,width=800,fit=contain/c1b3014d-a409-4f5a-80da-b19861cf1c23.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1995,
+    "era_badge": "\u2b50 GOOD WOOD (90s)",
+    "era_boost": 1.0,
+    "era_notes": "Honduran mahogany, early '57 Classics",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 49.0,
+    "shipping_carrier": "Seller Postage: \u00a349.00",
+    "published_at": "2026-11-22T08:40:39-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B+",
+          "badge_class": "bg-blue-600 text-white",
+          "verdict": "Grade B+ (Fair Market)",
+          "reason": "Landed at \u00a32341. Solid market price; worth an offer.",
+          "true_landed_cost": 2341.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B+",
+          "badge_class": "bg-blue-600 text-white",
+          "verdict": "Grade B+ (Fair Market)",
+          "reason": "Landed at \u00a32336. Solid market price; worth an offer.",
+          "true_landed_cost": 2336.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-22T13:40:39+00:00",
+    "days_on_market": 0,
+    "is_new_today": true,
+    "initial_price": 2295.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -5606,7 +6061,7 @@
     "shipping_available": true,
     "shipping_cost": 30.0,
     "shipping_carrier": "Seller Postage: \u00a330.00",
-    "published_at": "2026-10-22T04:20:23-05:00",
+    "published_at": "2026-10-22T05:20:23-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -5671,7 +6126,7 @@
     "shipping_available": true,
     "shipping_cost": 0.0,
     "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-10-31T14:37:57-05:00",
+    "published_at": "2026-10-31T15:37:57-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -5736,7 +6191,7 @@
     "shipping_available": true,
     "shipping_cost": 0.0,
     "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-08-12T04:40:36-05:00",
+    "published_at": "2026-08-12T05:40:36-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -5801,7 +6256,7 @@
     "shipping_available": true,
     "shipping_cost": 0.0,
     "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-09-30T09:07:35-05:00",
+    "published_at": "2026-09-30T10:07:35-04:00",
     "coords": [
       51.2141,
       -0.7984
@@ -5866,7 +6321,7 @@
     "shipping_available": false,
     "shipping_cost": 0.0,
     "shipping_carrier": "Collection in Person Only",
-    "published_at": "2026-08-05T06:20:47-05:00",
+    "published_at": "2026-08-05T07:20:47-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -5913,71 +6368,6 @@
     "previous_price": null
   },
   {
-    "id": "reverb_104543758",
-    "title": "Vintage 1995 Gibson ES 335 Dot Cherry Red w/ Orignal HSC",
-    "price": 2295.0,
-    "source": "GAS STATION GUITARS",
-    "url": "https://reverb.com/item/104543758-vintage-1995-gibson-es-335-dot-cherry-red-w-orignal-hsc",
-    "image_url": "https://rvb-img.reverb.com/i/s--C-BS55pI--/quality=medium-low,height=800,width=800,fit=contain/c1b3014d-a409-4f5a-80da-b19861cf1c23.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 1995,
-    "era_badge": "\u2b50 GOOD WOOD (90s)",
-    "era_boost": 1.0,
-    "era_notes": "Honduran mahogany, early '57 Classics",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 49.0,
-    "shipping_carrier": "Seller Postage: \u00a349.00",
-    "published_at": "2026-11-22T07:40:39-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "B+",
-          "badge_class": "bg-blue-600 text-white",
-          "verdict": "Grade B+ (Fair Market)",
-          "reason": "Landed at \u00a32341. Solid market price; worth an offer.",
-          "true_landed_cost": 2341.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "B+",
-          "badge_class": "bg-blue-600 text-white",
-          "verdict": "Grade B+ (Fair Market)",
-          "reason": "Landed at \u00a32336. Solid market price; worth an offer.",
-          "true_landed_cost": 2336.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-22T13:40:39+00:00",
-    "days_on_market": 0,
-    "is_new_today": true,
-    "initial_price": 2295.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "reverb_102908605",
     "title": "1999 Gibson ES-335 Dot",
     "price": 3495.0,
@@ -5996,7 +6386,7 @@
     "shipping_available": true,
     "shipping_cost": 0.0,
     "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-10-15T09:42:05-05:00",
+    "published_at": "2026-10-15T10:42:05-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6043,71 +6433,6 @@
     "previous_price": null
   },
   {
-    "id": "reverb_99282240",
-    "title": "Gibson ES-335 Dot 2000 Cherry",
-    "price": 2880.0,
-    "source": "Rad Guitars Ltd",
-    "url": "https://reverb.com/item/99282240-gibson-es-335-dot-2000-cherry",
-    "image_url": "https://rvb-img.reverb.com/i/s--1_WZXY29--/quality=medium-low,height=800,width=800,fit=contain/3134d5b1-0fca-4fb8-86c4-b2412c8809da.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2000,
-    "era_badge": "\ud83d\udcc5 2000",
-    "era_boost": 0.0,
-    "era_notes": "Production year 2000",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 54.99,
-    "shipping_carrier": "Seller Postage: \u00a354.99",
-    "published_at": "2026-09-19T09:07:27-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a32926. Higher than competitive private/used rates.",
-          "true_landed_cost": 2926.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a32921. Higher than competitive private/used rates.",
-          "true_landed_cost": 2921.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-09-19T14:07:27+00:00",
-    "days_on_market": 64,
-    "is_new_today": false,
-    "initial_price": 2880.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "reverb_85061165",
     "title": "\u265aAS NEW\u265a2005 Gibson ES-335 'AAA' FIGURED\u265aCherry Red Flame\u265aDots\u265a50's Neck\u265aINCREDIBLE",
     "price": 2849.0,
@@ -6126,7 +6451,7 @@
     "shipping_available": true,
     "shipping_cost": 49.99,
     "shipping_carrier": "Seller Postage: \u00a349.99",
-    "published_at": "2026-11-17T13:12:50-06:00",
+    "published_at": "2026-11-17T14:12:50-05:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6173,25 +6498,25 @@
     "previous_price": null
   },
   {
-    "id": "reverb_94459709",
-    "title": "Gibson ES-335 Dot, 2001",
-    "price": 2246.99,
-    "source": "Lawrence's Shop",
-    "url": "https://reverb.com/item/94459709-gibson-es-335-dot-2001",
-    "image_url": "https://rvb-img.reverb.com/i/s--KwNj0pid--/quality=medium-low,height=800,width=800,fit=contain/ad6b3157-028c-42c6-b2a0-424c75d29b09.jpeg",
+    "id": "reverb_99282240",
+    "title": "Gibson ES-335 Dot 2000 Cherry",
+    "price": 2880.0,
+    "source": "Rad Guitars Ltd",
+    "url": "https://reverb.com/item/99282240-gibson-es-335-dot-2000-cherry",
+    "image_url": "https://rvb-img.reverb.com/i/s--1_WZXY29--/quality=medium-low,height=800,width=800,fit=contain/3134d5b1-0fca-4fb8-86c4-b2412c8809da.jpg",
     "postcode": "B1 1AA",
     "brand_tier": "Gibson USA Standard",
-    "year": 2001,
-    "era_badge": "\ud83d\udcc5 2001",
+    "year": 2000,
+    "era_badge": "\ud83d\udcc5 2000",
     "era_boost": 0.0,
-    "era_notes": "Production year 2001",
+    "era_notes": "Production year 2000",
     "has_case": true,
     "has_repair": false,
     "is_left_handed": false,
     "shipping_available": true,
-    "shipping_cost": 50.0,
-    "shipping_carrier": "Seller Postage: \u00a350.00",
-    "published_at": "2026-11-17T01:18:35-06:00",
+    "shipping_cost": 54.99,
+    "shipping_carrier": "Seller Postage: \u00a354.99",
+    "published_at": "2026-09-19T10:07:27-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6205,11 +6530,11 @@
           "fuel_cost": 46.28
         },
         "evaluation": {
-          "grade": "B+",
-          "badge_class": "bg-blue-600 text-white",
-          "verdict": "Grade B+ (Fair Market)",
-          "reason": "Landed at \u00a32293. Solid market price; worth an offer.",
-          "true_landed_cost": 2293.27,
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a32926. Higher than competitive private/used rates.",
+          "true_landed_cost": 2926.28,
           "case_penalty": 0
         }
       },
@@ -6221,19 +6546,19 @@
           "fuel_cost": 41.45
         },
         "evaluation": {
-          "grade": "B+",
-          "badge_class": "bg-blue-600 text-white",
-          "verdict": "Grade B+ (Fair Market)",
-          "reason": "Landed at \u00a32288. Solid market price; worth an offer.",
-          "true_landed_cost": 2288.44,
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a32921. Higher than competitive private/used rates.",
+          "true_landed_cost": 2921.45,
           "case_penalty": 0
         }
       }
     },
-    "first_seen": "2026-11-17T07:18:35+00:00",
-    "days_on_market": 5,
+    "first_seen": "2026-09-19T14:07:27+00:00",
+    "days_on_market": 64,
     "is_new_today": false,
-    "initial_price": 2246.99,
+    "initial_price": 2880.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -6256,7 +6581,7 @@
     "shipping_available": true,
     "shipping_cost": 0.0,
     "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2025-11-01T17:30:29-05:00",
+    "published_at": "2025-11-01T18:30:29-04:00",
     "coords": [
       53.7665,
       -1.067
@@ -6303,6 +6628,71 @@
     "previous_price": null
   },
   {
+    "id": "reverb_94459709",
+    "title": "Gibson ES-335 Dot, 2001",
+    "price": 2246.99,
+    "source": "Lawrence's Shop",
+    "url": "https://reverb.com/item/94459709-gibson-es-335-dot-2001",
+    "image_url": "https://rvb-img.reverb.com/i/s--KwNj0pid--/quality=medium-low,height=800,width=800,fit=contain/ad6b3157-028c-42c6-b2a0-424c75d29b09.jpeg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2001,
+    "era_badge": "\ud83d\udcc5 2001",
+    "era_boost": 0.0,
+    "era_notes": "Production year 2001",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 50.0,
+    "shipping_carrier": "Seller Postage: \u00a350.00",
+    "published_at": "2026-11-17T02:18:35-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B+",
+          "badge_class": "bg-blue-600 text-white",
+          "verdict": "Grade B+ (Fair Market)",
+          "reason": "Landed at \u00a32293. Solid market price; worth an offer.",
+          "true_landed_cost": 2293.27,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B+",
+          "badge_class": "bg-blue-600 text-white",
+          "verdict": "Grade B+ (Fair Market)",
+          "reason": "Landed at \u00a32288. Solid market price; worth an offer.",
+          "true_landed_cost": 2288.44,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-17T07:18:35+00:00",
+    "days_on_market": 5,
+    "is_new_today": false,
+    "initial_price": 2246.99,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
     "id": "reverb_103980989",
     "title": "2001 Gibson ES-335 Dot Cherry w/OHSC",
     "price": 2455.0,
@@ -6321,7 +6711,7 @@
     "shipping_available": true,
     "shipping_cost": 46.0,
     "shipping_carrier": "Seller Postage: \u00a346.00",
-    "published_at": "2026-11-11T12:35:08-06:00",
+    "published_at": "2026-11-11T13:35:08-05:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6386,7 +6776,7 @@
     "shipping_available": true,
     "shipping_cost": 60.0,
     "shipping_carrier": "Seller Postage: \u00a360.00",
-    "published_at": "2026-10-18T13:02:15-05:00",
+    "published_at": "2026-10-18T14:02:15-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6451,7 +6841,7 @@
     "shipping_available": true,
     "shipping_cost": 63.0,
     "shipping_carrier": "Seller Postage: \u00a363.00",
-    "published_at": "2026-08-20T06:39:18-05:00",
+    "published_at": "2026-08-20T07:39:18-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6516,7 +6906,7 @@
     "shipping_available": true,
     "shipping_cost": 29.95,
     "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-08-01T00:51:58-05:00",
+    "published_at": "2026-08-01T01:51:58-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6581,7 +6971,7 @@
     "shipping_available": true,
     "shipping_cost": 0.0,
     "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-09-12T09:59:04-05:00",
+    "published_at": "2026-09-12T10:59:04-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6628,6 +7018,71 @@
     "previous_price": null
   },
   {
+    "id": "reverb_101705498",
+    "title": "ES-335 2016 Memphis Figured Cherry (Pre-Owned)",
+    "price": 2829.0,
+    "source": "Sound Affects",
+    "url": "https://reverb.com/item/101705498-es-335-2016-memphis-figured-cherry-pre-owned",
+    "image_url": "https://rvb-img.reverb.com/i/s--4qggMYWf--/quality=medium-low,height=800,width=800,fit=contain/765bc02d-1b1d-45f3-9274-7ad4d62b4e6a.png",
+    "postcode": "B1 1AA",
+    "brand_tier": "Other ES Equivalent",
+    "year": 2016,
+    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
+    "era_boost": 0.5,
+    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-09-11T09:32:53-04:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-700 text-stone-300",
+          "verdict": "Grade B (General ES)",
+          "reason": "Landed at \u00a32875.",
+          "true_landed_cost": 2875.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-700 text-stone-300",
+          "verdict": "Grade B (General ES)",
+          "reason": "Landed at \u00a32870.",
+          "true_landed_cost": 2870.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-09-11T13:32:53+00:00",
+    "days_on_market": 72,
+    "is_new_today": false,
+    "initial_price": 2829.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
     "id": "reverb_95285384",
     "title": "GIBSON USA Custom Shop 64' ES-335 \"Brunswick Sparkle Red + Rosewood\" (2021)",
     "price": 6120.0,
@@ -6646,7 +7101,7 @@
     "shipping_available": true,
     "shipping_cost": 29.95,
     "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-03-22T14:34:37-05:00",
+    "published_at": "2026-03-22T15:34:37-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6711,7 +7166,7 @@
     "shipping_available": true,
     "shipping_cost": 0.0,
     "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-09-12T09:35:15-05:00",
+    "published_at": "2026-09-12T10:35:15-04:00",
     "coords": [
       51.5152,
       -0.1292
@@ -6758,71 +7213,6 @@
     "previous_price": null
   },
   {
-    "id": "reverb_101705498",
-    "title": "ES-335 2016 Memphis Figured Cherry (Pre-Owned)",
-    "price": 2829.0,
-    "source": "Sound Affects",
-    "url": "https://reverb.com/item/101705498-es-335-2016-memphis-figured-cherry-pre-owned",
-    "image_url": "https://rvb-img.reverb.com/i/s--4qggMYWf--/quality=medium-low,height=800,width=800,fit=contain/765bc02d-1b1d-45f3-9274-7ad4d62b4e6a.png",
-    "postcode": "B1 1AA",
-    "brand_tier": "Other ES Equivalent",
-    "year": 2016,
-    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
-    "era_boost": 0.5,
-    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-09-11T08:32:53-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-stone-700 text-stone-300",
-          "verdict": "Grade B (General ES)",
-          "reason": "Landed at \u00a32875.",
-          "true_landed_cost": 2875.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-stone-700 text-stone-300",
-          "verdict": "Grade B (General ES)",
-          "reason": "Landed at \u00a32870.",
-          "true_landed_cost": 2870.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-09-11T13:32:53+00:00",
-    "days_on_market": 72,
-    "is_new_today": false,
-    "initial_price": 2829.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "reverb_90777196",
     "title": "Gibson Custom Made to Measure 64 ES 335 Kerry Green, Bigsby  ~ Display Guitar",
     "price": 5999.0,
@@ -6841,7 +7231,7 @@
     "shipping_available": true,
     "shipping_cost": 15.0,
     "shipping_carrier": "Seller Postage: \u00a315.00",
-    "published_at": "2025-06-15T05:12:11-05:00",
+    "published_at": "2025-06-15T06:12:11-04:00",
     "coords": [
       51.9772,
       -0.2285
@@ -6906,7 +7296,7 @@
     "shipping_available": true,
     "shipping_cost": 29.95,
     "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-09-25T09:17:58-05:00",
+    "published_at": "2026-09-25T10:17:58-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -6971,7 +7361,7 @@
     "shipping_available": true,
     "shipping_cost": 35.0,
     "shipping_carrier": "Seller Postage: \u00a335.00",
-    "published_at": "2026-06-26T13:37:56-05:00",
+    "published_at": "2026-06-26T14:37:56-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -7036,7 +7426,7 @@
     "shipping_available": true,
     "shipping_cost": 29.95,
     "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-06-05T03:18:30-05:00",
+    "published_at": "2026-06-05T04:18:30-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -7083,201 +7473,6 @@
     "previous_price": null
   },
   {
-    "id": "reverb_96009973",
-    "title": "2022 Gibson Custom Murphy Lab 1961 ES-335 Heavy Aged - Sixties Cherry",
-    "price": 6293.0,
-    "source": "Jordan Guitars Ltd",
-    "url": "https://reverb.com/item/96009973-2022-gibson-custom-murphy-lab-1961-es-335-heavy-aged-sixties-cherry",
-    "image_url": "https://rvb-img.reverb.com/i/s--wc6ZwQrc--/quality=medium-low,height=800,width=800,fit=contain/103a46b6-bb51-4cd2-830d-1b50a87eb027.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2022,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 35.0,
-    "shipping_carrier": "Seller Postage: \u00a335.00",
-    "published_at": "2026-10-19T10:10:13-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a36339. Higher than competitive private/used rates.",
-          "true_landed_cost": 6339.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a36334. Higher than competitive private/used rates.",
-          "true_landed_cost": 6334.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-19T15:10:13+00:00",
-    "days_on_market": 34,
-    "is_new_today": false,
-    "initial_price": 6293.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_102728015",
-    "title": "GIBSON USA Custom Shop Murphy Lab '64 ES-335 Reissue Ultra Light Aged \"Cherry Red + Rosewood\" (2025)",
-    "price": 5880.0,
-    "source": "Squealing Pig Guitars",
-    "url": "https://reverb.com/item/102728015-gibson-usa-custom-shop-murphy-lab-64-es-335-reissue-ultra-light-aged-cherry-red-rosewood-2025",
-    "image_url": "https://rvb-img.reverb.com/i/s--cdd5wrf3--/quality=medium-low,height=800,width=800,fit=contain/4fa43606-a3a7-40b2-8850-757d92bd8388.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2025,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 29.95,
-    "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-10-10T09:25:51-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a35926. Higher than competitive private/used rates.",
-          "true_landed_cost": 5926.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a35921. Higher than competitive private/used rates.",
-          "true_landed_cost": 5921.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-10T14:25:51+00:00",
-    "days_on_market": 43,
-    "is_new_today": false,
-    "initial_price": 5880.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_104551305",
-    "title": "Gibson Custom Shop Murphy Lab '59 ES-335 Reissue Ultra light aged Aged",
-    "price": 4395.0,
-    "source": "cowboymod",
-    "url": "https://reverb.com/item/104551305-gibson-custom-shop-murphy-lab-59-es-335-reissue-ultra-light-aged-aged",
-    "image_url": "https://rvb-img.reverb.com/i/s--s8-MUDZY--/quality=medium-low,height=800,width=800,fit=contain/cc312faa-3b31-436c-b992-ef052af63c4a.jpeg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": null,
-    "era_badge": "\ud83d\udcc5 ERA UNKNOWN",
-    "era_boost": 0.0,
-    "era_notes": "Year not specified",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": false,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Collection in Person Only",
-    "published_at": "2026-11-22T11:17:34-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34441. Higher than competitive private/used rates.",
-          "true_landed_cost": 4441.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34436. Higher than competitive private/used rates.",
-          "true_landed_cost": 4436.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-22T17:17:34+00:00",
-    "days_on_market": 0,
-    "is_new_today": true,
-    "initial_price": 4395.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "reverb_104391568",
     "title": "GIBSON USA Custom Shop M2M '64 ES-335 Reissue \"Heather Poly + Rosewood\" (2023)",
     "price": 5280.0,
@@ -7296,7 +7491,7 @@
     "shipping_available": true,
     "shipping_cost": 29.95,
     "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-11-20T06:15:57-06:00",
+    "published_at": "2026-11-20T07:15:57-05:00",
     "coords": [
       52.4772,
       -1.8986
@@ -7361,7 +7556,7 @@
     "shipping_available": true,
     "shipping_cost": 35.0,
     "shipping_carrier": "Seller Postage: \u00a335.00",
-    "published_at": "2026-03-29T13:06:59-05:00",
+    "published_at": "2026-03-29T14:06:59-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -7426,7 +7621,7 @@
     "shipping_available": true,
     "shipping_cost": 30.0,
     "shipping_carrier": "Seller Postage: \u00a330.00",
-    "published_at": "2026-05-31T14:20:29-05:00",
+    "published_at": "2026-05-31T15:20:29-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -7491,7 +7686,7 @@
     "shipping_available": true,
     "shipping_cost": 40.0,
     "shipping_carrier": "Seller Postage: \u00a340.00",
-    "published_at": "2026-10-29T09:50:53-05:00",
+    "published_at": "2026-10-29T10:50:53-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -7556,7 +7751,7 @@
     "shipping_available": false,
     "shipping_cost": 0.0,
     "shipping_carrier": "Collection in Person Only",
-    "published_at": "2026-10-26T09:01:11-05:00",
+    "published_at": "2026-10-26T10:01:11-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -7603,461 +7798,6 @@
     "previous_price": null
   },
   {
-    "id": "reverb_103967457",
-    "title": "GIBSON USA Custom Shop '59 ES-335 Reissue \"Historic Burst + Rosewood\" (2015)",
-    "price": 5040.0,
-    "source": "Squealing Pig Guitars",
-    "url": "https://reverb.com/item/103967457-gibson-usa-custom-shop-59-es-335-reissue-historic-burst-rosewood-2015",
-    "image_url": "https://rvb-img.reverb.com/i/s--x3occaZe--/quality=medium-low,height=800,width=800,fit=contain/99c577d6-c46b-419c-a168-fb786f261d4f.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2015,
-    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
-    "era_boost": 0.5,
-    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 29.95,
-    "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-11-11T11:18:20-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a35086. Higher than competitive private/used rates.",
-          "true_landed_cost": 5086.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a35081. Higher than competitive private/used rates.",
-          "true_landed_cost": 5081.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-11T17:18:20+00:00",
-    "days_on_market": 11,
-    "is_new_today": false,
-    "initial_price": 5040.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_95510107",
-    "title": "Gibson USA Memphis ES-335 2018 Limited Edition Figured Blueberry Burst Fade w/ OHSC & Docs",
-    "price": 2395.0,
-    "source": "GAS STATION GUITARS",
-    "url": "https://reverb.com/item/95510107-gibson-usa-memphis-es-335-2018-limited-edition-figured-blueberry-burst-fade-w-ohsc-docs",
-    "image_url": "https://rvb-img.reverb.com/i/s--QBkVK9CR--/quality=medium-low,height=800,width=800,fit=contain/ca5ec2c9-efc0-45a3-910a-531de169dba2.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2018,
-    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
-    "era_boost": 0.5,
-    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 49.0,
-    "shipping_carrier": "Seller Postage: \u00a349.00",
-    "published_at": "2026-10-05T04:31:30-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-stone-600 text-stone-200",
-          "verdict": "Grade B (Negotiate Down)",
-          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
-          "true_landed_cost": 2441.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-stone-600 text-stone-200",
-          "verdict": "Grade B (Negotiate Down)",
-          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
-          "true_landed_cost": 2436.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-05T09:31:30+00:00",
-    "days_on_market": 48,
-    "is_new_today": false,
-    "initial_price": 2395.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_93735035",
-    "title": "Gibson Custom 1959 ES-335 Reissue 2024 - Vintage Natural VOS",
-    "price": 3225.0,
-    "source": "Wickland Gallery",
-    "url": "https://reverb.com/item/93735035-gibson-custom-1959-es-335-reissue-2024-vintage-natural-vos",
-    "image_url": "https://rvb-img.reverb.com/i/s--ePbXW_w0--/quality=medium-low,height=800,width=800,fit=contain/9ae7b551-2c53-4778-b7b4-5f257a536560.jpeg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2024,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 35.0,
-    "shipping_carrier": "Seller Postage: \u00a335.00",
-    "published_at": "2026-10-31T04:43:51-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33271. Higher than competitive private/used rates.",
-          "true_landed_cost": 3271.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33266. Higher than competitive private/used rates.",
-          "true_landed_cost": 3266.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-31T09:43:51+00:00",
-    "days_on_market": 22,
-    "is_new_today": false,
-    "initial_price": 3225.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_99694641",
-    "title": "GIBSON USA Memphis ES-335 Block \"Vintage Natural + Rosewood\" (2018)",
-    "price": 3480.0,
-    "source": "Squealing Pig Guitars",
-    "url": "https://reverb.com/item/99694641-gibson-usa-memphis-es-335-block-vintage-natural-rosewood-2018",
-    "image_url": "https://rvb-img.reverb.com/i/s--D5UDKCac--/quality=medium-low,height=800,width=800,fit=contain/00b75c3a-f6a5-49f8-8d76-21c785dd91a3.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2018,
-    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
-    "era_boost": 0.5,
-    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 29.95,
-    "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-07-29T01:04:38-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33526. Higher than competitive private/used rates.",
-          "true_landed_cost": 3526.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33521. Higher than competitive private/used rates.",
-          "true_landed_cost": 3521.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-07-29T06:04:38+00:00",
-    "days_on_market": 116,
-    "is_new_today": false,
-    "initial_price": 3480.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_100911105",
-    "title": "Gibson Memphis ES-335 Dot  2013 - 2016",
-    "price": 2600.0,
-    "source": "Long-Forgotten Man",
-    "url": "https://reverb.com/item/100911105-gibson-memphis-es-335-dot-2013-2016",
-    "image_url": "https://rvb-img.reverb.com/i/s---6ykUaV6--/quality=medium-low,height=800,width=800,fit=contain/1ccd3be2-2a45-48db-bc15-c28383d21d71.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2013,
-    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
-    "era_boost": 0.5,
-    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 50.0,
-    "shipping_carrier": "Seller Postage: \u00a350.00",
-    "published_at": "2026-08-23T13:46:05-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a32646. Higher than competitive private/used rates.",
-          "true_landed_cost": 2646.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a32641. Higher than competitive private/used rates.",
-          "true_landed_cost": 2641.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-08-23T18:46:05+00:00",
-    "days_on_market": 91,
-    "is_new_today": false,
-    "initial_price": 2600.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_93359553",
-    "title": "Gibson ES-335 Vintage Burst Satin 2020s",
-    "price": 1850.0,
-    "source": "Mark G",
-    "url": "https://reverb.com/item/93359553-gibson-es-335-vintage-burst-satin-2020s",
-    "image_url": "https://rvb-img.reverb.com/i/s--vBMsXDbG--/quality=medium-low,height=800,width=800,fit=contain/b03564e0-1201-48f0-bc27-7a147aef6a11.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": null,
-    "era_badge": "\ud83d\udcc5 ERA UNKNOWN",
-    "era_boost": 0.0,
-    "era_notes": "Year not specified",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": false,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Collection in Person Only",
-    "published_at": "2026-07-22T10:03:58-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "A+",
-          "badge_class": "bg-emerald-500 text-stone-950 font-black",
-          "verdict": "Grade A+ (Holy Grail Steal)",
-          "reason": "Landed at \u00a31896. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
-          "true_landed_cost": 1896.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "A+",
-          "badge_class": "bg-emerald-500 text-stone-950 font-black",
-          "verdict": "Grade A+ (Holy Grail Steal)",
-          "reason": "Landed at \u00a31891. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
-          "true_landed_cost": 1891.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-07-22T15:03:58+00:00",
-    "days_on_market": 123,
-    "is_new_today": false,
-    "initial_price": 1850.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_104275242",
-    "title": "Gibson ES-335 Satin Vintage Burst with Bigsby (2022)",
-    "price": 1899.0,
-    "source": "O'Donnell's Guitars",
-    "url": "https://reverb.com/item/104275242-gibson-es-335-satin-vintage-burst-with-bigsby-2022",
-    "image_url": "https://rvb-img.reverb.com/i/s--ayp4Y-Fr--/quality=medium-low,height=800,width=800,fit=contain/fb18dcd3-122e-4781-83e5-5385b96ad127.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2022,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 50.0,
-    "shipping_carrier": "Seller Postage: \u00a350.00",
-    "published_at": "2026-11-17T03:45:15-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "A+",
-          "badge_class": "bg-emerald-500 text-stone-950 font-black",
-          "verdict": "Grade A+ (Holy Grail Steal)",
-          "reason": "Landed at \u00a31945. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
-          "true_landed_cost": 1945.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "A+",
-          "badge_class": "bg-emerald-500 text-stone-950 font-black",
-          "verdict": "Grade A+ (Holy Grail Steal)",
-          "reason": "Landed at \u00a31940. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
-          "true_landed_cost": 1940.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-17T09:45:15+00:00",
-    "days_on_market": 5,
-    "is_new_today": false,
-    "initial_price": 1899.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "reverb_104061369",
     "title": "2022 Gibson Custom Shop ES-335 \u201964 Reissue VOS (DEMO VIDEO)",
     "price": 4350.0,
@@ -8076,7 +7816,7 @@
     "shipping_available": true,
     "shipping_cost": 50.0,
     "shipping_carrier": "Seller Postage: \u00a350.00",
-    "published_at": "2026-11-12T10:57:49-06:00",
+    "published_at": "2026-11-12T11:57:49-05:00",
     "coords": [
       52.4772,
       -1.8986
@@ -8141,7 +7881,7 @@
     "shipping_available": true,
     "shipping_cost": 50.0,
     "shipping_carrier": "Seller Postage: \u00a350.00",
-    "published_at": "2026-09-16T03:10:22-05:00",
+    "published_at": "2026-09-16T04:10:22-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -8206,7 +7946,7 @@
     "shipping_available": true,
     "shipping_cost": 29.95,
     "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-02-16T09:50:58-06:00",
+    "published_at": "2026-02-16T10:50:58-05:00",
     "coords": [
       52.4772,
       -1.8986
@@ -8253,25 +7993,25 @@
     "previous_price": null
   },
   {
-    "id": "reverb_91862941",
-    "title": "Gibson Rusty Anderson ES-335 in Figured Natural (2013)",
-    "price": 3999.0,
-    "source": "We Have Sound Guitars",
-    "url": "https://reverb.com/item/91862941-gibson-rusty-anderson-es-335-in-figured-natural-2013",
-    "image_url": "https://rvb-img.reverb.com/i/s--fMvnl0qN--/quality=medium-low,height=800,width=800,fit=contain/xkngsozqqeymwsa2rl4v.jpg",
+    "id": "reverb_96009973",
+    "title": "2022 Gibson Custom Murphy Lab 1961 ES-335 Heavy Aged - Sixties Cherry",
+    "price": 6293.0,
+    "source": "Jordan Guitars Ltd",
+    "url": "https://reverb.com/item/96009973-2022-gibson-custom-murphy-lab-1961-es-335-heavy-aged-sixties-cherry",
+    "image_url": "https://rvb-img.reverb.com/i/s--wc6ZwQrc--/quality=medium-low,height=800,width=800,fit=contain/103a46b6-bb51-4cd2-830d-1b50a87eb027.jpg",
     "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2013,
-    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
-    "era_boost": 0.5,
-    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2022,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
     "has_case": true,
     "has_repair": false,
     "is_left_handed": false,
-    "shipping_available": false,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Collection in Person Only",
-    "published_at": "2025-08-19T07:46:23-05:00",
+    "shipping_available": true,
+    "shipping_cost": 35.0,
+    "shipping_carrier": "Seller Postage: \u00a335.00",
+    "published_at": "2026-10-19T11:10:13-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -8288,8 +8028,8 @@
           "grade": "C",
           "badge_class": "bg-stone-800 text-stone-400",
           "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34045. Higher than competitive private/used rates.",
-          "true_landed_cost": 4045.28,
+          "reason": "Landed at \u00a36339. Higher than competitive private/used rates.",
+          "true_landed_cost": 6339.28,
           "case_penalty": 0
         }
       },
@@ -8304,28 +8044,223 @@
           "grade": "C",
           "badge_class": "bg-stone-800 text-stone-400",
           "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34040. Higher than competitive private/used rates.",
-          "true_landed_cost": 4040.45,
+          "reason": "Landed at \u00a36334. Higher than competitive private/used rates.",
+          "true_landed_cost": 6334.45,
           "case_penalty": 0
         }
       }
     },
-    "first_seen": "2025-08-19T12:46:23+00:00",
-    "days_on_market": 460,
+    "first_seen": "2026-10-19T15:10:13+00:00",
+    "days_on_market": 34,
     "is_new_today": false,
-    "initial_price": 3999.0,
+    "initial_price": 6293.0,
     "price_drop": 0.0,
     "previous_price": null
   },
   {
-    "id": "reverb_101365037",
-    "title": "GIBSON USA Memphis ES-335 Reissue \"Heritage Cherry + Rosewood\" (2015)@",
-    "price": 3480.0,
+    "id": "reverb_102728015",
+    "title": "GIBSON USA Custom Shop Murphy Lab '64 ES-335 Reissue Ultra Light Aged \"Cherry Red + Rosewood\" (2025)",
+    "price": 5880.0,
     "source": "Squealing Pig Guitars",
-    "url": "https://reverb.com/item/101365037-gibson-usa-memphis-es-335-reissue-heritage-cherry-rosewood-2015",
-    "image_url": "https://rvb-img.reverb.com/i/s--nQNRVG_3--/quality=medium-low,height=800,width=800,fit=contain/74f7e824-6bfa-4bb7-aaa5-9f2867eb465d.jpg",
+    "url": "https://reverb.com/item/102728015-gibson-usa-custom-shop-murphy-lab-64-es-335-reissue-ultra-light-aged-cherry-red-rosewood-2025",
+    "image_url": "https://rvb-img.reverb.com/i/s--cdd5wrf3--/quality=medium-low,height=800,width=800,fit=contain/4fa43606-a3a7-40b2-8850-757d92bd8388.jpg",
     "postcode": "B1 1AA",
-    "brand_tier": "Heritage H-535",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2025,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 29.95,
+    "shipping_carrier": "Seller Postage: \u00a329.95",
+    "published_at": "2026-10-10T10:25:51-04:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a35926. Higher than competitive private/used rates.",
+          "true_landed_cost": 5926.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a35921. Higher than competitive private/used rates.",
+          "true_landed_cost": 5921.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-10T14:25:51+00:00",
+    "days_on_market": 43,
+    "is_new_today": false,
+    "initial_price": 5880.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_104551305",
+    "title": "Gibson Custom Shop Murphy Lab '59 ES-335 Reissue Ultra light aged Aged",
+    "price": 4395.0,
+    "source": "cowboymod",
+    "url": "https://reverb.com/item/104551305-gibson-custom-shop-murphy-lab-59-es-335-reissue-ultra-light-aged-aged",
+    "image_url": "https://rvb-img.reverb.com/i/s--s8-MUDZY--/quality=medium-low,height=800,width=800,fit=contain/cc312faa-3b31-436c-b992-ef052af63c4a.jpeg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
+    "year": null,
+    "era_badge": "\ud83d\udcc5 ERA UNKNOWN",
+    "era_boost": 0.0,
+    "era_notes": "Year not specified",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": false,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Collection in Person Only",
+    "published_at": "2026-11-22T12:17:34-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34441. Higher than competitive private/used rates.",
+          "true_landed_cost": 4441.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34436. Higher than competitive private/used rates.",
+          "true_landed_cost": 4436.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-22T17:17:34+00:00",
+    "days_on_market": 0,
+    "is_new_today": true,
+    "initial_price": 4395.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_93359553",
+    "title": "Gibson ES-335 Vintage Burst Satin 2020s",
+    "price": 1850.0,
+    "source": "Mark G",
+    "url": "https://reverb.com/item/93359553-gibson-es-335-vintage-burst-satin-2020s",
+    "image_url": "https://rvb-img.reverb.com/i/s--vBMsXDbG--/quality=medium-low,height=800,width=800,fit=contain/b03564e0-1201-48f0-bc27-7a147aef6a11.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": null,
+    "era_badge": "\ud83d\udcc5 ERA UNKNOWN",
+    "era_boost": 0.0,
+    "era_notes": "Year not specified",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": false,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Collection in Person Only",
+    "published_at": "2026-07-22T11:03:58-04:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "A+",
+          "badge_class": "bg-emerald-500 text-stone-950 font-black",
+          "verdict": "Grade A+ (Holy Grail Steal)",
+          "reason": "Landed at \u00a31896. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
+          "true_landed_cost": 1896.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "A+",
+          "badge_class": "bg-emerald-500 text-stone-950 font-black",
+          "verdict": "Grade A+ (Holy Grail Steal)",
+          "reason": "Landed at \u00a31891. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
+          "true_landed_cost": 1891.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-07-22T15:03:58+00:00",
+    "days_on_market": 123,
+    "is_new_today": false,
+    "initial_price": 1850.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_103967457",
+    "title": "GIBSON USA Custom Shop '59 ES-335 Reissue \"Historic Burst + Rosewood\" (2015)",
+    "price": 5040.0,
+    "source": "Squealing Pig Guitars",
+    "url": "https://reverb.com/item/103967457-gibson-usa-custom-shop-59-es-335-reissue-historic-burst-rosewood-2015",
+    "image_url": "https://rvb-img.reverb.com/i/s--x3occaZe--/quality=medium-low,height=800,width=800,fit=contain/99c577d6-c46b-419c-a168-fb786f261d4f.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
     "year": 2015,
     "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
     "era_boost": 0.5,
@@ -8336,7 +8271,72 @@
     "shipping_available": true,
     "shipping_cost": 29.95,
     "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-09-05T09:06:08-05:00",
+    "published_at": "2026-11-11T12:18:20-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a35086. Higher than competitive private/used rates.",
+          "true_landed_cost": 5086.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a35081. Higher than competitive private/used rates.",
+          "true_landed_cost": 5081.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-11T17:18:20+00:00",
+    "days_on_market": 11,
+    "is_new_today": false,
+    "initial_price": 5040.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_95510107",
+    "title": "Gibson USA Memphis ES-335 2018 Limited Edition Figured Blueberry Burst Fade w/ OHSC & Docs",
+    "price": 2395.0,
+    "source": "GAS STATION GUITARS",
+    "url": "https://reverb.com/item/95510107-gibson-usa-memphis-es-335-2018-limited-edition-figured-blueberry-burst-fade-w-ohsc-docs",
+    "image_url": "https://rvb-img.reverb.com/i/s--QBkVK9CR--/quality=medium-low,height=800,width=800,fit=contain/ca5ec2c9-efc0-45a3-910a-531de169dba2.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2018,
+    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
+    "era_boost": 0.5,
+    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 49.0,
+    "shipping_carrier": "Seller Postage: \u00a349.00",
+    "published_at": "2026-10-05T05:31:30-04:00",
     "coords": [
       52.4772,
       -1.8986
@@ -8351,9 +8351,139 @@
         },
         "evaluation": {
           "grade": "B",
-          "badge_class": "bg-amber-600 text-white font-bold",
-          "verdict": "Grade B (Kalamazoo Craft)",
-          "reason": "Landed at \u00a33526. Built in former Gibson Parsons St plant.",
+          "badge_class": "bg-stone-600 text-stone-200",
+          "verdict": "Grade B (Negotiate Down)",
+          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
+          "true_landed_cost": 2441.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "B",
+          "badge_class": "bg-stone-600 text-stone-200",
+          "verdict": "Grade B (Negotiate Down)",
+          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
+          "true_landed_cost": 2436.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-05T09:31:30+00:00",
+    "days_on_market": 48,
+    "is_new_today": false,
+    "initial_price": 2395.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_93735035",
+    "title": "Gibson Custom 1959 ES-335 Reissue 2024 - Vintage Natural VOS",
+    "price": 3225.0,
+    "source": "Wickland Gallery",
+    "url": "https://reverb.com/item/93735035-gibson-custom-1959-es-335-reissue-2024-vintage-natural-vos",
+    "image_url": "https://rvb-img.reverb.com/i/s--ePbXW_w0--/quality=medium-low,height=800,width=800,fit=contain/9ae7b551-2c53-4778-b7b4-5f257a536560.jpeg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2024,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 35.0,
+    "shipping_carrier": "Seller Postage: \u00a335.00",
+    "published_at": "2026-10-31T05:43:51-04:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33271. Higher than competitive private/used rates.",
+          "true_landed_cost": 3271.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33266. Higher than competitive private/used rates.",
+          "true_landed_cost": 3266.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-31T09:43:51+00:00",
+    "days_on_market": 22,
+    "is_new_today": false,
+    "initial_price": 3225.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_99694641",
+    "title": "GIBSON USA Memphis ES-335 Block \"Vintage Natural + Rosewood\" (2018)",
+    "price": 3480.0,
+    "source": "Squealing Pig Guitars",
+    "url": "https://reverb.com/item/99694641-gibson-usa-memphis-es-335-block-vintage-natural-rosewood-2018",
+    "image_url": "https://rvb-img.reverb.com/i/s--D5UDKCac--/quality=medium-low,height=800,width=800,fit=contain/00b75c3a-f6a5-49f8-8d76-21c785dd91a3.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2018,
+    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
+    "era_boost": 0.5,
+    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 29.95,
+    "shipping_carrier": "Seller Postage: \u00a329.95",
+    "published_at": "2026-07-29T02:04:38-04:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33526. Higher than competitive private/used rates.",
           "true_landed_cost": 3526.28,
           "case_penalty": 0
         }
@@ -8366,19 +8496,279 @@
           "fuel_cost": 41.45
         },
         "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-amber-600 text-white font-bold",
-          "verdict": "Grade B (Kalamazoo Craft)",
-          "reason": "Landed at \u00a33521. Built in former Gibson Parsons St plant.",
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33521. Higher than competitive private/used rates.",
           "true_landed_cost": 3521.45,
           "case_penalty": 0
         }
       }
     },
-    "first_seen": "2026-09-05T14:06:08+00:00",
-    "days_on_market": 78,
+    "first_seen": "2026-07-29T06:04:38+00:00",
+    "days_on_market": 116,
     "is_new_today": false,
     "initial_price": 3480.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_100911105",
+    "title": "Gibson Memphis ES-335 Dot  2013 - 2016",
+    "price": 2600.0,
+    "source": "Long-Forgotten Man",
+    "url": "https://reverb.com/item/100911105-gibson-memphis-es-335-dot-2013-2016",
+    "image_url": "https://rvb-img.reverb.com/i/s---6ykUaV6--/quality=medium-low,height=800,width=800,fit=contain/1ccd3be2-2a45-48db-bc15-c28383d21d71.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2013,
+    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
+    "era_boost": 0.5,
+    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 50.0,
+    "shipping_carrier": "Seller Postage: \u00a350.00",
+    "published_at": "2026-08-23T14:46:05-04:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a32646. Higher than competitive private/used rates.",
+          "true_landed_cost": 2646.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a32641. Higher than competitive private/used rates.",
+          "true_landed_cost": 2641.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-08-23T18:46:05+00:00",
+    "days_on_market": 91,
+    "is_new_today": false,
+    "initial_price": 2600.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_104275242",
+    "title": "Gibson ES-335 Satin Vintage Burst with Bigsby (2022)",
+    "price": 1899.0,
+    "source": "O'Donnell's Guitars",
+    "url": "https://reverb.com/item/104275242-gibson-es-335-satin-vintage-burst-with-bigsby-2022",
+    "image_url": "https://rvb-img.reverb.com/i/s--ayp4Y-Fr--/quality=medium-low,height=800,width=800,fit=contain/fb18dcd3-122e-4781-83e5-5385b96ad127.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2022,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 50.0,
+    "shipping_carrier": "Seller Postage: \u00a350.00",
+    "published_at": "2026-11-17T04:45:15-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "A+",
+          "badge_class": "bg-emerald-500 text-stone-950 font-black",
+          "verdict": "Grade A+ (Holy Grail Steal)",
+          "reason": "Landed at \u00a31945. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
+          "true_landed_cost": 1945.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "A+",
+          "badge_class": "bg-emerald-500 text-stone-950 font-black",
+          "verdict": "Grade A+ (Holy Grail Steal)",
+          "reason": "Landed at \u00a31940. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
+          "true_landed_cost": 1940.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-17T09:45:15+00:00",
+    "days_on_market": 5,
+    "is_new_today": false,
+    "initial_price": 1899.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_91791363",
+    "title": "Pre Owned Gibson 2012 Memphis Custom Shop LTD ES-335 P90 - Satin Cherry, Gloss Top Inc. Case",
+    "price": 2995.0,
+    "source": "Express Music",
+    "url": "https://reverb.com/item/91791363-pre-owned-gibson-2012-memphis-custom-shop-ltd-es-335-p90-satin-cherry-gloss-top-inc-case",
+    "image_url": "https://rvb-img.reverb.com/i/s--KKft06-q--/quality=medium-low,height=800,width=800,fit=contain/satgwsvk7iw3rwkgcebf.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2012,
+    "era_badge": "\u26a0\ufe0f 2012 SPEC CHECK",
+    "era_boost": -0.5,
+    "era_notes": "Check for baked maple / laminated rosewood board",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 10.0,
+    "shipping_carrier": "Seller Postage: \u00a310.00",
+    "published_at": "2026-11-11T11:01:09-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33041. Higher than competitive private/used rates.",
+          "true_landed_cost": 3041.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33036. Higher than competitive private/used rates.",
+          "true_landed_cost": 3036.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-11T16:01:09+00:00",
+    "days_on_market": 11,
+    "is_new_today": false,
+    "initial_price": 2995.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_103070857",
+    "title": "GIBSON USA Custom Shop '59 ES-335 Reissue \"Vintage Burst + Rosewood\" (2021)@",
+    "price": 4920.0,
+    "source": "Squealing Pig Guitars",
+    "url": "https://reverb.com/item/103070857-gibson-usa-custom-shop-59-es-335-reissue-vintage-burst-rosewood-2021",
+    "image_url": "https://rvb-img.reverb.com/i/s--Jkoxnllc--/quality=medium-low,height=800,width=800,fit=contain/3abdd8ce-5ed3-46db-a455-17c50cd82bac.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2021,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 29.95,
+    "shipping_carrier": "Seller Postage: \u00a329.95",
+    "published_at": "2026-10-20T11:00:26-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34966. Higher than competitive private/used rates.",
+          "true_landed_cost": 4966.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34961. Higher than competitive private/used rates.",
+          "true_landed_cost": 4961.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-20T16:00:26+00:00",
+    "days_on_market": 33,
+    "is_new_today": false,
+    "initial_price": 4920.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -8448,25 +8838,25 @@
     "previous_price": null
   },
   {
-    "id": "reverb_103070857",
-    "title": "GIBSON USA Custom Shop '59 ES-335 Reissue \"Vintage Burst + Rosewood\" (2021)@",
-    "price": 4920.0,
+    "id": "reverb_101365037",
+    "title": "GIBSON USA Memphis ES-335 Reissue \"Heritage Cherry + Rosewood\" (2015)@",
+    "price": 3480.0,
     "source": "Squealing Pig Guitars",
-    "url": "https://reverb.com/item/103070857-gibson-usa-custom-shop-59-es-335-reissue-vintage-burst-rosewood-2021",
-    "image_url": "https://rvb-img.reverb.com/i/s--Jkoxnllc--/quality=medium-low,height=800,width=800,fit=contain/3abdd8ce-5ed3-46db-a455-17c50cd82bac.jpg",
+    "url": "https://reverb.com/item/101365037-gibson-usa-memphis-es-335-reissue-heritage-cherry-rosewood-2015",
+    "image_url": "https://rvb-img.reverb.com/i/s--nQNRVG_3--/quality=medium-low,height=800,width=800,fit=contain/74f7e824-6bfa-4bb7-aaa5-9f2867eb465d.jpg",
     "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2021,
-    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
-    "era_boost": 0.0,
-    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "brand_tier": "Heritage H-535",
+    "year": 2015,
+    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
+    "era_boost": 0.5,
+    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
     "has_case": true,
     "has_repair": false,
     "is_left_handed": false,
     "shipping_available": true,
     "shipping_cost": 29.95,
     "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-10-20T11:00:26-05:00",
+    "published_at": "2026-09-05T09:06:08-05:00",
     "coords": [
       52.4772,
       -1.8986
@@ -8480,11 +8870,11 @@
           "fuel_cost": 46.28
         },
         "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34966. Higher than competitive private/used rates.",
-          "true_landed_cost": 4966.28,
+          "grade": "B",
+          "badge_class": "bg-amber-600 text-white font-bold",
+          "verdict": "Grade B (Kalamazoo Craft)",
+          "reason": "Landed at \u00a33526. Built in former Gibson Parsons St plant.",
+          "true_landed_cost": 3526.28,
           "case_penalty": 0
         }
       },
@@ -8496,19 +8886,19 @@
           "fuel_cost": 41.45
         },
         "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34961. Higher than competitive private/used rates.",
-          "true_landed_cost": 4961.45,
+          "grade": "B",
+          "badge_class": "bg-amber-600 text-white font-bold",
+          "verdict": "Grade B (Kalamazoo Craft)",
+          "reason": "Landed at \u00a33521. Built in former Gibson Parsons St plant.",
+          "true_landed_cost": 3521.45,
           "case_penalty": 0
         }
       }
     },
-    "first_seen": "2026-10-20T16:00:26+00:00",
-    "days_on_market": 33,
+    "first_seen": "2026-09-05T14:06:08+00:00",
+    "days_on_market": 78,
     "is_new_today": false,
-    "initial_price": 4920.0,
+    "initial_price": 3480.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -8643,25 +9033,25 @@
     "previous_price": null
   },
   {
-    "id": "reverb_91791363",
-    "title": "Pre Owned Gibson 2012 Memphis Custom Shop LTD ES-335 P90 - Satin Cherry, Gloss Top Inc. Case",
-    "price": 2995.0,
-    "source": "Express Music",
-    "url": "https://reverb.com/item/91791363-pre-owned-gibson-2012-memphis-custom-shop-ltd-es-335-p90-satin-cherry-gloss-top-inc-case",
-    "image_url": "https://rvb-img.reverb.com/i/s--KKft06-q--/quality=medium-low,height=800,width=800,fit=contain/satgwsvk7iw3rwkgcebf.jpg",
+    "id": "reverb_71337089",
+    "title": "1984 Gibson Custom Shop ES-335 DOT neck 1984 in Pearl White & case",
+    "price": 5450.0,
+    "source": "New Kings Road Vintage Guitar Emporium",
+    "url": "https://reverb.com/item/71337089-1984-gibson-custom-shop-es-335-dot-neck-1984-in-pearl-white-case",
+    "image_url": "https://rvb-img.reverb.com/i/s--GQur1njw--/quality=medium-low,height=800,width=800,fit=contain/latnnafwoyjx0z6jdzrx.jpg",
     "postcode": "B1 1AA",
     "brand_tier": "Gibson Custom Shop",
-    "year": 2012,
-    "era_badge": "\u26a0\ufe0f 2012 SPEC CHECK",
-    "era_boost": -0.5,
-    "era_notes": "Check for baked maple / laminated rosewood board",
+    "year": 1984,
+    "era_badge": "\ud83c\udfb8 NORLIN ERA",
+    "era_boost": 0.0,
+    "era_notes": "Check weight, 3-piece neck, volute",
     "has_case": true,
     "has_repair": false,
     "is_left_handed": false,
     "shipping_available": true,
-    "shipping_cost": 10.0,
-    "shipping_carrier": "Seller Postage: \u00a310.00",
-    "published_at": "2026-11-11T10:01:09-06:00",
+    "shipping_cost": 40.0,
+    "shipping_carrier": "Seller Postage: \u00a340.00",
+    "published_at": "2023-07-18T05:53:17-05:00",
     "coords": [
       52.4772,
       -1.8986
@@ -8678,8 +9068,8 @@
           "grade": "C",
           "badge_class": "bg-stone-800 text-stone-400",
           "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33041. Higher than competitive private/used rates.",
-          "true_landed_cost": 3041.28,
+          "reason": "Landed at \u00a35496. Higher than competitive private/used rates.",
+          "true_landed_cost": 5496.28,
           "case_penalty": 0
         }
       },
@@ -8694,16 +9084,16 @@
           "grade": "C",
           "badge_class": "bg-stone-800 text-stone-400",
           "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33036. Higher than competitive private/used rates.",
-          "true_landed_cost": 3036.45,
+          "reason": "Landed at \u00a35491. Higher than competitive private/used rates.",
+          "true_landed_cost": 5491.45,
           "case_penalty": 0
         }
       }
     },
-    "first_seen": "2026-11-11T16:01:09+00:00",
-    "days_on_market": 11,
+    "first_seen": "2023-07-18T10:53:17+00:00",
+    "days_on_market": 1223,
     "is_new_today": false,
-    "initial_price": 2995.0,
+    "initial_price": 5450.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -8773,25 +9163,25 @@
     "previous_price": null
   },
   {
-    "id": "reverb_71337089",
-    "title": "1984 Gibson Custom Shop ES-335 DOT neck 1984 in Pearl White & case",
-    "price": 5450.0,
-    "source": "New Kings Road Vintage Guitar Emporium",
-    "url": "https://reverb.com/item/71337089-1984-gibson-custom-shop-es-335-dot-neck-1984-in-pearl-white-case",
-    "image_url": "https://rvb-img.reverb.com/i/s--GQur1njw--/quality=medium-low,height=800,width=800,fit=contain/latnnafwoyjx0z6jdzrx.jpg",
+    "id": "reverb_101703631",
+    "title": "Gibson Memphis ES-335 Block - Cherry",
+    "price": 1800.0,
+    "source": "CandySkullGuitars",
+    "url": "https://reverb.com/item/101703631-gibson-memphis-es-335-block-cherry",
+    "image_url": "https://rvb-img.reverb.com/i/s--u5vhHM6B--/quality=medium-low,height=800,width=800,fit=contain/036632f9-c565-4209-932d-2e04da138172.jpeg",
     "postcode": "B1 1AA",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 1984,
-    "era_badge": "\ud83c\udfb8 NORLIN ERA",
+    "brand_tier": "Gibson USA Standard",
+    "year": null,
+    "era_badge": "\ud83d\udcc5 ERA UNKNOWN",
     "era_boost": 0.0,
-    "era_notes": "Check weight, 3-piece neck, volute",
+    "era_notes": "Year not specified",
     "has_case": true,
     "has_repair": false,
     "is_left_handed": false,
     "shipping_available": true,
-    "shipping_cost": 40.0,
-    "shipping_carrier": "Seller Postage: \u00a340.00",
-    "published_at": "2023-07-18T05:53:17-05:00",
+    "shipping_cost": 30.0,
+    "shipping_carrier": "Seller Postage: \u00a330.00",
+    "published_at": "2026-11-16T06:45:20-06:00",
     "coords": [
       52.4772,
       -1.8986
@@ -8805,11 +9195,11 @@
           "fuel_cost": 46.28
         },
         "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a35496. Higher than competitive private/used rates.",
-          "true_landed_cost": 5496.28,
+          "grade": "A+",
+          "badge_class": "bg-emerald-500 text-stone-950 font-black",
+          "verdict": "Grade A+ (Holy Grail Steal)",
+          "reason": "Landed at \u00a31846. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
+          "true_landed_cost": 1846.28,
           "case_penalty": 0
         }
       },
@@ -8821,19 +9211,19 @@
           "fuel_cost": 41.45
         },
         "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a35491. Higher than competitive private/used rates.",
-          "true_landed_cost": 5491.45,
+          "grade": "A+",
+          "badge_class": "bg-emerald-500 text-stone-950 font-black",
+          "verdict": "Grade A+ (Holy Grail Steal)",
+          "reason": "Landed at \u00a31841. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
+          "true_landed_cost": 1841.45,
           "case_penalty": 0
         }
       }
     },
-    "first_seen": "2023-07-18T10:53:17+00:00",
-    "days_on_market": 1223,
+    "first_seen": "2026-11-16T12:45:20+00:00",
+    "days_on_market": 6,
     "is_new_today": false,
-    "initial_price": 5450.0,
+    "initial_price": 1800.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -8899,71 +9289,6 @@
     "days_on_market": 15,
     "is_new_today": false,
     "initial_price": 2495.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_101703631",
-    "title": "Gibson Memphis ES-335 Block - Cherry",
-    "price": 1800.0,
-    "source": "CandySkullGuitars",
-    "url": "https://reverb.com/item/101703631-gibson-memphis-es-335-block-cherry",
-    "image_url": "https://rvb-img.reverb.com/i/s--u5vhHM6B--/quality=medium-low,height=800,width=800,fit=contain/036632f9-c565-4209-932d-2e04da138172.jpeg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": null,
-    "era_badge": "\ud83d\udcc5 ERA UNKNOWN",
-    "era_boost": 0.0,
-    "era_notes": "Year not specified",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 30.0,
-    "shipping_carrier": "Seller Postage: \u00a330.00",
-    "published_at": "2026-11-16T06:45:20-06:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "A+",
-          "badge_class": "bg-emerald-500 text-stone-950 font-black",
-          "verdict": "Grade A+ (Holy Grail Steal)",
-          "reason": "Landed at \u00a31846. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
-          "true_landed_cost": 1846.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "A+",
-          "badge_class": "bg-emerald-500 text-stone-950 font-black",
-          "verdict": "Grade A+ (Holy Grail Steal)",
-          "reason": "Landed at \u00a31841. Rare sub-\u00a32k threshold for authentic Gibson USA 335!",
-          "true_landed_cost": 1841.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-16T12:45:20+00:00",
-    "days_on_market": 6,
-    "is_new_today": false,
-    "initial_price": 1800.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -9683,71 +10008,6 @@
     "previous_price": null
   },
   {
-    "id": "reverb_103112677",
-    "title": "2013 Gibson '63 Reissue ES-335TDC \u2013 Sixties Cherry VOS",
-    "price": 3795.0,
-    "source": "Jordan Guitars Ltd",
-    "url": "https://reverb.com/item/103112677-2013-gibson-63-reissue-es-335tdc-sixties-cherry-vos",
-    "image_url": "https://rvb-img.reverb.com/i/s--iUwZuYIz--/quality=medium-low,height=800,width=800,fit=contain/b2a2e8cf-9cbb-4395-a5e6-b047c42a2560.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2013,
-    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
-    "era_boost": 0.5,
-    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 35.0,
-    "shipping_carrier": "Seller Postage: \u00a335.00",
-    "published_at": "2026-10-20T10:50:26-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33841. Higher than competitive private/used rates.",
-          "true_landed_cost": 3841.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33836. Higher than competitive private/used rates.",
-          "true_landed_cost": 3836.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-20T15:50:26+00:00",
-    "days_on_market": 33,
-    "is_new_today": false,
-    "initial_price": 3795.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "reverb_97256294",
     "title": "GIBSON USA Custom Shop 59 ES-355 Custom Reissue *Dealer Select Murphy Lab Light Aged \"Sea Green\" (2025) (Reserved)",
     "price": 8040.0,
@@ -9809,6 +10069,71 @@
     "days_on_market": 184,
     "is_new_today": false,
     "initial_price": 8040.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "reverb_103112677",
+    "title": "2013 Gibson '63 Reissue ES-335TDC \u2013 Sixties Cherry VOS",
+    "price": 3795.0,
+    "source": "Jordan Guitars Ltd",
+    "url": "https://reverb.com/item/103112677-2013-gibson-63-reissue-es-335tdc-sixties-cherry-vos",
+    "image_url": "https://rvb-img.reverb.com/i/s--iUwZuYIz--/quality=medium-low,height=800,width=800,fit=contain/b2a2e8cf-9cbb-4395-a5e6-b047c42a2560.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2013,
+    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
+    "era_boost": 0.5,
+    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 35.0,
+    "shipping_carrier": "Seller Postage: \u00a335.00",
+    "published_at": "2026-10-20T10:50:26-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33841. Higher than competitive private/used rates.",
+          "true_landed_cost": 3841.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33836. Higher than competitive private/used rates.",
+          "true_landed_cost": 3836.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-20T15:50:26+00:00",
+    "days_on_market": 33,
+    "is_new_today": false,
+    "initial_price": 3795.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -10203,6 +10528,71 @@
     "previous_price": null
   },
   {
+    "id": "reverb_100347549",
+    "title": "1973 Gibson ES-335 Cherry Vintage Semi-Hollow Electric Guitar, Case - Very Good Condition",
+    "price": 6299.0,
+    "source": "Fair Deal Music",
+    "url": "https://reverb.com/item/100347549-1973-gibson-es-335-cherry-vintage-semi-hollow-electric-guitar-case-very-good-condition",
+    "image_url": "https://rvb-img.reverb.com/i/s--R0iKvmqI--/quality=medium-low,height=800,width=800,fit=contain/2f37bdd5-1989-443e-8928-37c6a7cc8f6e.jpg",
+    "postcode": "B1 1AA",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1973,
+    "era_badge": "\ud83c\udfb8 NORLIN ERA",
+    "era_boost": 0.0,
+    "era_notes": "Check weight, 3-piece neck, volute",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-08-10T10:12:54-05:00",
+    "coords": [
+      52.4772,
+      -1.8986
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.2,
+          "round_trip_miles": 272.4,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.28
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a36345. Higher than competitive private/used rates.",
+          "true_landed_cost": 6345.28,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.0,
+          "round_trip_miles": 244.0,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.45
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a36340. Higher than competitive private/used rates.",
+          "true_landed_cost": 6340.45,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-08-10T15:12:54+00:00",
+    "days_on_market": 104,
+    "is_new_today": false,
+    "initial_price": 6299.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
     "id": "reverb_96446477",
     "title": "Original '66 Gibson ES-335 - 1966 - Cherry Red - 1 Owner!",
     "price": 10525.0,
@@ -10329,71 +10719,6 @@
     "days_on_market": 53,
     "is_new_today": false,
     "initial_price": 7199.1,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "reverb_100347549",
-    "title": "1973 Gibson ES-335 Cherry Vintage Semi-Hollow Electric Guitar, Case - Very Good Condition",
-    "price": 6299.0,
-    "source": "Fair Deal Music",
-    "url": "https://reverb.com/item/100347549-1973-gibson-es-335-cherry-vintage-semi-hollow-electric-guitar-case-very-good-condition",
-    "image_url": "https://rvb-img.reverb.com/i/s--R0iKvmqI--/quality=medium-low,height=800,width=800,fit=contain/2f37bdd5-1989-443e-8928-37c6a7cc8f6e.jpg",
-    "postcode": "B1 1AA",
-    "brand_tier": "Gibson USA Standard",
-    "year": 1973,
-    "era_badge": "\ud83c\udfb8 NORLIN ERA",
-    "era_boost": 0.0,
-    "era_notes": "Check weight, 3-piece neck, volute",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-08-10T10:12:54-05:00",
-    "coords": [
-      52.4772,
-      -1.8986
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 136.2,
-          "round_trip_miles": 272.4,
-          "drive_hours": 2.7,
-          "fuel_cost": 46.28
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a36345. Higher than competitive private/used rates.",
-          "true_landed_cost": 6345.28,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 122.0,
-          "round_trip_miles": 244.0,
-          "drive_hours": 2.4,
-          "fuel_cost": 41.45
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a36340. Higher than competitive private/used rates.",
-          "true_landed_cost": 6340.45,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-08-10T15:12:54+00:00",
-    "days_on_market": 104,
-    "is_new_today": false,
-    "initial_price": 6299.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -11236,7 +11561,7 @@
       }
     },
     "first_seen": "2026-07-28T20:32:09+00:00",
-    "days_on_market": 116,
+    "days_on_market": 117,
     "is_new_today": false,
     "initial_price": 5499.0,
     "price_drop": 0.0,
@@ -11308,71 +11633,6 @@
     "previous_price": null
   },
   {
-    "id": "reverb_102124216",
-    "title": "Gibson Custom 1961 ES-335 - Rosewood - VOS Sixties Cherry",
-    "price": 4999.0,
-    "source": "Peach Guitars",
-    "url": "https://reverb.com/item/102124216-gibson-custom-1961-es-335-rosewood-vos-sixties-cherry",
-    "image_url": "https://rvb-img.reverb.com/i/s--RuRFsgQQ--/quality=medium-low,height=800,width=800,fit=contain/2784b5f1-5646-41df-a55a-da991ff4576c.jpg",
-    "postcode": "CO4 9QP",
-    "brand_tier": "Gibson USA Standard",
-    "year": 1961,
-    "era_badge": "\ud83d\udcc5 1961",
-    "era_boost": 0.0,
-    "era_notes": "Production year 1961",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-09-30T09:17:10-05:00",
-    "coords": [
-      51.9056,
-      0.9419
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 172.4,
-          "round_trip_miles": 344.8,
-          "drive_hours": 3.4,
-          "fuel_cost": 58.57
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a35058. Higher than competitive private/used rates.",
-          "true_landed_cost": 5057.57,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 219.1,
-          "round_trip_miles": 438.2,
-          "drive_hours": 4.4,
-          "fuel_cost": 74.44
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a35073. Higher than competitive private/used rates.",
-          "true_landed_cost": 5073.44,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-09-30T14:17:10+00:00",
-    "days_on_market": 53,
-    "is_new_today": false,
-    "initial_price": 4999.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "reverb_97091082",
     "title": "Gibson Custom 1964 ES-335 - Rosewood - VOS Vintage Burst",
     "price": 5299.0,
@@ -11438,6 +11698,71 @@
     "previous_price": null
   },
   {
+    "id": "reverb_102124216",
+    "title": "Gibson Custom 1961 ES-335 - Rosewood - VOS Sixties Cherry",
+    "price": 4999.0,
+    "source": "Peach Guitars",
+    "url": "https://reverb.com/item/102124216-gibson-custom-1961-es-335-rosewood-vos-sixties-cherry",
+    "image_url": "https://rvb-img.reverb.com/i/s--RuRFsgQQ--/quality=medium-low,height=800,width=800,fit=contain/2784b5f1-5646-41df-a55a-da991ff4576c.jpg",
+    "postcode": "CO4 9QP",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1961,
+    "era_badge": "\ud83d\udcc5 1961",
+    "era_boost": 0.0,
+    "era_notes": "Production year 1961",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-09-30T09:17:10-05:00",
+    "coords": [
+      51.9056,
+      0.9419
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 172.4,
+          "round_trip_miles": 344.8,
+          "drive_hours": 3.4,
+          "fuel_cost": 58.57
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a35058. Higher than competitive private/used rates.",
+          "true_landed_cost": 5057.57,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 219.1,
+          "round_trip_miles": 438.2,
+          "drive_hours": 4.4,
+          "fuel_cost": 74.44
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a35073. Higher than competitive private/used rates.",
+          "true_landed_cost": 5073.44,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-09-30T14:17:10+00:00",
+    "days_on_market": 53,
+    "is_new_today": false,
+    "initial_price": 4999.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
     "id": "reverb_104303125",
     "title": "1991 Orville By Gibson ES-335 Dot Natural Blonde, MIJ, Japan, Terada Factory Made",
     "price": 1895.0,
@@ -11496,7 +11821,7 @@
       }
     },
     "first_seen": "2026-11-17T20:39:02+00:00",
-    "days_on_market": 4,
+    "days_on_market": 5,
     "is_new_today": false,
     "initial_price": 1895.0,
     "price_drop": 0.0,
@@ -11716,7 +12041,7 @@
     "shipping_available": true,
     "shipping_cost": 9.5,
     "shipping_carrier": "Seller Postage: \u00a39.50",
-    "published_at": "2021-10-14T10:30:19-04:00",
+    "published_at": "2021-10-14T08:30:19-06:00",
     "coords": [
       52.4772,
       -1.8986
@@ -12211,7 +12536,7 @@
       }
     },
     "first_seen": "2026-10-16T20:35:53+00:00",
-    "days_on_market": 36,
+    "days_on_market": 37,
     "is_new_today": false,
     "initial_price": 1689.7,
     "price_drop": 0.0,
@@ -12666,7 +12991,7 @@
       }
     },
     "first_seen": "2026-10-22T20:26:00+00:00",
-    "days_on_market": 30,
+    "days_on_market": 31,
     "is_new_today": false,
     "initial_price": 2969.99,
     "price_drop": 0.0,
@@ -12803,71 +13128,6 @@
     "previous_price": null
   },
   {
-    "id": "ebay_v1|227563670567|0",
-    "title": "Gibson ES-335 Dot 1997 - Figured Antique Natural",
-    "price": 2585.0,
-    "source": "eBay UK (pricelessguitars)",
-    "url": "https://www.ebay.co.uk/itm/227563670567?_skw=gibson+es-335&hash=item34fbda0c27:g:T8AAAeSwsypqzLHH",
-    "image_url": "https://i.ebayimg.com/images/g/T8AAAeSwsypqzLHH/s-l225.jpg",
-    "postcode": "N13",
-    "brand_tier": "Gibson USA Standard",
-    "year": 1997,
-    "era_badge": "\u2b50 GOOD WOOD (90s)",
-    "era_boost": 1.0,
-    "era_notes": "Honduran mahogany, early '57 Classics",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 30.0,
-    "shipping_carrier": "Seller Postage: \u00a330.00",
-    "published_at": "2026-10-12T10:10:08.000Z",
-    "coords": [
-      51.61802165909088,
-      -0.1042378863636363
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 184.2,
-          "round_trip_miles": 368.4,
-          "drive_hours": 3.7,
-          "fuel_cost": 62.58
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a32648. Higher than competitive private/used rates.",
-          "true_landed_cost": 2647.58,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 159.2,
-          "round_trip_miles": 318.4,
-          "drive_hours": 3.2,
-          "fuel_cost": 54.09
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a32639. Higher than competitive private/used rates.",
-          "true_landed_cost": 2639.09,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-12T10:10:08+00:00",
-    "days_on_market": 41,
-    "is_new_today": false,
-    "initial_price": 2585.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "ebay_v1|158167424259|0",
     "title": "Gibson ES-335 Dot Blue Burst Memphis 2018 With Case And Papers Excellent",
     "price": 2352.7,
@@ -12991,74 +13251,74 @@
       }
     },
     "first_seen": "2026-10-22T20:29:03+00:00",
-    "days_on_market": 30,
+    "days_on_market": 31,
     "is_new_today": false,
     "initial_price": 3399.99,
     "price_drop": 0.0,
     "previous_price": null
   },
   {
-    "id": "ebay_v1|880018557415|0",
-    "title": "Beautiful Vintage 2000 Gibson ES 335 Dot Tobacco Sunburst Yamano Order",
-    "price": 2725.0,
-    "source": "eBay UK (gas_station_guitars_uk)",
-    "url": "https://www.ebay.co.uk/itm/880018557415?_skw=gibson+es-335&hash=itemcce53189e7:g:xmoAAeSwXwxq0KW~",
-    "image_url": "https://i.ebayimg.com/images/g/xmoAAeSwXwxq0KW~/s-l225.jpg",
-    "postcode": "TA1",
+    "id": "ebay_v1|227563670567|0",
+    "title": "Gibson ES-335 Dot 1997 - Figured Antique Natural",
+    "price": 2585.0,
+    "source": "eBay UK (pricelessguitars)",
+    "url": "https://www.ebay.co.uk/itm/227563670567?_skw=gibson+es-335&hash=item34fbda0c27:g:T8AAAeSwsypqzLHH",
+    "image_url": "https://i.ebayimg.com/images/g/T8AAAeSwsypqzLHH/s-l225.jpg",
+    "postcode": "N13",
     "brand_tier": "Gibson USA Standard",
-    "year": 2000,
-    "era_badge": "\ud83d\udcc5 2000",
-    "era_boost": 0.0,
-    "era_notes": "Production year 2000",
+    "year": 1997,
+    "era_badge": "\u2b50 GOOD WOOD (90s)",
+    "era_boost": 1.0,
+    "era_notes": "Honduran mahogany, early '57 Classics",
     "has_case": true,
     "has_repair": false,
     "is_left_handed": false,
     "shipping_available": true,
-    "shipping_cost": 43.0,
-    "shipping_carrier": "Seller Postage: \u00a343.00",
-    "published_at": "2026-10-15T10:08:57.000Z",
+    "shipping_cost": 30.0,
+    "shipping_carrier": "Seller Postage: \u00a330.00",
+    "published_at": "2026-10-12T10:10:08.000Z",
     "coords": [
-      51.01318609168086,
-      -3.10292137860781
+      51.61802165909088,
+      -0.1042378863636363
     ],
     "hubs": {
       "Hull": {
         "travel": {
-          "one_way_miles": 277.4,
-          "round_trip_miles": 554.8,
-          "drive_hours": 5.5,
-          "fuel_cost": 94.25
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-700 text-stone-300",
-          "verdict": "Too Far",
-          "reason": "Drive time (5.5h) exceeds the 4.5h hard travel cap.",
-          "true_landed_cost": 2819.25,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 20.3,
-          "round_trip_miles": 40.6,
-          "drive_hours": 0.4,
-          "fuel_cost": 6.9
+          "one_way_miles": 184.2,
+          "round_trip_miles": 368.4,
+          "drive_hours": 3.7,
+          "fuel_cost": 62.58
         },
         "evaluation": {
           "grade": "C",
           "badge_class": "bg-stone-800 text-stone-400",
           "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a32732. Higher than competitive private/used rates.",
-          "true_landed_cost": 2731.9,
+          "reason": "Landed at \u00a32648. Higher than competitive private/used rates.",
+          "true_landed_cost": 2647.58,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 159.2,
+          "round_trip_miles": 318.4,
+          "drive_hours": 3.2,
+          "fuel_cost": 54.09
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a32639. Higher than competitive private/used rates.",
+          "true_landed_cost": 2639.09,
           "case_penalty": 0
         }
       }
     },
-    "first_seen": "2026-10-15T10:08:57+00:00",
-    "days_on_market": 38,
+    "first_seen": "2026-10-12T10:10:08+00:00",
+    "days_on_market": 41,
     "is_new_today": false,
-    "initial_price": 2725.0,
+    "initial_price": 2585.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -13189,6 +13449,71 @@
     "days_on_market": 9,
     "is_new_today": false,
     "initial_price": 2595.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "ebay_v1|880018557415|0",
+    "title": "Beautiful Vintage 2000 Gibson ES 335 Dot Tobacco Sunburst Yamano Order",
+    "price": 2725.0,
+    "source": "eBay UK (gas_station_guitars_uk)",
+    "url": "https://www.ebay.co.uk/itm/880018557415?_skw=gibson+es-335&hash=itemcce53189e7:g:xmoAAeSwXwxq0KW~",
+    "image_url": "https://i.ebayimg.com/images/g/xmoAAeSwXwxq0KW~/s-l225.jpg",
+    "postcode": "TA1",
+    "brand_tier": "Gibson USA Standard",
+    "year": 2000,
+    "era_badge": "\ud83d\udcc5 2000",
+    "era_boost": 0.0,
+    "era_notes": "Production year 2000",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 43.0,
+    "shipping_carrier": "Seller Postage: \u00a343.00",
+    "published_at": "2026-10-15T10:08:57.000Z",
+    "coords": [
+      51.01318609168086,
+      -3.10292137860781
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 277.4,
+          "round_trip_miles": 554.8,
+          "drive_hours": 5.5,
+          "fuel_cost": 94.25
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-700 text-stone-300",
+          "verdict": "Too Far",
+          "reason": "Drive time (5.5h) exceeds the 4.5h hard travel cap.",
+          "true_landed_cost": 2819.25,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 20.3,
+          "round_trip_miles": 40.6,
+          "drive_hours": 0.4,
+          "fuel_cost": 6.9
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a32732. Higher than competitive private/used rates.",
+          "true_landed_cost": 2731.9,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-15T10:08:57+00:00",
+    "days_on_market": 38,
+    "is_new_today": false,
+    "initial_price": 2725.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -13583,71 +13908,6 @@
     "previous_price": null
   },
   {
-    "id": "ebay_v1|227579187608|0",
-    "title": "GIBSON USA Custom Shop Murphy Lab '64 ES-335 Reissue Ultra Light Aged \"Cherry Re",
-    "price": 4899.99,
-    "source": "eBay UK (squealingpigguitars)",
-    "url": "https://www.ebay.co.uk/itm/227579187608?_skw=gibson+es-335&hash=item34fcc6d198:g:psYAAeSwTgFq2ojU",
-    "image_url": "https://i.ebayimg.com/images/g/psYAAeSwTgFq2ojU/s-l225.jpg",
-    "postcode": "NG9",
-    "brand_tier": "Gibson Custom Shop",
-    "year": null,
-    "era_badge": "\ud83d\udcc5 ERA UNKNOWN",
-    "era_boost": 0.0,
-    "era_notes": "Year not specified",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 0.0,
-    "shipping_carrier": "Seller Free UK Delivery",
-    "published_at": "2026-10-22T22:06:19.000Z",
-    "coords": [
-      52.926006935230056,
-      -1.2380189776029058
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 84.7,
-          "round_trip_miles": 169.4,
-          "drive_hours": 1.7,
-          "fuel_cost": 28.78
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34929. Higher than competitive private/used rates.",
-          "true_landed_cost": 4928.77,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 173.1,
-          "round_trip_miles": 346.2,
-          "drive_hours": 3.5,
-          "fuel_cost": 58.81
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a34959. Higher than competitive private/used rates.",
-          "true_landed_cost": 4958.8,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-10-22T22:06:19+00:00",
-    "days_on_market": 30,
-    "is_new_today": false,
-    "initial_price": 4899.99,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "ebay_v1|235514319757|0",
     "title": "Gibson ES-335 in Vintage Ebony #213730182",
     "price": 3189.0,
@@ -13709,71 +13969,6 @@
     "days_on_market": 956,
     "is_new_today": false,
     "initial_price": 3189.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "ebay_v1|820370491867|0",
-    "title": "2006 Gibson Custom Shop ES-335 Larry Carlton Model Carlton Burst",
-    "price": 3650.0,
-    "source": "eBay UK (protonemusicltd)",
-    "url": "https://www.ebay.co.uk/itm/820370491867?_skw=gibson+es-335&hash=itembf01e449db:g:5UIAAeSw4LNq~h5i",
-    "image_url": "https://i.ebayimg.com/images/g/5UIAAeSw4LNq~h5i/s-l225.jpg",
-    "postcode": "L1",
-    "brand_tier": "Gibson Custom Shop",
-    "year": 2006,
-    "era_badge": "\ud83d\udcc5 2006",
-    "era_boost": 0.0,
-    "era_notes": "Production year 2006",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 29.95,
-    "shipping_carrier": "Seller Postage: \u00a329.95",
-    "published_at": "2026-11-18T21:54:36.000Z",
-    "coords": [
-      53.40198485403051,
-      -2.98054894335512
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 138.8,
-          "round_trip_miles": 277.6,
-          "drive_hours": 2.8,
-          "fuel_cost": 47.16
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33697. Higher than competitive private/used rates.",
-          "true_landed_cost": 3697.16,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 186.9,
-          "round_trip_miles": 373.8,
-          "drive_hours": 3.7,
-          "fuel_cost": 63.5
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a33714. Higher than competitive private/used rates.",
-          "true_landed_cost": 3713.5,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-18T21:54:36+00:00",
-    "days_on_market": 3,
-    "is_new_today": false,
-    "initial_price": 3650.0,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -13843,6 +14038,136 @@
     "previous_price": null
   },
   {
+    "id": "ebay_v1|820370491867|0",
+    "title": "2006 Gibson Custom Shop ES-335 Larry Carlton Model Carlton Burst",
+    "price": 3650.0,
+    "source": "eBay UK (protonemusicltd)",
+    "url": "https://www.ebay.co.uk/itm/820370491867?_skw=gibson+es-335&hash=itembf01e449db:g:5UIAAeSw4LNq~h5i",
+    "image_url": "https://i.ebayimg.com/images/g/5UIAAeSw4LNq~h5i/s-l225.jpg",
+    "postcode": "L1",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2006,
+    "era_badge": "\ud83d\udcc5 2006",
+    "era_boost": 0.0,
+    "era_notes": "Production year 2006",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 29.95,
+    "shipping_carrier": "Seller Postage: \u00a329.95",
+    "published_at": "2026-11-18T21:54:36.000Z",
+    "coords": [
+      53.40198485403051,
+      -2.98054894335512
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 138.8,
+          "round_trip_miles": 277.6,
+          "drive_hours": 2.8,
+          "fuel_cost": 47.16
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33697. Higher than competitive private/used rates.",
+          "true_landed_cost": 3697.16,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 186.9,
+          "round_trip_miles": 373.8,
+          "drive_hours": 3.7,
+          "fuel_cost": 63.5
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33714. Higher than competitive private/used rates.",
+          "true_landed_cost": 3713.5,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-18T21:54:36+00:00",
+    "days_on_market": 3,
+    "is_new_today": false,
+    "initial_price": 3650.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "ebay_v1|227579187608|0",
+    "title": "GIBSON USA Custom Shop Murphy Lab '64 ES-335 Reissue Ultra Light Aged \"Cherry Re",
+    "price": 4899.99,
+    "source": "eBay UK (squealingpigguitars)",
+    "url": "https://www.ebay.co.uk/itm/227579187608?_skw=gibson+es-335&hash=item34fcc6d198:g:psYAAeSwTgFq2ojU",
+    "image_url": "https://i.ebayimg.com/images/g/psYAAeSwTgFq2ojU/s-l225.jpg",
+    "postcode": "NG9",
+    "brand_tier": "Gibson Custom Shop",
+    "year": null,
+    "era_badge": "\ud83d\udcc5 ERA UNKNOWN",
+    "era_boost": 0.0,
+    "era_notes": "Year not specified",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-10-22T22:06:19.000Z",
+    "coords": [
+      52.926006935230056,
+      -1.2380189776029058
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 84.7,
+          "round_trip_miles": 169.4,
+          "drive_hours": 1.7,
+          "fuel_cost": 28.78
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34929. Higher than competitive private/used rates.",
+          "true_landed_cost": 4928.77,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 173.1,
+          "round_trip_miles": 346.2,
+          "drive_hours": 3.5,
+          "fuel_cost": 58.81
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34959. Higher than competitive private/used rates.",
+          "true_landed_cost": 4958.8,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-10-22T22:06:19+00:00",
+    "days_on_market": 30,
+    "is_new_today": false,
+    "initial_price": 4899.99,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
     "id": "ebay_v1|117138841291|0",
     "title": "Gibson USA Memphis ES-335 + Monty PAF Pickups",
     "price": 2100.0,
@@ -13904,71 +14229,6 @@
     "days_on_market": 224,
     "is_new_today": false,
     "initial_price": 2100.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
-    "id": "ebay_v1|307007298071|0",
-    "title": "Gibson Memphis ES-335 Ltd Edition Block 2015, Satin Faded Cherry Inc OHSC & COA!",
-    "price": 2400.64,
-    "source": "eBay UK (gcp-guitars)",
-    "url": "https://www.ebay.co.uk/itm/307007298071?_skw=gibson+es-335&hash=item477b0f9a17:g:vKgAAeSw0olqMmwC",
-    "image_url": "https://i.ebayimg.com/images/g/vKgAAeSw0olqMmwC/s-l225.jpg",
-    "postcode": "DY14",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2015,
-    "era_badge": "\ud83c\udf96\ufe0f MEMPHIS PEAK (13-18)",
-    "era_boost": 0.5,
-    "era_notes": "Rolled neck binding, Adirondack spruce, MHS PAFs",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 14.83,
-    "shipping_carrier": "Seller Postage: \u00a314.83",
-    "published_at": "2026-06-17T09:48:40.000Z",
-    "coords": [
-      52.380488368159234,
-      -2.4684061757877283
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 161.7,
-          "round_trip_miles": 323.4,
-          "drive_hours": 3.2,
-          "fuel_cost": 54.94
-        },
-        "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-stone-600 text-stone-200",
-          "verdict": "Grade B (Negotiate Down)",
-          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
-          "true_landed_cost": 2455.58,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 102.6,
-          "round_trip_miles": 205.2,
-          "drive_hours": 2.1,
-          "fuel_cost": 34.86
-        },
-        "evaluation": {
-          "grade": "B",
-          "badge_class": "bg-stone-600 text-stone-200",
-          "verdict": "Grade B (Negotiate Down)",
-          "reason": "Room to negotiate \u00a3150-\u00a3250 off for travel offset.",
-          "true_landed_cost": 2435.5,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-06-17T09:48:40+00:00",
-    "days_on_market": 158,
-    "is_new_today": false,
-    "initial_price": 2400.64,
     "price_drop": 0.0,
     "previous_price": null
   },
@@ -14103,6 +14363,136 @@
     "previous_price": null
   },
   {
+    "id": "ebay_v1|287724651963|0",
+    "title": "2023 Gibson Custom Shop ES-335 \u201961 Reissue VOS (DEMO VIDEO)",
+    "price": 4236.7,
+    "source": "eBay UK (rolandoo78)",
+    "url": "https://www.ebay.co.uk/itm/287724651963?_skw=gibson+es-335&hash=item42fdb9c5bb:g:7vgAAeSwrhJq9eo4",
+    "image_url": "https://i.ebayimg.com/images/g/7vgAAeSwrhJq9eo4/s-l225.jpg",
+    "postcode": "CV47",
+    "brand_tier": "Gibson Custom Shop",
+    "year": 2023,
+    "era_badge": "\ud83d\udee1\ufe0f MODERN NASHVILLE",
+    "era_boost": 0.0,
+    "era_notes": "Calibrated T-Types, Rounded C neck, hand-wired",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 50.0,
+    "shipping_carrier": "Seller Postage: \u00a350.00",
+    "published_at": "2026-11-12T16:34:15.000Z",
+    "coords": [
+      52.234781788491446,
+      -1.3858423996889564
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 141.4,
+          "round_trip_miles": 282.8,
+          "drive_hours": 2.8,
+          "fuel_cost": 48.04
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34285. Higher than competitive private/used rates.",
+          "true_landed_cost": 4284.74,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 121.8,
+          "round_trip_miles": 243.6,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.38
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a34278. Higher than competitive private/used rates.",
+          "true_landed_cost": 4278.08,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-11-12T16:34:15+00:00",
+    "days_on_market": 10,
+    "is_new_today": false,
+    "initial_price": 4236.7,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
+    "id": "ebay_v1|277937255079|0",
+    "title": "Gibson ES-335 Figured AAA Flame Yamano Semi-Hollow Electric Guitar, 1997 Model",
+    "price": 3500.0,
+    "source": "eBay UK (fair_deal_music_holdings)",
+    "url": "https://www.ebay.co.uk/itm/277937255079?_skw=gibson+es-335&hash=item40b659f2a7:g:oJQAAeSwTFBp8L4a",
+    "image_url": "https://i.ebayimg.com/images/g/oJQAAeSwTFBp8L4a/s-l225.jpg",
+    "postcode": "B18",
+    "brand_tier": "Gibson USA Standard",
+    "year": 1997,
+    "era_badge": "\u2b50 GOOD WOOD (90s)",
+    "era_boost": 1.0,
+    "era_notes": "Honduran mahogany, early '57 Classics",
+    "has_case": true,
+    "has_repair": false,
+    "is_left_handed": false,
+    "shipping_available": true,
+    "shipping_cost": 0.0,
+    "shipping_carrier": "Seller Free UK Delivery",
+    "published_at": "2026-04-28T14:03:21.000Z",
+    "coords": [
+      52.49116970652167,
+      -1.9255205369565231
+    ],
+    "hubs": {
+      "Hull": {
+        "travel": {
+          "one_way_miles": 136.1,
+          "round_trip_miles": 272.2,
+          "drive_hours": 2.7,
+          "fuel_cost": 46.24
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33546. Higher than competitive private/used rates.",
+          "true_landed_cost": 3546.24,
+          "case_penalty": 0
+        }
+      },
+      "Somerset": {
+        "travel": {
+          "one_way_miles": 122.4,
+          "round_trip_miles": 244.8,
+          "drive_hours": 2.4,
+          "fuel_cost": 41.59
+        },
+        "evaluation": {
+          "grade": "C",
+          "badge_class": "bg-stone-800 text-stone-400",
+          "verdict": "Grade C (Overpriced)",
+          "reason": "Landed at \u00a33542. Higher than competitive private/used rates.",
+          "true_landed_cost": 3541.59,
+          "case_penalty": 0
+        }
+      }
+    },
+    "first_seen": "2026-04-28T14:03:21+00:00",
+    "days_on_market": 208,
+    "is_new_today": false,
+    "initial_price": 3500.0,
+    "price_drop": 0.0,
+    "previous_price": null
+  },
+  {
     "id": "ebay_v1|267828235782|0",
     "title": "Nashville Gibson ES335 1992 Tobacco Burst Left Handed Very Rare Promo Model ",
     "price": 2750.0,
@@ -14168,76 +14558,11 @@
     "previous_price": null
   },
   {
-    "id": "ebay_v1|800892837056|0",
-    "title": "\u265aMINT\u265a2005 Gibson ES-335 'AAA' FIGURED\u265aCherry Red Flame\u265aDots\u265a50s Neck\u265aINCREDIBLE",
-    "price": 2895.0,
-    "source": "eBay UK (the.guitar.dept)",
-    "url": "https://www.ebay.co.uk/itm/800892837056?_skw=gibson+es-335&hash=itemba78eedcc0:g:rnQAAOSwP8VnA8Ft",
-    "image_url": "https://i.ebayimg.com/images/g/rnQAAOSwP8VnA8Ft/s-l225.jpg",
-    "postcode": "PO21",
-    "brand_tier": "Gibson USA Standard",
-    "year": 2005,
-    "era_badge": "\ud83d\udcc5 2005",
-    "era_boost": 0.0,
-    "era_notes": "Production year 2005",
-    "has_case": true,
-    "has_repair": false,
-    "is_left_handed": false,
-    "shipping_available": true,
-    "shipping_cost": 49.99,
-    "shipping_carrier": "Seller Postage: \u00a349.99",
-    "published_at": "2026-11-08T14:58:25.000Z",
-    "coords": [
-      50.78518870636097,
-      -0.699551959319527
-    ],
-    "hubs": {
-      "Hull": {
-        "travel": {
-          "one_way_miles": 256.4,
-          "round_trip_miles": 512.8,
-          "drive_hours": 5.1,
-          "fuel_cost": 87.11
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-700 text-stone-300",
-          "verdict": "Too Far",
-          "reason": "Drive time (5.1h) exceeds the 4.5h hard travel cap.",
-          "true_landed_cost": 2982.11,
-          "case_penalty": 0
-        }
-      },
-      "Somerset": {
-        "travel": {
-          "one_way_miles": 130.8,
-          "round_trip_miles": 261.6,
-          "drive_hours": 2.6,
-          "fuel_cost": 44.44
-        },
-        "evaluation": {
-          "grade": "C",
-          "badge_class": "bg-stone-800 text-stone-400",
-          "verdict": "Grade C (Overpriced)",
-          "reason": "Landed at \u00a32939. Higher than competitive private/used rates.",
-          "true_landed_cost": 2939.44,
-          "case_penalty": 0
-        }
-      }
-    },
-    "first_seen": "2026-11-08T14:58:25+00:00",
-    "days_on_market": 14,
-    "is_new_today": false,
-    "initial_price": 2895.0,
-    "price_drop": 0.0,
-    "previous_price": null
-  },
-  {
     "id": "ebay_v1|198768807106|0",
     "title": "Left Handed Gibson ES-335 1980  Semi-Hollow 6-String 22-Fret Electric + Case",
     "price": 3575.68,
     "source": "eBay UK (3005jon)",
-    "url": "https://www.ebay.co.uk/itm/198768807106?_skw=gibson+es-335&hash=item2e478b4cc2:g:~tQAAeSwZ1Bq6g60&amdata=enc%3AAQALAAAA8Of5zIIojhOf%2BkQK%2Bxzjn7mjDmkrYDyHqkXJmHlPQxWGSCkWB--UFWvkgrAhBsfhauaR4EaRQ%2BfMmC7m8wx%2BnZR7t2nYZUQa%2FnP976UNbTh77oP5mjEjaGknWzm1n4gI%2BCSNa%2BQnlfuhrG3Ad9opSmI1cd0ep3UhrtZImaCevD4fCq2EwrjWrBytIToqj%2BFfAB9rta3xtHrvPstCwd4DYPzFcaG5OMISMYKfWoK%2FOf3Jsy5iwUh%2FZpOTPYmmGur0TQQD%2FjjewKBjSFuvmSET5fovMB5ihuZVnRHIFMEfT1112Nl9BNKHOb5KInSJP96SAg%3D%3D",
+    "url": "https://www.ebay.co.uk/itm/198768807106?_skw=gibson+es-335&hash=item2e478b4cc2:g:~tQAAeSwZ1Bq6g60&amdata=enc%3AAQALAAAA8Of5zIIojhOf%2BkQK%2Bxzjn7mjDmkrYDyHqkXJmHlPQxWGSCkWB--UFWvkgrAhBsfhauaR4EaRQ%2BfMmC7m8wx%2BnZR7t2nYZUQa%2FnP976UNbTh77oP5mjEjaGknWzm1n4gI%2BCSNa%2BQnlfuhrG3Ad9opSmKfwPMR%2BwmhQ39UA%2B2sz%2FJwafB7nzjCLompQcYt7QhIs29EAfqUGvOn8%2BAwixo3U5xslSUqP6pxcrIKbqPXF%2BzLjpU8hn6H87nuzFQAgScF9PYgDa03ryLKqRhtBVVIp0GcFrM%2Bk0wgmgQ3tQVy9YDsx22rpu7Wi0AXpxo486ugZQ%3D%3D",
     "image_url": "https://i.ebayimg.com/images/g/~tQAAeSwZ1Bq6g60/s-l225.jpg",
     "postcode": "BN8",
     "brand_tier": "Gibson USA Standard",
@@ -14302,7 +14627,7 @@
     "title": "Gibson ES335 Limited Edition 2017 - Pelham Blue",
     "price": 4586.7,
     "source": "eBay UK (mikec78uk)",
-    "url": "https://www.ebay.co.uk/itm/297742864076?_skw=gibson+es-335&hash=item4552db8ecc:g:Cx0AAeSwLp9pDbxf&amdata=enc%3AAQALAAAA8Of5zIIojhOf%2BkQK%2Bxzjn7mBenKC8UA4ZOO%2B2Dj8ZYHULxsHgudv%2B3VlxBS2CsTxNeXjnDl7iX5ukHmop%2BprJNzYZIqpKTawixvMvpA2iCNLzUyDnnglF989%2BTgcEKk3%2FD6n%2Bbr70fCZVHrUSs%2FKQqEHkMIOrIUcmKBOwVwVm0w%2B88eCH5xy3J568mjBLn8L4CNDdKQvwQjEJWkFIVDQQwDcwuUxjRvVltYS6Ir1%2BcTCoikxQ6iOdGz6HC9EF3c3PLoVzNtnzvNN6OttXOWsVZH62LUCwDhpJ%2BPM%2F1igBwrMci32iyZiEXdQN%2Bf0%2Fi5fdw%3D%3D",
+    "url": "https://www.ebay.co.uk/itm/297742864076?_skw=gibson+es-335&hash=item4552db8ecc:g:Cx0AAeSwLp9pDbxf&amdata=enc%3AAQALAAAA8Of5zIIojhOf%2BkQK%2Bxzjn7mBenKC8UA4ZOO%2B2Dj8ZYHULxsHgudv%2B3VlxBS2CsTxNeXjnDl7iX5ukHmop%2BprJNzYZIqpKTawixvMvpA2iCNLzUyDnnglF989%2BTgcEKk3%2FD6n%2Bbr70fCZVHrUSs%2FKQqGMvxWsEfWJo45SbnxXom6nNKFhiHrk8RJMTMhwGdpkqDQwyMK4QvCezBu2gYEES%2BRfcsFFw8FdqrY6LN63sQgfzs9WHYSP6%2FTZSD00dEgXd4vZ06h4WoqNOqdWcv0DCefu%2BQ5TifyBrXFlek2DUPci48Cjf0qbGraSp6j2dHtL7Q%3D%3D",
     "image_url": "https://i.ebayimg.com/images/g/Cx0AAeSwLp9pDbxf/s-l225.jpg",
     "postcode": "CV22",
     "brand_tier": "Gibson USA Standard",
