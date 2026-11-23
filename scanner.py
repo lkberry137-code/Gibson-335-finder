@@ -262,6 +262,13 @@ def detect_brand_tier(title, desc=""):
         return "Gibson USA Standard"
     return "Other ES Equivalent"
 
+def detect_model_family(title):
+    """Detects whether a listing is an ES-345 vs ES-335 (or equivalent)."""
+    tlow = (title or "").lower()
+    if re.search(r'\b(es[\s-]?345|345)\b', tlow):
+        return "ES-345"
+    return "ES-335"
+
 def detect_era(text):
     # 1. Check explicit 4-digit year in title/description
     match = re.search(r'\b(19[6-9]\d|20[0-2]\d)\b', text)
@@ -352,7 +359,7 @@ def detect_shipping_info(source, title, price=0.0):
         "shipping_carrier": "Tracked & Insured Courier (£30)"
     }
 
-def evaluate_deal(price, brand_tier, era_boost, has_repair, has_case, drive_hours, max_hours=3.0, fuel_cost=0.0):
+def evaluate_deal(price, brand_tier, era_boost, has_repair, has_case, drive_hours, max_hours=3.0, fuel_cost=0.0, model_family="ES-335"):
     """
     Core Deal Grading:
     Computes True Landed Cost = Price + Fuel Cost + Case Penalty (£150 if no case)
@@ -394,6 +401,54 @@ def evaluate_deal(price, brand_tier, era_boost, has_repair, has_case, drive_hour
     
     # Brand-specific evaluation
     if brand_tier in ["Gibson USA Standard", "Gibson Custom Shop"]:
+        if model_family == "ES-345":
+            if true_landed_cost < 2300 or (true_landed_cost <= 2350 and era_boost >= 1.0):
+                return {
+                    "grade": "A+",
+                    "badge_class": "bg-emerald-500 text-stone-950 font-black",
+                    "verdict": "Grade A+ (Holy Grail Steal)",
+                    "reason": f"Landed at £{true_landed_cost:.0f}. Rare sub-£2.3k threshold for authentic Gibson ES-345!",
+                    "true_landed_cost": true_landed_cost,
+                    "case_penalty": case_penalty
+                }
+            elif true_landed_cost <= 2500:
+                return {
+                    "grade": "A",
+                    "badge_class": "bg-teal-500 text-stone-950 font-bold",
+                    "verdict": "Grade A (Prime Target)",
+                    "reason": f"Landed at £{true_landed_cost:.0f}. Well under £2,550 ES-345 market floor.",
+                    "true_landed_cost": true_landed_cost,
+                    "case_penalty": case_penalty
+                }
+            elif true_landed_cost <= 2750:
+                return {
+                    "grade": "B+",
+                    "badge_class": "bg-blue-600 text-white",
+                    "verdict": "Grade B+ (Fair Market)",
+                    "reason": f"Landed at £{true_landed_cost:.0f}. Solid ES-345 market price; worth an offer.",
+                    "true_landed_cost": true_landed_cost,
+                    "case_penalty": case_penalty
+                }
+            elif true_landed_cost <= 2950:
+                return {
+                    "grade": "B",
+                    "badge_class": "bg-stone-600 text-stone-200",
+                    "verdict": "Grade B (Negotiate Down)",
+                    "reason": "Room to negotiate £150-£250 off for travel offset.",
+                    "true_landed_cost": true_landed_cost,
+                    "case_penalty": case_penalty
+                }
+            else:
+                return {
+                    "grade": "C",
+                    "badge_class": "bg-stone-800 text-stone-400",
+                    "verdict": "Grade C (Overpriced)",
+                    "reason": f"Landed at £{true_landed_cost:.0f}. Higher than competitive private/used rates.",
+                    "true_landed_cost": true_landed_cost,
+                    "case_penalty": case_penalty
+                }
+
+        # Standard ES-335 thresholds
         # Sub-£2,000 True Landed Cost is an instant Holy Grail Steal
         if true_landed_cost < 2000 or (true_landed_cost <= 2050 and era_boost >= 1.0):
             return {
@@ -1119,14 +1174,14 @@ def load_blocklist():
     return ids
 
 def detect_fake_risk(title, desc="", price=0, brand="", has_repair=False, year=None):
-    """Detects counterfeit / Chibson red flags on Gibson ES-335 listings."""
+    """Detects counterfeit / Chibson red flags on Gibson ES-335/345 listings."""
     tlow = (title or "").lower()
     combined = f"{title} {desc}".lower()
     reasons = []
 
-    # 1. Impossible factory claims for ES-335
+    # 1. Impossible factory claims for ES-335/345
     if "bozeman" in combined and "gibson" in combined:
-        reasons.append("Impossible factory: Gibson Bozeman MT only builds acoustics, never ES-335s")
+        reasons.append("Impossible factory: Gibson Bozeman MT only builds acoustics, never ES-335/345s")
     if "kalamazoo" in combined and "gibson" in combined and year and int(year) >= 1985 and "heritage" not in combined and "reissue" not in combined and "custom shop" not in combined:
         reasons.append(f"Impossible factory: Kalamazoo closed in 1984 (listed as {year})")
 
@@ -1145,21 +1200,26 @@ def detect_fake_risk(title, desc="", price=0, brand="", has_repair=False, year=N
         if kw in tlow:
             reasons.append(msg)
 
-    # 3. Suspiciously cheap Gibson USA ES-335 without repair (excluding 335-S solid-body)
+    # 3. Suspiciously cheap Gibson USA ES-335/345 without repair (excluding 335-S solid-body)
     if "gibson usa" in (brand or "").lower() and not has_repair and "335-s" not in tlow and "studio" not in tlow:
         if price and 0 < float(price) < 1250:
-            reasons.append(f"Suspiciously low price (£{int(price)}) for an unrepaired Gibson USA ES-335 — inspect carefully")
+            reasons.append(f"Suspiciously low price (£{int(price)}) for an unrepaired authentic Gibson USA ES-335/345 — inspect carefully")
 
     if reasons:
         return True, " • ".join(reasons)
     return False, ""
 
 def is_valid_335_model(title, brand=""):
-    """Strictly filters out Epiphones and non-335 models (e.g. Tokai Love Rock/Goldstar/LS/LC)."""
+    """Strictly filters out Epiphones, non-335 Tokai models, and unrelated non-ES solid bodies."""
     tlow = (title or "").lower()
     blow = (brand or "").lower()
     if blow == "epiphone (exclude)" or ("epiphone" in tlow and "elitist" not in tlow):
         return False
+
+    # Avoid letting unrelated non-ES solid bodies slip in via search queries
+    if "gibson" in tlow or "gibson" in blow:
+        if not re.search(r'(335|345|355|es[\s-]?\d{3})', tlow):
+            return False
 
     # Strict Tokai 335 semi-hollow gate: must be ES-series or 335, never Les Paul/Strat copies
     if "tokai" in tlow or "tokai" in blow:
@@ -1171,7 +1231,7 @@ def is_valid_335_model(title, brand=""):
             return False
         if re.search(r'\b(u?ls|lc|sg|lp|st|te)[\s-]?\d{2,3}', tlow):
             return False
-        if not (re.search(r'\bes[\s-]?\d{2,3}', tlow) or "335" in tlow or "semi" in tlow):
+        if not (re.search(r'\bes[\s-]?\d{2,3}', tlow) or "335" in tlow or "345" in tlow or "semi" in tlow):
             return False
 
     return True
@@ -1186,10 +1246,13 @@ def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42):
         if str(item.get("id", "")) in blocked:
             continue
 
-        # Strictly exclude Epiphones & non-335 Tokai models
+        # Strictly exclude Epiphones, non-335 Tokai models, and unrelated non-ES solid bodies
         brand = item.get("brand_tier", "")
         if not is_valid_335_model(item.get("title", ""), brand):
             continue
+
+        model_family = detect_model_family(item.get("title", ""))
+        item["model_family"] = model_family
 
         fake_risk, fake_reason = detect_fake_risk(
             title=item.get("title", ""),
@@ -1215,7 +1278,8 @@ def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42):
             has_case=item.get("has_case", True),
             drive_hours=hull_travel["drive_hours"],
             max_hours=3.0,
-            fuel_cost=hull_travel["fuel_cost"]
+            fuel_cost=hull_travel["fuel_cost"],
+            model_family=model_family
         )
         
         # Somerset Hub Metrics
@@ -1228,7 +1292,8 @@ def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42):
             has_case=item.get("has_case", True),
             drive_hours=somerset_travel["drive_hours"],
             max_hours=1.5,
-            fuel_cost=somerset_travel["fuel_cost"]
+            fuel_cost=somerset_travel["fuel_cost"],
+            model_family=model_family
         )
         
         full_item = {
@@ -1801,9 +1866,9 @@ UK_SHOP_POSTCODES = {
 }
 
 def harvest_live_reverb():
-    """Fetches 100% REAL, LIVE, active UK Gibson ES-335 listings directly via UK live feed."""
+    """Fetches 100% REAL, LIVE, active UK Gibson ES-335 & ES-345 listings directly via UK live feed."""
     print("🔍 Harvesting live UK listings via Reverb UK Live Feed...")
-    queries = ["gibson es-335", "orville 335", "heritage h-535", "tokai 335"]
+    queries = ["gibson es-335", "gibson es-345", "orville 335", "heritage h-535", "tokai 335"]
     harvested = []
     seen_ids = set()
     headers = {
@@ -1994,13 +2059,13 @@ def get_ebay_oauth_token(client_id, client_secret):
         return None
 
 def harvest_live_ebay(client_id, client_secret):
-    """Fetches real live Gibson ES-335 items from the official eBay Browse API (eBay UK)."""
+    """Fetches real live Gibson ES-335 & ES-345 items from the official eBay Browse API (eBay UK)."""
     token = get_ebay_oauth_token(client_id, client_secret)
     if not token:
         return []
 
     print("\n🔍 Harvesting live UK items from official eBay Browse API...")
-    queries = ["gibson es-335", "orville 335", "heritage h-535", "tokai 335"]
+    queries = ["gibson es-335", "gibson es-345", "orville 335", "heritage h-535", "tokai 335"]
     harvested = []
     seen_ids = set()
 
@@ -2141,7 +2206,7 @@ def harvest_live_indie_shops():
         "strap", "knobs", "epiphone", "pedal", "cable", "strings", "book", "t-shirt",
         "love rock", "goldstar", "breezysound", "sold"
     ]
-    queries = ["gibson 335", "orville 335", "heritage 535", "tokai es"]
+    queries = ["gibson 335", "gibson 345", "orville 335", "heritage 535", "tokai es"]
 
     for shop in INDIE_UK_SHOPS:
         shop_count = 0
@@ -2166,7 +2231,7 @@ def harvest_live_indie_shops():
                             continue
                         if any(b in tlow for b in bad_terms) and "elitist" not in tlow:
                             continue
-                        if not any(m in tlow for m in ["335", "535", "es-1", "es-2", "es1", "es60", "es70", "es80", "es90", "es120", "es135", "es156", "es160", "es166"]):
+                        if not any(m in tlow for m in ["335", "345", "535", "es-1", "es-2", "es1", "es60", "es70", "es80", "es90", "es120", "es135", "es156", "es160", "es166"]):
                             continue
                         try:
                             price = round(float(p.get("price") or 0), 2)
@@ -2226,7 +2291,7 @@ def harvest_live_indie_shops():
                         tlow = title.lower()
                         if any(b in tlow for b in bad_terms) and "elitist" not in tlow:
                             continue
-                        if not any(m in tlow for m in ["335", "535", "es-1", "es-2", "es1", "es60", "es70", "es80", "es90", "es120", "es135", "es156", "es160", "es166"]):
+                        if not any(m in tlow for m in ["335", "345", "535", "es-1", "es-2", "es1", "es60", "es70", "es80", "es90", "es120", "es135", "es156", "es160", "es166"]):
                             continue
                         prices = p.get("prices", {}) or {}
                         minor = int(prices.get("currency_minor_unit", 2))

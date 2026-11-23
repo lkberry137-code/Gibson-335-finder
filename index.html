@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gibson ES-335 UK Deal Radar</title>
+  <title>Gibson ES-335 &amp; ES-345 UK Deal Radar</title>
   <!-- Google Fonts: Inter (shadcn UI) + Kaushan Script (Vintage Headstock Script) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -155,7 +155,7 @@
 
         <h1 class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span class="gibson-script text-4xl sm:text-5xl leading-none pr-1">Gibson</span>
-          <span class="text-xl sm:text-2xl font-semibold tracking-tight text-foreground/90">ES-335 Deal Radar</span>
+          <span class="text-xl sm:text-2xl font-semibold tracking-tight text-foreground/90">ES-335 &amp; 345 Deal Radar</span>
         </h1>
 
         <p class="text-muted-foreground text-sm max-w-2xl">
@@ -363,7 +363,7 @@
           <input
             type="text"
             id="searchInput"
-            placeholder="Search finish, year, shop (e.g. cherry, bigsby)..."
+            placeholder="Search model, finish, year, shop (e.g. 345, cherry, bigsby)..."
             class="w-full h-8 rounded-md border border-input bg-background pl-8 pr-3 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
           >
         </div>
@@ -411,7 +411,7 @@
         </div>
       </div>
 
-      <!-- Bottom Row: Brand Filter + Dexterity -->
+      <!-- Bottom Row: Brand Filter + Model Filter + Activity + Dexterity -->
       <div class="flex flex-wrap items-center justify-between gap-3 pt-2.5 border-t border-border">
         <!-- Brand Filter Tabs -->
         <div class="flex flex-wrap items-center gap-1.5">
@@ -423,6 +423,14 @@
             <button class="filter-brand-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-brand="Heritage">Heritage H-535</button>
             <button class="filter-brand-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-brand="Tokai">Tokai Japan</button>
           </div>
+        </div>
+
+        <!-- Model Filter Tabs -->
+        <div class="inline-flex items-center gap-1 rounded-lg bg-secondary p-1 border border-border">
+          <span class="text-[11px] text-muted-foreground font-medium px-2">Model</span>
+          <button class="filter-model-btn rounded-md px-2.5 py-1 bg-card text-foreground font-semibold shadow-sm border border-border transition-all" data-model="all">All</button>
+          <button class="filter-model-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-model="ES-335">ES-335</button>
+          <button class="filter-model-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-model="ES-345">ES-345</button>
         </div>
 
         <!-- Market Activity Filter (New / Price Drops / 30+ Days) -->
@@ -544,7 +552,7 @@
             <i data-lucide="map" class="w-4 h-4"></i>
           </div>
           <div>
-            <h3 class="text-sm font-semibold tracking-tight text-foreground">Interactive UK ES-335 Deal Map</h3>
+            <h3 class="text-sm font-semibold tracking-tight text-foreground">Interactive UK ES-335 &amp; ES-345 Deal Map</h3>
             <p id="mapSubtitle" class="text-[11px] text-muted-foreground">Showing filtered listings with live drive-time radius rings from Hull &amp; Somerset</p>
           </div>
         </div>
@@ -574,7 +582,7 @@
     <span id="toastMsg">Offer message copied to clipboard!</span>
   </div>
 
-  <script src="app.js?v=3.7"></script>
+  <script src="app.js?v=3.8"></script>
   <script>
     if (window.lucide) lucide.createIcons();
   </script>

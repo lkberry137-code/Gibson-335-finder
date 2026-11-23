@@ -5,6 +5,7 @@
 let currentHub = "Hull";
 let rawListings = [];
 let filteredBrand = "all";
+let filteredModel = "all"; // "all" | "ES-335" | "ES-345"
 let filteredSource = "all"; // "all" | "indie" | "ebay" | "reverb" | "gumtree"
 let filteredActivity = "all"; // "all" | "new" | "drops" | "stale"
 let searchQuery = "";
@@ -386,6 +387,10 @@ function computeListingMetrics(listing, mpg, fuelPrice, maxDriveHours) {
     ? Boolean(listing.is_left_handed)
     : /\b(left[\s-]?hand(ed)?|lh|lefty|southpaw)\b/i.test(`${listing.title} ${listing.era_notes || ''}`);
 
+  // Model Family Detection (ES-345 vs ES-335)
+  const is345 = (listing.model_family === "ES-345") || /\b(es[\s-]?345|345)\b/i.test(listing.title || "");
+  const isGibsonStandardOrCS = listing.brand_tier.includes("Gibson USA") || listing.brand_tier.includes("Gibson Custom");
+
   // Grade Evaluation (shadcn Vintage Sunburst Badges)
   let grade = "B";
   let gradePillClass = "bg-secondary/95 text-foreground border border-border font-semibold";
@@ -393,7 +398,9 @@ function computeListingMetrics(listing, mpg, fuelPrice, maxDriveHours) {
   let notes = "Good candidate for negotiation.";
 
   // Exceeds travel cap check (allow up to 4.5h for Holy Grail steals)
-  const isGrailCandidate = (listing.brand_tier.includes("Gibson USA") && (trueLandedCost <= 2000 || (trueLandedCost <= 2050 && (listing.era_boost || 0) >= 1.0)));
+  const isGrailCandidate = is345
+    ? (isGibsonStandardOrCS && (trueLandedCost <= 2300 || (trueLandedCost <= 2350 && (listing.era_boost || 0) >= 1.0)))
+    : (listing.brand_tier.includes("Gibson USA") && (trueLandedCost <= 2000 || (trueLandedCost <= 2050 && (listing.era_boost || 0) >= 1.0)));
   const effectiveMaxHours = isGrailCandidate ? 4.5 : maxDriveHours;
 
   if (driveHours > effectiveMaxHours && !shippingAvailable) {
@@ -412,6 +419,28 @@ function computeListingMetrics(listing, mpg, fuelPrice, maxDriveHours) {
       gradePillClass = "bg-cherry/90 text-white border border-cherry font-semibold";
       verdict = "Caution • Overpriced Repair";
       notes = `Repaired guitar landed at £${trueLandedCost}; above £1,450 safe threshold.`;
+    }
+  } else if (is345 && isGibsonStandardOrCS) {
+    if (trueLandedCost < 2300 || (trueLandedCost <= 2350 && (listing.era_boost || 0) >= 1.0)) {
+      grade = "A+";
+      gradePillClass = "bg-emerald-500 text-background font-bold shadow-sm";
+      verdict = "Grade A+ • Holy Grail";
+      notes = `True landed at £${trueLandedCost}. Rare sub-£2.3k threshold for authentic Gibson ES-345.`;
+    } else if (trueLandedCost <= 2500) {
+      grade = "A";
+      gradePillClass = "bg-primary text-primary-foreground font-bold shadow-sm";
+      verdict = "Grade A • Prime Target";
+      notes = `Landed at £${trueLandedCost}. Below the £2,550 ES-345 market floor.`;
+    } else if (trueLandedCost <= 2750) {
+      grade = "B+";
+      gradePillClass = "bg-card/95 text-foreground border border-primary/40 font-semibold";
+      verdict = "Grade B+ • Solid Buy";
+      notes = "Fair ES-345 market price. Very solid pick.";
+    } else {
+      grade = "B";
+      gradePillClass = "bg-background/90 text-muted-foreground border border-border font-medium";
+      verdict = "Grade B • Make Offer";
+      notes = "Slightly high for travel pickup. Negotiate a travel discount.";
     }
   } else if (listing.brand_tier.includes("Gibson USA")) {
     if (trueLandedCost < 2000 || (trueLandedCost <= 2050 && (listing.era_boost || 0) >= 1.0)) {
@@ -503,6 +532,7 @@ function computeListingMetrics(listing, mpg, fuelPrice, maxDriveHours) {
     bestLandedCost,
     trueLandedCost,
     isLefty,
+    is345,
     grade,
     gradePillClass,
     verdict,
@@ -545,6 +575,11 @@ function renderListings() {
     if (filteredBrand !== "all" && !item.brand_tier.toLowerCase().includes(filteredBrand.toLowerCase())) {
       return false;
     }
+
+    // Model Family filter (ES-335 vs ES-345)
+    const is345Item = (item.model_family === "ES-345") || /\b(es[\s-]?345|345)\b/i.test(item.title || "");
+    if (filteredModel === "ES-345" && !is345Item) return false;
+    if (filteredModel === "ES-335" && is345Item) return false;
 
     // Source filter (Indie Shops / eBay UK / Reverb / Gumtree)
     if (filteredSource !== "all") {
@@ -654,7 +689,9 @@ function renderListings() {
               <img src="${item.image_url}" alt="" class="w-10 h-10 rounded-md object-cover border border-border shrink-0 bg-background">
               <div class="min-w-0">
                 <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="font-semibold text-foreground hover:text-primary transition-colors block truncate" title="${escapeQuotes(item.title)}">${item.title}</a>
-                <div class="text-[11px] text-muted-foreground truncate">${item.brand_tier} • ${item.source}</div>
+                <div class="text-[11px] text-muted-foreground truncate">
+                  ${m.is345 ? '<span class="inline-flex items-center rounded px-1.5 py-0.2 text-[10px] font-bold bg-primary/15 text-primary border border-primary/30 mr-1">ES-345</span>' : ''}${item.brand_tier} • ${item.source}
+                </div>
               </div>
             </div>
           </td>
@@ -754,11 +791,16 @@ function renderListings() {
           <img src="${item.image_url}" alt="${escapeQuotes(item.title)}" class="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-300">
           <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-background/30"></div>
 
-          <!-- Top Left Badges: Deal Grade, Price Drop & Lefty -->
+          <!-- Top Left Badges: Deal Grade, Model, Price Drop & Lefty -->
           <div class="absolute top-3 left-3 flex flex-wrap gap-1.5 items-center">
             <span class="inline-flex items-center rounded-md px-2 py-0.5 text-[11px] tracking-tight backdrop-blur-md ${m.gradePillClass}">
               ${m.verdict}
             </span>
+            ${m.is345 ? `
+              <span class="inline-flex items-center rounded-md px-2 py-0.5 text-[10px] font-bold bg-primary/15 text-primary border border-primary/30 backdrop-blur-md">
+                ES-345
+              </span>
+            ` : ''}
             ${item.fake_risk ? `
               <span class="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold bg-cherry text-white shadow-sm" title="${escapeQuotes(item.fake_reason || 'Counterfeit red flag detected')}">
                 <i data-lucide="alert-triangle" class="w-3 h-3"></i>
@@ -1239,6 +1281,20 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       e.target.className = "filter-brand-btn rounded-md px-2.5 py-1 bg-card text-foreground font-semibold shadow-sm border border-border transition-all";
       filteredBrand = e.target.getAttribute("data-brand");
+      renderListings();
+    });
+  });
+
+  // Model Filter Buttons (All / ES-335 / ES-345)
+  document.querySelectorAll(".filter-model-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const targetBtn = e.target.closest(".filter-model-btn");
+      if (!targetBtn) return;
+      document.querySelectorAll(".filter-model-btn").forEach(b => {
+        b.className = "filter-model-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all";
+      });
+      targetBtn.className = "filter-model-btn rounded-md px-2.5 py-1 bg-card text-foreground font-semibold shadow-sm border border-border transition-all";
+      filteredModel = targetBtn.getAttribute("data-model");
       renderListings();
     });
   });
