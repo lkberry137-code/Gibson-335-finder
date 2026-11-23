@@ -53,7 +53,10 @@ function hideListing(id) {
   hiddenIds.add(id);
   shortlistedIds.delete(id);
   saveUserSets();
-  showToast("Listing hidden (click Restore anytime)");
+  if (!window.location.hostname.includes("github.io")) {
+    fetch(`/api/remove_deal?id=${encodeURIComponent(id)}`).catch(() => {});
+  }
+  showToast("Removed from feed (click Restore anytime to bring back)");
   renderListings();
 }
 
@@ -287,7 +290,9 @@ function computeListingMetrics(listing, mpg, fuelPrice, maxDriveHours) {
   let driveHours = 0;
   let fuelCost = 0;
 
-  if (listing.coords && listing.coords.length === 2) {
+  const hasKnownLocation = Boolean(listing.coords && listing.coords.length === 2 && !String(listing.postcode || "").toUpperCase().includes("TBC"));
+
+  if (hasKnownLocation) {
     const direct = haversineMiles(hub.lat, hub.lng, listing.coords[0], listing.coords[1]);
     oneWayMiles = Math.round(direct * 1.25); // 1.25 UK road network winding factor
     roundTripMiles = oneWayMiles * 2;
@@ -319,7 +324,25 @@ function computeListingMetrics(listing, mpg, fuelPrice, maxDriveHours) {
   let bestLandedCost = landedDriveCost;
   let savings = 0;
 
-  if (shippingAvailable) {
+  if (!hasKnownLocation) {
+    if (shippingAvailable) {
+      cheaperMethod = "ship";
+      savings = 0;
+      cheaperMethodLabel = "Seller Delivery";
+      cheaperText = `Exact UK town not listed — Seller Delivery (${shippingCost === 0 ? 'FREE' : '£' + shippingCost.toFixed(2)})`;
+      cheaperCalloutClass = "bg-emerald-500/10 text-emerald-300 border border-emerald-500/25";
+      cheaperIcon = "package";
+      bestLandedCost = landedShipCost;
+    } else {
+      cheaperMethod = "drive_only";
+      savings = 0;
+      cheaperMethodLabel = "Location TBC";
+      cheaperText = "Exact UK town not listed on marketplace — ask seller for postcode";
+      cheaperCalloutClass = "bg-secondary text-muted-foreground border border-border";
+      cheaperIcon = "map-pin";
+      bestLandedCost = landedDriveCost;
+    }
+  } else if (shippingAvailable) {
     if (fuelCost < shippingCost) {
       cheaperMethod = "drive";
       savings = Math.round(shippingCost - fuelCost);
@@ -460,6 +483,7 @@ function computeListingMetrics(listing, mpg, fuelPrice, maxDriveHours) {
   const suggestedShipOffer = Math.max(Math.round((listing.price * 0.92) / 25) * 25, Math.round(listing.price * 0.88));
 
   return {
+    hasKnownLocation,
     oneWayMiles,
     roundTripMiles,
     driveHours,
@@ -635,11 +659,17 @@ function renderListings() {
             </div>
           </td>
           <td class="py-2.5 px-2 whitespace-nowrap text-muted-foreground tabular-nums">
-            <div>${item.postcode}</div>
-            <div class="text-[10px]">${m.oneWayMiles} mi (${m.driveHours}h)</div>
+            <div>${m.hasKnownLocation ? item.postcode : 'UK (TBC)'}</div>
+            <div class="text-[10px]">${m.hasKnownLocation ? `${m.oneWayMiles} mi (${m.driveHours}h)` : 'Location TBC'}</div>
           </td>
           <td class="py-2.5 px-2 whitespace-nowrap tabular-nums">
             <div class="font-semibold text-foreground">£${item.price.toLocaleString()}</div>
+            ${item.fake_risk ? `
+              <span class="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold bg-cherry text-white shadow-sm" title="${escapeQuotes(item.fake_reason || 'Counterfeit red flag detected')}">
+                <i data-lucide="alert-triangle" class="w-3 h-3"></i>
+                <span>FAKE RISK</span>
+              </span>
+            ` : ''}
             ${priceDrop > 0 ? `<div class="text-[10px] font-semibold text-emerald-400">↓ −£${Math.round(priceDrop)}</div>` : ''}
           </td>
           <td class="py-2.5 px-2 whitespace-nowrap tabular-nums">
@@ -729,6 +759,12 @@ function renderListings() {
             <span class="inline-flex items-center rounded-md px-2 py-0.5 text-[11px] tracking-tight backdrop-blur-md ${m.gradePillClass}">
               ${m.verdict}
             </span>
+            ${item.fake_risk ? `
+              <span class="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold bg-cherry text-white shadow-sm" title="${escapeQuotes(item.fake_reason || 'Counterfeit red flag detected')}">
+                <i data-lucide="alert-triangle" class="w-3 h-3"></i>
+                <span>FAKE RISK</span>
+              </span>
+            ` : ''}
             ${priceDrop > 0 ? `
               <span class="inline-flex items-center gap-0.5 rounded-md px-2 py-0.5 text-[10px] font-bold bg-emerald-500 text-background shadow-sm tabular-nums">
                 <i data-lucide="trending-down" class="w-3 h-3"></i>
@@ -752,10 +788,10 @@ function renderListings() {
           <!-- Bottom Location Pill -->
           <div class="absolute bottom-2.5 left-3 inline-flex items-center gap-1.5 rounded-md bg-background/85 backdrop-blur-md border border-border px-2 py-0.5 text-[11px] font-medium text-foreground/90 tabular-nums">
             <i data-lucide="map-pin" class="w-3 h-3 text-primary"></i>
-            <span>${item.postcode} • ${m.oneWayMiles} mi (${m.driveHours}h from ${currentHub})</span>
+            <span>${m.hasKnownLocation ? `${item.postcode} • ${m.oneWayMiles} mi (${m.driveHours}h from ${currentHub})` : 'UK • Location TBC'}</span>
           </div>
 
-          <!-- Bottom Right: Shortlist & Hide Quick Actions -->
+          <!-- Bottom Right: Shortlist & Remove from Feed Quick Actions -->
           <div class="absolute bottom-2.5 right-3 flex items-center gap-1.5">
             <button
               onclick="toggleShortlist('${escapeQuotes(item.id)}')"
@@ -765,9 +801,9 @@ function renderListings() {
             </button>
             <button
               onclick="hideListing('${escapeQuotes(item.id)}')"
-              class="h-7 w-7 inline-flex items-center justify-center rounded-md bg-background/85 backdrop-blur-md border border-border text-muted-foreground hover:text-foreground transition-colors"
-              title="Hide listing">
-              <i data-lucide="eye-off" class="w-3.5 h-3.5"></i>
+              class="h-7 w-7 inline-flex items-center justify-center rounded-md bg-background/85 backdrop-blur-md border border-border text-muted-foreground hover:text-cherry hover:border-cherry/50 transition-colors"
+              title="Remove from feed">
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
             </button>
           </div>
         </div>
@@ -805,9 +841,9 @@ function renderListings() {
                   <span class="inline-flex items-center gap-1"><i data-lucide="car" class="w-3 h-3"></i> Road Trip</span>
                   ${m.cheaperMethod === 'drive' ? '<span class="rounded bg-primary text-primary-foreground text-[9px] font-bold px-1.5 py-0.2">BEST</span>' : ''}
                 </div>
-                <div class="text-muted-foreground mt-1.5 tabular-nums">Petrol: <strong class="text-foreground">+£${m.fuelCost}</strong></div>
-                <div class="text-[10px] text-muted-foreground/80 tabular-nums">${m.roundTripMiles} mi round</div>
-                <div class="text-foreground font-semibold mt-1 tabular-nums">£${m.landedDriveCost.toLocaleString()}</div>
+                <div class="text-muted-foreground mt-1.5 tabular-nums">Petrol: <strong class="text-foreground">${m.hasKnownLocation ? '+£' + m.fuelCost : 'TBC'}</strong></div>
+                <div class="text-[10px] text-muted-foreground/80 tabular-nums">${m.hasKnownLocation ? `${m.roundTripMiles} mi round` : 'Ask seller postcode'}</div>
+                <div class="text-foreground font-semibold mt-1 tabular-nums">${m.hasKnownLocation ? '£' + m.landedDriveCost.toLocaleString() : 'TBC'}</div>
               </div>
 
               <!-- Seller Delivery Option -->
@@ -844,6 +880,13 @@ function renderListings() {
               <span class="text-lg font-bold tracking-tight text-primary tabular-nums">£${m.trueLandedCost.toLocaleString()}</span>
             </div>
           </div>
+
+          ${item.fake_risk && item.fake_reason ? `
+          <div class="rounded-md border border-cherry/40 bg-cherry/10 px-2.5 py-2 text-[11px] text-cherry font-medium flex items-start gap-1.5">
+            <i data-lucide="alert-triangle" class="w-3.5 h-3.5 shrink-0 mt-0.5"></i>
+            <span>${item.fake_reason}</span>
+          </div>
+          ` : ''}
 
           <!-- Valuation Notes -->
           <p class="text-[11px] text-muted-foreground leading-relaxed">

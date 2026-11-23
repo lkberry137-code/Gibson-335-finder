@@ -86,7 +86,17 @@ POSTCODE_CACHE = {
     "WC2H 8LA": (51.5152, -0.1292), # Denmark St London
     "B5 4SL": (52.4737, -1.8947),   # Birmingham Fair Deal
     "PE29 3NW": (52.3304, -0.1846), # Huntingdon Music Street
-    "GL10 2BG": (51.7463, -2.2869)  # Stonehouse World Guitars
+    "GL10 2BG": (51.7463, -2.2869), # Stonehouse World Guitars
+    "LE3 8HN": (52.6486, -1.2017),  # Leicester Jordan Guitars
+    "NG9 8AR": (52.9278, -1.2750),  # Stapleford Nottingham Squealing Pig
+    "TA1 5LU": (51.0150, -3.1030),  # Taunton Somerset Gas Station Guitars
+    "AL1 1NG": (51.7520, -0.3360),  # St Albans The 58 Sound
+    "CF10 5DR": (51.4730, -3.1730), # Cardiff MotoMusic
+    "SW6 4SG": (51.4728, -0.2030),  # London New Kings Road Vintage
+    "CV47 0AA": (52.2510, -1.3880), # Southam Warwickshire Rolly's Guitars
+    "BN22 9BH": (50.7905, 0.2890),  # Eastbourne Bonners Music
+    "BB7 9YE": (53.8220, -2.4080),  # Whalley Lancs Reidys Home of Music
+    "CA3 8UU": (54.9010, -2.9360)   # Carlisle Rainbow Music
 }
 
 UK_CITY_POSTCODES = {
@@ -94,11 +104,13 @@ UK_CITY_POSTCODES = {
     "leeds": "LS1 1AA", "sheffield": "S1 2GE", "grimsby": "DN31 1AA", "scunthorpe": "DN15 6AA",
     "doncaster": "DN1 1AA", "mansfield": "NG18 1AA", "nottingham": "NG1 1AA", "derby": "DE1 1AA",
     "leicester": "LE1 1AA", "lincoln": "LN1 1AA", "liverpool": "L1 8JQ", "manchester": "M1 1AE",
-    "bristol": "BS1 1AA", "bath": "BA1 1AA", "cardiff": "CF10 1AA", "london": "SW1A 1AA",
-    "norwood": "SW1A 1AA", "birmingham": "B1 1AA", "norwich": "NR1 1AA", "colchester": "CO4 9QP",
-    "newcastle": "NE1 1AA", "oxford": "OX1 1AA", "cambridge": "CB1 1AA", "exeter": "EX1 1AA",
-    "plymouth": "PL1 1AA", "southampton": "SO14 1AA", "portsmouth": "PO1 1AA", "bournemouth": "BH1 1AA",
-    "farnham": "GU9 7ND", "guildford": "GU1 4RF", "cheltenham": "GL50 1TA", "ormskirk": "PR7 1NY"
+    "bristol": "BS1 1AA", "bath": "BA1 1AA", "cardiff": "CF10 1AA", "south wales": "CF10 1AA",
+    "london": "SW1A 1AA", "norwood": "SW1A 1AA", "birmingham": "B1 1AA", "norwich": "NR1 1AA",
+    "colchester": "CO4 9QP", "newcastle": "NE1 1AA", "oxford": "OX1 1AA", "cambridge": "CB1 1AA",
+    "exeter": "EX1 1AA", "plymouth": "PL1 1AA", "southampton": "SO14 1AA", "portsmouth": "PO1 1AA",
+    "bournemouth": "BH1 1AA", "farnham": "GU9 7ND", "guildford": "GU1 4RF", "cheltenham": "GL50 1TA",
+    "ormskirk": "PR7 1NY", "taunton": "TA1 5LU", "st albans": "AL1 1NG", "eastbourne": "BN22 9BH",
+    "carlisle": "CA3 8UU", "blackburn": "BB7 9YE", "reading": "RG1 1DN"
 }
 
 def resolve_uk_location_postcode(locality, shop_name=""):
@@ -109,11 +121,11 @@ def resolve_uk_location_postcode(locality, shop_name=""):
     for k, pc in UK_CITY_POSTCODES.items():
         if k in comb:
             return pc
-    return "B1 1AA"
+    return "UK (TBC)"
 
 def get_postcode_coords(postcode):
     """Fetches (lat, lng) for a UK postcode or masked outcode (e.g. YO8***) via cache or postcodes.io."""
-    if not postcode:
+    if not postcode or "TBC" in str(postcode).upper():
         return None
     clean = postcode.strip().upper()
     if clean in POSTCODE_CACHE:
@@ -986,6 +998,59 @@ def generate_sample_listings():
 # ---------------------------------------------------------
 # 7. ENRICHMENT & SCORING PIPELINE
 # ---------------------------------------------------------
+BLOCKED_LISTING_IDS = {
+    "gumtree_1511012969", # Suspected fake ("Bozeman Plant MT USA" ES-335 + misaligned tuners)
+}
+
+def load_blocklist():
+    ids = set(BLOCKED_LISTING_IDS)
+    bl_path = os.path.join(os.path.dirname(__file__), "blocklist.json")
+    if os.path.exists(bl_path):
+        try:
+            with open(bl_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    ids.update(str(x) for x in data)
+        except Exception:
+            pass
+    return ids
+
+def detect_fake_risk(title, desc="", price=0, brand="", has_repair=False, year=None):
+    """Detects counterfeit / Chibson red flags on Gibson ES-335 listings."""
+    tlow = (title or "").lower()
+    combined = f"{title} {desc}".lower()
+    reasons = []
+
+    # 1. Impossible factory claims for ES-335
+    if "bozeman" in combined and "gibson" in combined:
+        reasons.append("Impossible factory: Gibson Bozeman MT only builds acoustics, never ES-335s")
+    if "kalamazoo" in combined and "gibson" in combined and year and int(year) >= 1985 and "heritage" not in combined and "reissue" not in combined and "custom shop" not in combined:
+        reasons.append(f"Impossible factory: Kalamazoo closed in 1984 (listed as {year})")
+
+    # 2. Explicit replica / copy / counterfeit hardware red flags
+    fake_keywords = [
+        ("chibson", "Listed as Chibson/replica"),
+        ("replica", "Listed as replica"),
+        ("copy", "Listed as copy"),
+        ("tribute build", "Non-Gibson tribute build"),
+        ("kit guitar", "Kit guitar build"),
+        ("3-screw", "3-screw truss rod cover (Gibson uses 2)"),
+        ("3 screw", "3-screw truss rod cover (Gibson uses 2)"),
+        ("metric bridge", "Metric bridge posts (counterfeit indicator)"),
+    ]
+    for kw, msg in fake_keywords:
+        if kw in tlow:
+            reasons.append(msg)
+
+    # 3. Suspiciously cheap Gibson USA ES-335 without repair (excluding 335-S solid-body)
+    if "gibson usa" in (brand or "").lower() and not has_repair and "335-s" not in tlow and "studio" not in tlow:
+        if price and 0 < float(price) < 1250:
+            reasons.append(f"Suspiciously low price (£{int(price)}) for an unrepaired Gibson USA ES-335 — inspect carefully")
+
+    if reasons:
+        return True, " • ".join(reasons)
+    return False, ""
+
 def is_valid_335_model(title, brand=""):
     """Strictly filters out Epiphones and non-335 models (e.g. Tokai Love Rock/Goldstar/LS/LC)."""
     tlow = (title or "").lower()
@@ -1009,14 +1074,30 @@ def is_valid_335_model(title, brand=""):
     return True
 
 def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42):
-    """Calculates distances, fuel costs, and deal grades for both Hull and Somerset hubs."""
+    """Calculates distances, fuel costs, counterfeit risk flags, and deal grades for both hubs."""
     enriched = []
+    blocked = load_blocklist()
     
     for item in listings:
+        # Skip user-removed / blocked fake listings
+        if str(item.get("id", "")) in blocked:
+            continue
+
         # Strictly exclude Epiphones & non-335 Tokai models
         brand = item.get("brand_tier", "")
         if not is_valid_335_model(item.get("title", ""), brand):
             continue
+
+        fake_risk, fake_reason = detect_fake_risk(
+            title=item.get("title", ""),
+            desc=item.get("era_notes", ""),
+            price=item.get("price", 0),
+            brand=brand,
+            has_repair=item.get("has_repair", False),
+            year=item.get("year")
+        )
+        item["fake_risk"] = fake_risk
+        item["fake_reason"] = fake_reason
 
         pc = item.get("postcode", "")
         coords = get_postcode_coords(pc)
@@ -1458,6 +1539,32 @@ class DealRadarServer(SimpleHTTPRequestHandler):
                 self.wfile.write(res_body)
                 return
 
+            if self.path.startswith("/api/remove_deal"):
+                parsed_url = urllib.parse.urlparse(self.path)
+                qs = urllib.parse.parse_qs(parsed_url.query)
+                rem_id = qs.get("id", [""])[0].strip()
+                if rem_id:
+                    bl_path = os.path.join(os.path.dirname(__file__), "blocklist.json")
+                    bl = list(load_blocklist())
+                    if rem_id not in bl:
+                        bl.append(rem_id)
+                    with open(bl_path, "w", encoding="utf-8") as f:
+                        json.dump(bl, f, indent=2)
+                    filepath = os.path.join(os.path.dirname(__file__), "deals.json")
+                    if os.path.exists(filepath):
+                        with open(filepath, "r", encoding="utf-8-sig") as f:
+                            deals = json.load(f)
+                        deals = [d for d in deals if str(d.get("id", "")) != rem_id]
+                        with open(filepath, "w", encoding="utf-8") as f:
+                            json.dump(deals, f, indent=2)
+                    res_body = json.dumps({"status": "ok", "removed": rem_id}).encode("utf-8")
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.send_header("Content-Length", str(len(res_body)))
+                    self.end_headers()
+                    self.wfile.write(res_body)
+                    return
+
             if self.path.startswith("/api/scan_now"):
                 def run_sweep():
                     try:
@@ -1558,16 +1665,36 @@ def start_server(port=8000):
         print("\nStopping server...")
 
 UK_SHOP_POSTCODES = {
-    "wildwire": "YO8 8LZ",   # Selby, North Yorkshire (35 miles from Hull HQ!)
-    "rich tone": "S9 3RP",   # Sheffield (60 miles from Hull HQ!)
-    "coda music": "SG6 2AL", # Hertfordshire
-    "peach": "CO4 9QP",      # Colchester
-    "guitar village": "GU9 7ND", # Farnham
-    "andertons": "GU1 4RF",  # Guildford
-    "atb guitars": "GL50 1TA", # Cheltenham (near Somerset!)
-    "wunjo": "WC2H 8LA",     # London
-    "soundaffects": "PR7 1NY", # Ormskirk, Lancs
-    "guitarguitar": "B5 4RB" # Birmingham
+    "wildwire": "YO8 8LZ",          # Selby, North Yorkshire (35 miles from Hull HQ!)
+    "rich tone": "S9 3RP",          # Sheffield (60 miles from Hull HQ!)
+    "coda music": "SG6 2AL",        # Hertfordshire
+    "peach": "CO4 9QP",             # Colchester
+    "guitar village": "GU9 7ND",    # Farnham
+    "andertons": "GU1 4RF",         # Guildford
+    "atb guitars": "GL50 1TA",      # Cheltenham (near Somerset!)
+    "wunjo": "WC2H 8LA",            # London
+    "denmark street": "WC2H 8LP",   # London
+    "no.tom": "WC2H 8LP",           # London
+    "regent sounds": "WC2H 8LA",    # London
+    "soundaffects": "PR7 1NY",      # Ormskirk, Lancs
+    "sound affects": "PR7 1NY",     # Ormskirk, Lancs
+    "guitarguitar": "B5 4RB",       # Birmingham
+    "fair deal": "B5 4SL",          # Birmingham
+    "jordan": "LE3 8HN",            # Leicester (Glenfield)
+    "squealing pig": "NG9 8AR",     # Stapleford, Nottingham
+    "gas station": "TA1 5LU",       # Taunton, Somerset
+    "58 sound": "AL1 1NG",          # St Albans, Herts
+    "motomusic": "CF10 5DR",        # Cardiff
+    "in bloom": "RG1 1DN",          # Reading
+    "new kings road": "SW6 4SG",    # London
+    "rolly": "CV47 0AA",            # Southam, Warwickshire
+    "guitars in the attic": "NG18 1AA", # Mansfield, Notts
+    "south wales": "CF10 1AA",      # South Wales
+    "bonners": "BN22 9BH",          # Eastbourne
+    "reidys": "BB7 9YE",            # Whalley, Lancs
+    "rainbow music": "CA3 8UU",     # Carlisle
+    "music street": "PE29 3NW",     # Huntingdon
+    "world guitars": "GL10 2BG"     # Stonehouse, Glos
 }
 
 def harvest_live_reverb():
@@ -1880,7 +2007,7 @@ def harvest_live_ebay(client_id, client_secret):
     return harvested
 
 INDIE_UK_SHOPS = [
-    {"slug": "jordan", "name": "Jordan Guitars", "base": "https://jordanguitars.co.uk", "type": "shopify", "postcode": "NR1 1AA", "city": "Norwich", "shipping_cost": 0.0, "shipping_carrier": "Free Insured UK Delivery"},
+    {"slug": "jordan", "name": "Jordan Guitars", "base": "https://jordanguitars.co.uk", "type": "shopify", "postcode": "LE3 8HN", "city": "Leicester", "shipping_cost": 0.0, "shipping_carrier": "Free Insured UK Delivery"},
     {"slug": "soundaffects", "name": "Soundaffects", "base": "https://www.soundaffects.com", "type": "shopify", "postcode": "PR7 1NY", "city": "Ormskirk", "shipping_cost": 0.0, "shipping_carrier": "Free UK Courier"},
     {"slug": "atb", "name": "ATB Guitars", "base": "https://atbguitars.com", "type": "shopify", "postcode": "GL50 1TA", "city": "Cheltenham", "shipping_cost": 25.0, "shipping_carrier": "Dealer UK Courier: £25.00"},
     {"slug": "guitarvillage", "name": "Guitar Village", "base": "https://guitarvillage.co.uk", "type": "woo", "postcode": "GU9 7ND", "city": "Farnham", "shipping_cost": 0.0, "shipping_carrier": "Free UK Delivery"},
@@ -2075,15 +2202,21 @@ def main():
     print(f"\nTotal live active UK guitars: {len(all_live_deals)}")
     enriched = enrich_listings(all_live_deals)
 
-    # Preserve any imported Gumtree & FB deals across runs
+    # Preserve any imported Gumtree & FB deals across runs (excluding blocklisted fakes)
     filepath = os.path.join(os.path.dirname(__file__), "deals.json")
+    blocked_ids = load_blocklist()
     saved_imports = []
     if os.path.exists(filepath):
         try:
             with open(filepath, "r", encoding="utf-8-sig") as f:
                 prev = json.load(f)
                 seen_ids = {d.get("id") for d in enriched}
-                saved_imports = [d for d in prev if (d.get("id", "").startswith("gumtree_") or d.get("id", "").startswith("fb_")) and d.get("id") not in seen_ids]
+                saved_imports = [
+                    d for d in prev
+                    if (d.get("id", "").startswith("gumtree_") or d.get("id", "").startswith("fb_"))
+                    and d.get("id") not in seen_ids
+                    and d.get("id") not in blocked_ids
+                ]
         except Exception:
             pass
 
