@@ -1,0 +1,20 @@
+# Secrets & local credentials (NEVER commit)
+config.json
+.env
+
+# Local binaries, browser profiles & caches
+cloudflared.exe
+fb_profile/
+__pycache__/
+*.pyc
+
+# Local test/debug scripts & dumps
+test_*.py
+ebay_dump.html
+ebay_page_dump.html
+download_tunnel.py
+tunnel.py
+fb_login.*
+fb_scraper.py
+*.bat
+*.ps1
