@@ -566,8 +566,111 @@ def init_db():
             sent_at TEXT
         )
     """)
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS shop_locations (
+            shop_key TEXT PRIMARY KEY,
+            locality TEXT,
+            region TEXT,
+            postcode TEXT,
+            lat REAL,
+            lng REAL
+        )
+    """)
     conn.commit()
     conn.close()
+
+def geocode_uk_town(locality, region="ENG"):
+    """Resolves any UK town/village name to (postcode_or_outcode, (lat, lng)) using region matching."""
+    if not locality:
+        return "UK (TBC)", None
+    loc_low = locality.strip().lower()
+    # 1. Instant match for major UK cities/towns
+    for k, pc in UK_CITY_POSTCODES.items():
+        if k == loc_low or k in loc_low:
+            coords = get_postcode_coords(pc)
+            if coords:
+                return pc, coords
+
+    # 2. Live lookup via postcodes.io/places (covers every UK town & village)
+    region_to_country = {"ENG": "England", "SCT": "Scotland", "WLS": "Wales", "NIR": "Northern Ireland"}
+    want_country = region_to_country.get((region or "").upper())
+    try:
+        url = f"https://api.postcodes.io/places?q={urllib.parse.quote(locality.strip())}&limit=5"
+        req = urllib.request.Request(url, headers={"User-Agent": "Gibson335Radar/1.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read().decode("utf-8", errors="ignore"))
+        results = data.get("result") or []
+        if results:
+            pick = None
+            if want_country:
+                pick = next((r for r in results if r.get("country") == want_country and r.get("outcode")), None)
+            if not pick:
+                pick = next((r for r in results if r.get("outcode")), results[0])
+            outcode = pick.get("outcode") or locality.strip()
+            lat, lng = pick.get("latitude"), pick.get("longitude")
+            if lat is not None and lng is not None:
+                POSTCODE_CACHE[outcode] = (lat, lng)
+                return outcode, (lat, lng)
+    except Exception:
+        pass
+    return "UK (TBC)", None
+
+def resolve_reverb_shop_location(shop_name, item_id, headers):
+    """Fetches & caches each Reverb shop's real UK town/locality from Reverb's API in deals.db."""
+    shop_key = (shop_name or "").strip().lower()
+    if not shop_key:
+        return "", "UK (TBC)", None
+
+    # 1. Check SQLite cache first (instant on all future scans)
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        c = conn.cursor()
+        c.execute("SELECT locality, postcode, lat, lng FROM shop_locations WHERE shop_key = ?", (shop_key,))
+        row = c.fetchone()
+        conn.close()
+        if row:
+            loc, pc, lat, lng = row
+            coords = (lat, lng) if (lat is not None and lng is not None) else None
+            return (loc or ""), (pc or "UK (TBC)"), coords
+    except Exception:
+        pass
+
+    # 2. Fetch real location from Reverb single-listing API once per unique shop
+    locality, region = "", "ENG"
+    try:
+        detail_url = f"https://api.reverb.com/api/listings/{item_id}"
+        req = urllib.request.Request(detail_url, headers=headers)
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            detail = json.loads(resp.read().decode("utf-8", errors="ignore"))
+        loc_obj = detail.get("location", {}) or {}
+        locality = (loc_obj.get("locality") or "").strip()
+        region = (loc_obj.get("region") or "ENG").strip()
+    except Exception:
+        pass
+
+    pc, coords = geocode_uk_town(locality, region) if locality else ("UK (TBC)", None)
+
+    # Secondary fallback to verified shop dictionary only if Reverb returned no locality
+    if not coords:
+        fallback_pc = resolve_uk_location_postcode(locality, shop_name)
+        if fallback_pc != "UK (TBC)":
+            pc = fallback_pc
+            coords = get_postcode_coords(fallback_pc)
+
+    # 3. Persist to SQLite cache so this shop is resolved instantly forever
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        c = conn.cursor()
+        c.execute(
+            "INSERT OR REPLACE INTO shop_locations (shop_key, locality, region, postcode, lat, lng) VALUES (?, ?, ?, ?, ?, ?)",
+            (shop_key, locality, region, pc, coords[0] if coords else None, coords[1] if coords else None)
+        )
+        conn.commit()
+        conn.close()
+    except Exception:
+        pass
+
+    return locality, pc, coords
 
 def _parse_iso_dt(date_str):
     if not date_str:
@@ -1100,7 +1203,7 @@ def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42):
         item["fake_reason"] = fake_reason
 
         pc = item.get("postcode", "")
-        coords = get_postcode_coords(pc)
+        coords = item.get("coords") or get_postcode_coords(pc)
         
         # Hull Hub Metrics
         hull_travel = calculate_travel_metrics(coords, "Hull", car_mpg, fuel_price)
@@ -1685,7 +1788,7 @@ UK_SHOP_POSTCODES = {
     "gas station": "TA1 5LU",       # Taunton, Somerset
     "58 sound": "AL1 1NG",          # St Albans, Herts
     "motomusic": "CF10 5DR",        # Cardiff
-    "in bloom": "RG1 1DN",          # Reading
+    "in bloom": "LS1 1AA",          # Leeds, West Yorkshire
     "new kings road": "SW6 4SG",    # London
     "rolly": "CV47 0AA",            # Southam, Warwickshire
     "guitars in the attic": "NG18 1AA", # Mansfield, Notts
@@ -1754,10 +1857,14 @@ def harvest_live_reverb():
                         image_url = photos[0].get("_links", {}).get("large_crop", {}).get("href", "") if photos else ""
                         shop_name = it.get("shop_name") or "Reverb UK Seller"
 
-                        # Determine accurate UK town / city postcode
+                        # Systematically resolve real UK town & coords from Reverb API (cached per shop in deals.db)
                         loc_data = it.get("location", {}) or {}
-                        locality = loc_data.get("locality") or loc_data.get("display_location") or ""
-                        postcode = resolve_uk_location_postcode(locality, shop_name)
+                        locality = (loc_data.get("locality") or "").strip()
+                        region = (loc_data.get("region") or "ENG").strip()
+                        if locality:
+                            postcode, resolved_coords = geocode_uk_town(locality, region)
+                        else:
+                            locality, postcode, resolved_coords = resolve_reverb_shop_location(shop_name, item_id, headers)
 
                         brand = detect_brand_tier(title)
                         if brand == "Epiphone (Exclude)":
@@ -1811,6 +1918,7 @@ def harvest_live_reverb():
                             "url": web_url,
                             "image_url": image_url,
                             "postcode": postcode,
+                            "coords": resolved_coords,
                             "brand_tier": brand,
                             "year": era["year"],
                             "era_badge": era["badge"],
