@@ -941,9 +941,8 @@ function renderUkMap() {
 
   if (!ukMapInstance) {
     ukMapInstance = L.map("ukMapContainer", { zoomControl: true }).setView([53.0, -1.5], 6);
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      attribution: "&copy; OpenStreetMap &copy; CARTO",
-      subdomains: "abcd",
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "&copy; OpenStreetMap contributors",
       maxZoom: 18
     }).addTo(ukMapInstance);
     ukMapLayerGroup = L.layerGroup().addTo(ukMapInstance);
