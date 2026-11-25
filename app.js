@@ -16,9 +16,33 @@ let lastRenderedListings = [];
 let ukMapInstance = null;
 let ukMapLayerGroup = null;
 
-// Persisted Shortlist & Hidden Sets (localStorage)
+// Persisted Shortlist, Hidden & Manual Import Sets (localStorage)
 let shortlistedIds = new Set(JSON.parse(localStorage.getItem("es335_shortlist") || "[]"));
 let hiddenIds = new Set(JSON.parse(localStorage.getItem("es335_hidden") || "[]"));
+
+function getLocalImports() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem("es335_manual_imports") || "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveLocalImport(item) {
+  if (!item || !item.id) return;
+  const current = getLocalImports().filter(d => d.id !== item.id);
+  current.unshift(item);
+  localStorage.setItem("es335_manual_imports", JSON.stringify(current.slice(0, 50)));
+}
+
+function mergeLocalImports(serverDeals) {
+  const localImports = getLocalImports();
+  if (localImports.length === 0) return serverDeals;
+  const serverIds = new Set(serverDeals.map(d => d.id));
+  const extra = localImports.filter(d => d && d.id && !serverIds.has(d.id));
+  return [...extra, ...serverDeals];
+}
 
 function saveUserSets() {
   localStorage.setItem("es335_shortlist", JSON.stringify([...shortlistedIds]));
@@ -54,6 +78,8 @@ function hideListing(id) {
   hiddenIds.add(id);
   shortlistedIds.delete(id);
   saveUserSets();
+  const remainingManual = getLocalImports().filter(d => d.id !== id);
+  localStorage.setItem("es335_manual_imports", JSON.stringify(remainingManual));
   if (!window.location.hostname.includes("github.io")) {
     fetch(`/api/remove_deal?id=${encodeURIComponent(id)}`).catch(() => {});
   }
@@ -581,7 +607,7 @@ function renderListings() {
     if (filteredModel === "ES-345" && !is345Item) return false;
     if (filteredModel === "ES-335" && is345Item) return false;
 
-    // Source filter (Indie Shops / eBay UK / Reverb / Gumtree)
+    // Source filter (Indie Shops / eBay UK / Reverb / Gumtree / Facebook)
     if (filteredSource !== "all") {
       const idStr = (item.id || "").toLowerCase();
       const srcStr = (item.source || "").toLowerCase();
@@ -589,6 +615,7 @@ function renderListings() {
       if (filteredSource === "ebay" && !idStr.startsWith("ebay_") && !srcStr.includes("ebay")) return false;
       if (filteredSource === "reverb" && !idStr.startsWith("reverb_")) return false;
       if (filteredSource === "gumtree" && !idStr.startsWith("gumtree_") && !srcStr.includes("gumtree")) return false;
+      if (filteredSource === "facebook" && !idStr.startsWith("fb_") && !srcStr.includes("facebook")) return false;
     }
 
     // Keyword Search filter
@@ -1139,7 +1166,7 @@ async function loadDeals() {
     if (text && text.trim().startsWith("[")) {
       const data = JSON.parse(text);
       if (Array.isArray(data) && data.length > 0) {
-        rawListings = data;
+        rawListings = mergeLocalImports(data);
         renderListings();
         return;
       }
@@ -1149,7 +1176,7 @@ async function loadDeals() {
   }
 
   // Load fallback seed data
-  rawListings = FALLBACK_LISTINGS;
+  rawListings = mergeLocalImports(FALLBACK_LISTINGS);
   renderListings();
 }
 
@@ -1376,50 +1403,365 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateShortlistHiddenUI();
 
-  // Deal Importer (Facebook Marketplace & Gumtree)
+function isFacebookUrl(urlStr) {
+  try {
+    const host = new URL(urlStr).hostname.toLowerCase();
+    return /^(?:[a-z0-9-]+\.)*(?:facebook\.com|fb\.com|fb\.me)$/.test(host);
+  } catch {
+    return false;
+  }
+}
+
+function validateImportUrl(urlStr) {
+  let parsed;
+  try {
+    parsed = new URL(urlStr);
+  } catch {
+    return { valid: false, message: "Enter a valid listing URL starting with https:// or enter details manually below." };
+  }
+  if (!["http:", "https:"].includes(parsed.protocol)) {
+    return { valid: false, message: "Listing URL must start with https:// or http://." };
+  }
+  const host = parsed.hostname.toLowerCase();
+  const path = parsed.pathname || "/";
+  if (isFacebookUrl(urlStr)) {
+    const isItem = /\/marketplace\/(?:[^/?#]+\/)?item\/\d{8,20}/.test(path);
+    const isShare = path.startsWith("/share/") || host.endsWith("fb.me");
+    if (!isItem && !isShare) {
+      return {
+        valid: false,
+        message: "Unsupported Facebook URL format. Paste a Marketplace item link (/marketplace/item/<id>) or mobile Share link (/share/...), or enter details manually below."
+      };
+    }
+    return { valid: true, isFb: true };
+  }
+  if (host.includes("reverb.com") || host.includes("ebay.co.uk") || host.includes("ebay.com") || host.includes("gumtree.com")) {
+    return { valid: true, isFb: false };
+  }
+  return {
+    valid: false,
+    message: "Auto-import supports Reverb, eBay UK, Gumtree, and Facebook Marketplace links. Enter listing details manually below to calculate Landed Cost."
+  };
+}
+
+const QUICK_UK_CITIES = {
+  hull: { pc: "HU1 1AA", coords: [53.7457, -0.3367] },
+  somerset: { pc: "TA8 1PE", coords: [51.2383, -2.9972] },
+  burnham: { pc: "TA8 1PE", coords: [51.2383, -2.9972] },
+  leeds: { pc: "LS1 1AA", coords: [53.7960, -1.5478] },
+  york: { pc: "YO1 7HH", coords: [53.9599, -1.0873] },
+  sheffield: { pc: "S1 2GE", coords: [53.3811, -1.4701] },
+  manchester: { pc: "M1 1AE", coords: [53.4808, -2.2426] },
+  liverpool: { pc: "L1 8JQ", coords: [53.4046, -2.9872] },
+  birmingham: { pc: "B1 1AA", coords: [52.4772, -1.8986] },
+  bristol: { pc: "BS1 1AA", coords: [51.4545, -2.5879] },
+  bath: { pc: "BA1 1AA", coords: [51.3811, -2.3590] },
+  london: { pc: "SW1A 1AA", coords: [51.5014, -0.1419] },
+  nottingham: { pc: "NG1 1AA", coords: [52.9536, -1.1505] },
+  leicester: { pc: "LE1 1AA", coords: [52.6369, -1.1398] },
+  newcastle: { pc: "NE1 1AA", coords: [54.9783, -1.6178] },
+  cardiff: { pc: "CF10 1AA", coords: [51.4816, -3.1791] },
+  edinburgh: { pc: "EH1 1AA", coords: [55.9533, -3.1883] },
+  glasgow: { pc: "G1 1AA", coords: [55.8642, -4.2518] },
+  taunton: { pc: "TA1 5LU", coords: [51.0150, -3.1030] },
+  norwich: { pc: "NR1 1AA", coords: [52.6284, 1.2996] }
+};
+
+async function geocodeUkLocationClient(locInput) {
+  const clean = (locInput || "").trim();
+  if (!clean) return { postcode: "UK (TBC)", coords: null, displayLoc: "UK" };
+  const low = clean.toLowerCase();
+  for (const [k, v] of Object.entries(QUICK_UK_CITIES)) {
+    if (low === k || low.includes(k)) {
+      return { postcode: v.pc, coords: v.coords, displayLoc: clean };
+    }
+  }
+  try {
+    const pcNoSpace = clean.toUpperCase().replace(/\s+/g, "");
+    if (/^[A-Z]{1,2}\d[A-Z\d]?\d[A-Z]{2}$/.test(pcNoSpace)) {
+      const r = await fetch(`https://api.postcodes.io/postcodes/${encodeURIComponent(clean)}`);
+      const d = await r.json();
+      if (d.status === 200 && d.result) {
+        return { postcode: d.result.postcode, coords: [d.result.latitude, d.result.longitude], displayLoc: d.result.postcode };
+      }
+    } else if (/^[A-Z]{1,2}\d[A-Z\d]?$/.test(pcNoSpace)) {
+      const r = await fetch(`https://api.postcodes.io/outcodes/${encodeURIComponent(pcNoSpace)}`);
+      const d = await r.json();
+      if (d.status === 200 && d.result) {
+        return { postcode: pcNoSpace, coords: [d.result.latitude, d.result.longitude], displayLoc: pcNoSpace };
+      }
+    }
+    const r = await fetch(`https://api.postcodes.io/places?q=${encodeURIComponent(clean)}&limit=1`);
+    const d = await r.json();
+    const place = d.result && d.result[0];
+    if (place && place.latitude != null && place.longitude != null) {
+      return { postcode: place.outcode || clean, coords: [place.latitude, place.longitude], displayLoc: clean };
+    }
+  } catch {}
+  return { postcode: "UK (TBC)", coords: null, displayLoc: clean };
+}
+
+function buildClientManualDeal({ url, title, price, geo, hasCase, hasRepair }) {
+  const tlow = title.toLowerCase();
+  let brand = "Gibson USA Standard";
+  if (tlow.includes("orville by gibson") || tlow.includes("obg")) brand = "Orville by Gibson";
+  else if (tlow.includes("orville")) brand = "Orville MIJ";
+  else if (tlow.includes("heritage") || tlow.includes("h-535")) brand = "Heritage H-535";
+  else if (tlow.includes("tokai")) brand = "Tokai Japan";
+  else if (tlow.includes("studio") && !tlow.includes("satin")) brand = "Gibson USA Studio";
+  else if (/(custom shop|historic|1959|1963|murphy)/.test(tlow)) brand = "Gibson Custom Shop";
+
+  const yearMatch = title.match(/\b(19[6-9]\d|20[0-2]\d)\b/);
+  const year = yearMatch ? parseInt(yearMatch[1], 10) : null;
+  let eraBadge = "ERA UNKNOWN";
+  let eraBoost = 0.0;
+  if (year && year >= 1990 && year <= 1999) { eraBadge = "GOOD WOOD (90s)"; eraBoost = 1.0; }
+  else if (year && year >= 2013 && year <= 2018) { eraBadge = "MEMPHIS PEAK (13-18)"; eraBoost = 0.5; }
+  else if (year) { eraBadge = `${year}`; }
+
+  const isFb = url && isFacebookUrl(url);
+  const fbMatch = (url || "").match(/\/marketplace\/(?:[^/?#]+\/)?item\/(\d{8,20})/);
+  const cleanUrl = fbMatch ? `https://www.facebook.com/marketplace/item/${fbMatch[1]}/` : (url || "#");
+  const id = fbMatch ? `fb_${fbMatch[1]}` : `${isFb ? "fb_manual" : "manual"}_${Date.now()}`;
+  const is345 = /\b(es[\s-]?345|345)\b/i.test(title);
+  const isLefty = /\b(left[\s-]?hand(ed)?|lh|lefty|southpaw)\b/i.test(title);
+
+  return {
+    id,
+    title,
+    price: parseFloat(price),
+    model_family: is345 ? "ES-345" : "ES-335",
+    source: isFb ? `Facebook (${geo.displayLoc})` : `Manual Import (${geo.displayLoc})`,
+    url: cleanUrl,
+    image_url: "https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=600",
+    postcode: geo.postcode,
+    coords: geo.coords,
+    brand_tier: brand,
+    year,
+    era_badge: eraBadge,
+    era_boost: eraBoost,
+    era_notes: year ? `Production year ${year}` : "Manual entry",
+    has_case: Boolean(hasCase),
+    has_repair: Boolean(hasRepair),
+    is_left_handed: isLefty,
+    shipping_available: !isFb,
+    shipping_cost: isFb ? 0.0 : 30.0,
+    shipping_carrier: isFb ? "Collection in Person (Local)" : "Tracked & Insured Courier (£30)"
+  };
+}
+
+  // Deal Importer (Reverb, eBay UK, Gumtree, Facebook Marketplace + Manual Override)
   const fbForm = document.getElementById("fbImportForm");
+  const urlInput = document.getElementById("fbUrlInput");
+  const locInput = document.getElementById("fbLocInput");
+  const importBtn = document.getElementById("fbImportBtn");
+  const errorBanner = document.getElementById("importErrorBanner");
+  const errorText = document.getElementById("importErrorText");
+  const dismissErrorBtn = document.getElementById("dismissImportErrorBtn");
+  const manualPanel = document.getElementById("importManualPanel");
+  const toggleManualBtn = document.getElementById("toggleManualImportBtn");
+  const manualTitleInput = document.getElementById("manualTitleInput");
+  const manualPriceInput = document.getElementById("manualPriceInput");
+  const manualLocInput = document.getElementById("manualLocInput");
+  const manualHasCase = document.getElementById("manualHasCase");
+  const manualHasRepair = document.getElementById("manualHasRepair");
+
+  function upsertListingInFeed(item) {
+    rawListings = rawListings.filter(d => d.id !== item.id);
+    rawListings.unshift(item);
+    renderListings();
+  }
+
+  function showImportError(msg) {
+    if (errorBanner && errorText) {
+      errorText.textContent = msg;
+      errorBanner.classList.remove("hidden");
+      if (window.lucide) lucide.createIcons();
+    } else {
+      showToast(`❌ ${msg}`);
+    }
+  }
+
+  function hideImportError() {
+    if (errorBanner) errorBanner.classList.add("hidden");
+  }
+
+  function openManualPanel({ title, price, location } = {}) {
+    if (!manualPanel) return;
+    manualPanel.classList.remove("hidden");
+    if (title && manualTitleInput) manualTitleInput.value = title;
+    if (price && manualPriceInput) manualPriceInput.value = price;
+    if (location && manualLocInput && !manualLocInput.value.trim()) {
+      manualLocInput.value = location;
+    } else if (manualLocInput && !manualLocInput.value.trim() && locInput && locInput.value.trim()) {
+      manualLocInput.value = locInput.value.trim();
+    }
+    if (window.lucide) lucide.createIcons();
+  }
+
+  if (dismissErrorBtn) {
+    dismissErrorBtn.addEventListener("click", hideImportError);
+  }
+
+  if (toggleManualBtn && manualPanel) {
+    toggleManualBtn.addEventListener("click", () => {
+      const willOpen = manualPanel.classList.contains("hidden");
+      if (willOpen) {
+        openManualPanel();
+      } else {
+        manualPanel.classList.add("hidden");
+      }
+    });
+  }
+
   if (fbForm) {
     fbForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const urlInput = document.getElementById("fbUrlInput");
-      const locInput = document.getElementById("fbLocInput");
-      const btn = document.getElementById("fbImportBtn");
-
       const targetUrl = urlInput.value.trim();
-      const loc = locInput.value.trim() || "Hull";
+      const loc = (locInput.value.trim() || "");
       if (!targetUrl) return;
 
-      const origBtn = btn.innerHTML;
-      btn.innerHTML = `<span>⏳ Extracting...</span>`;
-      btn.disabled = true;
+      hideImportError();
+      const check = validateImportUrl(targetUrl);
+      if (!check.valid) {
+        showImportError(check.message);
+        openManualPanel({ location: loc });
+        return;
+      }
+
+      if (window.location.hostname.includes("github.io")) {
+        showImportError("Automated Facebook/URL scraping requires the local Deal Radar server (localhost:8000) with APIFY_TOKEN. Enter the title and asking price below to calculate Landed Cost here!");
+        openManualPanel({ location: loc || currentHub });
+        return;
+      }
+
+      const origBtn = importBtn.innerHTML;
+      importBtn.innerHTML = check.isFb
+        ? `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i><span>Importing from Facebook...</span>`
+        : `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i><span>Importing listing...</span>`;
+      importBtn.disabled = true;
+      if (window.lucide) lucide.createIcons();
+
+      const controller = new AbortController();
+      const timeoutMs = check.isFb ? 65000 : 25000;
+      const timerId = setTimeout(() => controller.abort(), timeoutMs);
 
       try {
-        const resp = await fetch(`/api/import_fb?url=${encodeURIComponent(targetUrl)}&location=${encodeURIComponent(loc)}`);
+        const resp = await fetch(
+          `/api/import_deal?url=${encodeURIComponent(targetUrl)}&location=${encodeURIComponent(loc)}`,
+          { signal: controller.signal }
+        );
         const text = await resp.text();
         let result = null;
         try {
           if (text && (text.trim().startsWith("{") || text.trim().startsWith("["))) {
             result = JSON.parse(text);
           }
-        } catch (e) {
+        } catch {
           result = null;
         }
 
         if (result && result.status === "ok" && result.item) {
-          rawListings.unshift(result.item);
-          renderListings();
+          upsertListingInFeed(result.item);
           urlInput.value = "";
+          hideImportError();
+          if (manualPanel) manualPanel.classList.add("hidden");
           showToast(`✅ Added Deal: ${result.item.title}`);
-        } else if (result && result.message) {
-          showToast(`❌ ${result.message}`);
         } else {
-          showToast(`❌ Could not parse listing. Meta / 2FA checkpoint blocked the page.`);
+          if (result && result.canonical_url && urlInput) {
+            urlInput.value = result.canonical_url;
+          }
+          const errMsg = (result && result.message)
+            ? result.message
+            : "Could not automatically extract this listing. Enter the title and price manually below to calculate Landed Cost.";
+          showImportError(errMsg);
+          openManualPanel({
+            title: result && result.partial ? result.partial.title : "",
+            price: result && result.partial ? result.partial.price : "",
+            location: (result && result.partial && result.partial.location) || loc
+          });
         }
       } catch (err) {
-        showToast(`❌ Connection error: ${err.message}`);
+        const errMsg = err.name === "AbortError"
+          ? "Facebook import timed out waiting for Apify. Try again or enter the listing title & price manually below."
+          : `Could not reach the local import server (${err.message}). Enter the listing details manually below.`;
+        showImportError(errMsg);
+        openManualPanel({ location: loc });
       } finally {
-        btn.innerHTML = origBtn;
-        btn.disabled = false;
+        clearTimeout(timerId);
+        importBtn.innerHTML = origBtn;
+        importBtn.disabled = false;
+        if (window.lucide) lucide.createIcons();
+      }
+    });
+  }
+
+  if (manualPanel) {
+    manualPanel.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const title = (manualTitleInput.value || "").trim();
+      const priceVal = parseFloat(manualPriceInput.value);
+      const loc = (manualLocInput.value.trim() || locInput.value.trim() || currentHub);
+      const targetUrl = (urlInput.value || "").trim();
+      const hasCase = manualHasCase ? manualHasCase.checked : true;
+      const hasRepair = manualHasRepair ? manualHasRepair.checked : false;
+
+      if (!title || isNaN(priceVal) || priceVal <= 0) {
+        showImportError("Enter a guitar title and positive asking price (£) to calculate Landed Cost.");
+        return;
+      }
+
+      const calcBtn = document.getElementById("manualCalcBtn");
+      const origCalc = calcBtn.innerHTML;
+      calcBtn.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i><span>Calculating Landed Cost...</span>`;
+      calcBtn.disabled = true;
+      if (window.lucide) lucide.createIcons();
+
+      try {
+        if (!window.location.hostname.includes("github.io")) {
+          const resp = await fetch("/api/import_deal", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              manual: true,
+              url: targetUrl,
+              title,
+              price: priceVal,
+              location: loc,
+              has_case: hasCase,
+              has_repair: hasRepair
+            })
+          });
+          const result = await resp.json();
+          if (result && result.status === "ok" && result.item) {
+            upsertListingInFeed(result.item);
+            hideImportError();
+            manualPanel.classList.add("hidden");
+            manualTitleInput.value = "";
+            manualPriceInput.value = "";
+            urlInput.value = "";
+            showToast(`✅ Added Deal: ${result.item.title}`);
+            return;
+          }
+        }
+
+        // Static host or server unavailable -> client-side geocoding + localStorage persistence
+        const geo = await geocodeUkLocationClient(loc);
+        const item = buildClientManualDeal({ url: targetUrl, title, price: priceVal, geo, hasCase, hasRepair });
+        saveLocalImport(item);
+        upsertListingInFeed(item);
+        hideImportError();
+        manualPanel.classList.add("hidden");
+        manualTitleInput.value = "";
+        manualPriceInput.value = "";
+        urlInput.value = "";
+        showToast(`✅ Added Deal: ${item.title}`);
+      } catch (err) {
+        showImportError(`Manual import failed: ${err.message}`);
+      } finally {
+        calcBtn.innerHTML = origCalc;
+        calcBtn.disabled = false;
+        if (window.lucide) lucide.createIcons();
       }
     });
   }

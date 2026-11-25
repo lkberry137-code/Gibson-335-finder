@@ -308,36 +308,105 @@
             <i data-lucide="link" class="w-4 h-4 text-primary"></i>
             <h2 class="text-sm font-semibold tracking-tight text-foreground">1-Click Deal Importer</h2>
           </div>
-          <span class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
-            Reverb • Gumtree • FB
-          </span>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center rounded-md border border-border bg-secondary px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+              Reverb • eBay • Gumtree • FB
+            </span>
+            <button type="button" id="toggleManualImportBtn" class="inline-flex items-center gap-1 rounded-md border border-border bg-secondary hover:bg-accent hover:text-foreground px-2 py-0.5 text-[10px] font-medium text-muted-foreground transition-colors" title="Enter or override listing details manually">
+              <span>Manual</span>
+            </button>
+          </div>
         </div>
 
-        <form id="fbImportForm" class="p-4 space-y-2.5">
-          <div class="flex flex-col sm:flex-row gap-2">
-            <input
-              type="url"
-              id="fbUrlInput"
-              placeholder="Paste Reverb, Gumtree or FB link..."
-              class="flex-1 h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
-              required
-            >
-            <input
-              type="text"
-              id="fbLocInput"
-              placeholder="City / Postcode"
-              class="w-full sm:w-36 h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
-              value=""
-            >
+        <div class="p-4 space-y-2.5">
+          <form id="fbImportForm" class="space-y-2.5">
+            <div class="flex flex-col sm:flex-row gap-2">
+              <input
+                type="url"
+                id="fbUrlInput"
+                placeholder="Paste Reverb, eBay, Gumtree or FB (/share/ or /item/) link..."
+                class="flex-1 h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+                required
+              >
+              <input
+                type="text"
+                id="fbLocInput"
+                placeholder="City / Postcode"
+                class="w-full sm:w-36 h-9 rounded-md border border-input bg-background px-3 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+                value=""
+              >
+            </div>
+            <button
+              type="submit"
+              id="fbImportBtn"
+              class="w-full h-9 inline-flex items-center justify-center gap-1.5 rounded-md bg-primary px-4 text-xs font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Import &amp; Calculate Landed Cost</span>
+            </button>
+          </form>
+
+          <!-- Actionable Error Banner -->
+          <div id="importErrorBanner" class="hidden rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-[11px] text-amber-200 flex items-start justify-between gap-2">
+            <div class="flex items-start gap-2 min-w-0">
+              <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5"></i>
+              <span id="importErrorText" class="leading-relaxed"></span>
+            </div>
+            <button type="button" id="dismissImportErrorBtn" class="text-amber-300/80 hover:text-amber-100 shrink-0 p-0.5" aria-label="Dismiss error">
+              <i data-lucide="x" class="w-3.5 h-3.5"></i>
+            </button>
           </div>
-          <button
-            type="submit"
-            id="fbImportBtn"
-            class="w-full h-9 inline-flex items-center justify-center gap-1.5 rounded-md bg-primary px-4 text-xs font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:opacity-50">
-            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-            <span>Import &amp; Calculate Landed Cost</span>
-          </button>
-        </form>
+
+          <!-- Collapsible Manual Fill / Override Form -->
+          <form id="importManualPanel" class="hidden rounded-lg border border-border bg-background/70 p-3 space-y-2.5 text-xs">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[11px] font-semibold text-foreground">Manual Details / Override</span>
+              <span class="text-[10px] text-muted-foreground">Calculates True Landed Cost</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <input
+                type="text"
+                id="manualTitleInput"
+                placeholder="Guitar title (e.g. Gibson ES-335 Dot 2016 Cherry)"
+                class="sm:col-span-2 h-8 rounded-md border border-input bg-background px-2.5 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                required
+              >
+              <input
+                type="number"
+                id="manualPriceInput"
+                placeholder="Price (£)"
+                min="1"
+                step="1"
+                class="h-8 rounded-md border border-input bg-background px-2.5 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring tabular-nums"
+                required
+              >
+            </div>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <input
+                type="text"
+                id="manualLocInput"
+                placeholder="City / Postcode (e.g. Leeds)"
+                class="w-full sm:w-40 h-8 rounded-md border border-input bg-background px-2.5 text-xs text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              >
+              <div class="flex items-center gap-3 text-[11px] text-muted-foreground">
+                <label class="inline-flex items-center gap-1.5 cursor-pointer select-none">
+                  <input type="checkbox" id="manualHasCase" checked class="rounded border-input accent-[#E59A28]">
+                  <span>Hard Case</span>
+                </label>
+                <label class="inline-flex items-center gap-1.5 cursor-pointer select-none">
+                  <input type="checkbox" id="manualHasRepair" class="rounded border-input accent-[#E59A28]">
+                  <span>Repair</span>
+                </label>
+              </div>
+            </div>
+            <button
+              type="submit"
+              id="manualCalcBtn"
+              class="w-full h-8 inline-flex items-center justify-center gap-1.5 rounded-md border border-primary/40 bg-primary/15 hover:bg-primary hover:text-primary-foreground px-3 text-xs font-semibold text-primary transition-colors">
+              <i data-lucide="calculator" class="w-3.5 h-3.5"></i>
+              <span>Calculate Landed Cost &amp; Add to Feed</span>
+            </button>
+          </form>
+        </div>
       </section>
     </div>
 
@@ -354,6 +423,7 @@
             <button class="filter-source-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-source="ebay">eBay UK</button>
             <button class="filter-source-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-source="reverb">Reverb</button>
             <button class="filter-source-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-source="gumtree">Gumtree</button>
+            <button class="filter-source-btn rounded-md px-2.5 py-1 text-muted-foreground hover:text-foreground transition-all" data-source="facebook">Facebook</button>
           </div>
         </div>
 
@@ -582,7 +652,7 @@
     <span id="toastMsg">Offer message copied to clipboard!</span>
   </div>
 
-  <script src="app.js?v=3.9"></script>
+  <script src="app.js?v=4.0"></script>
   <script>
     if (window.lucide) lucide.createIcons();
   </script>

@@ -1239,7 +1239,7 @@ def is_valid_335_model(title, brand=""):
 
     return True
 
-def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42):
+def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42, skip_model_filter=False):
     """Calculates distances, fuel costs, counterfeit risk flags, and deal grades for both hubs."""
     enriched = []
     blocked = load_blocklist()
@@ -1251,7 +1251,7 @@ def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42):
 
         # Strictly exclude Epiphones, non-335 Tokai models, and unrelated non-ES solid bodies
         brand = item.get("brand_tier", "")
-        if not is_valid_335_model(item.get("title", ""), brand):
+        if not skip_model_filter and not is_valid_335_model(item.get("title", ""), brand):
             continue
 
         model_family = detect_model_family(item.get("title", ""))
@@ -1327,95 +1327,515 @@ def export_deals_json(data, filename="deals.json"):
         json.dump(data, f, indent=2)
     print(f"📁 Exported {len(data)} deals to {filename}")
 
-def scrape_and_enrich_single_fb(url, user_location="Hull"):
-    """Scrapes a public Facebook Marketplace listing URL headlessly without login and enriches it."""
-    from bs4 import BeautifulSoup
-    from playwright.sync_api import sync_playwright
+class _NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Prevents automatic redirect following so /share/ Location headers can be inspected hop-by-hop."""
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
 
-    clean_url = url.split('?')[0]
-    match_id = re.search(r'/marketplace/item/(\d+)', clean_url)
-    item_id = match_id.group(1) if match_id else str(int(time.time()))
+
+def is_facebook_url(url):
+    """Returns True for facebook.com (including m./web./mobile.), fb.com, and fb.me URLs."""
+    try:
+        host = (urllib.parse.urlparse((url or "").strip()).hostname or "").lower()
+    except Exception:
+        return False
+    return bool(re.match(r'^(?:[a-z0-9-]+\.)*(?:facebook\.com|fb\.com|fb\.me)$', host))
+
+
+def _extract_fb_item_id(url_or_text):
+    """Extracts numeric Facebook Marketplace item ID directly or from encoded redirect query params."""
+    if not url_or_text:
+        return None
+    text = str(url_or_text)
+    m = re.search(r'/marketplace/(?:[^/?#]+/)?item/(\d{8,20})', text)
+    if m:
+        return m.group(1)
+    try:
+        parsed = urllib.parse.urlparse(text)
+        qs = urllib.parse.parse_qs(parsed.query)
+        for key in ("next", "u", "redirect_uri", "href", "target"):
+            for val in qs.get(key, []):
+                decoded = urllib.parse.unquote(val)
+                m2 = re.search(r'/marketplace/(?:[^/?#]+/)?item/(\d{8,20})', decoded)
+                if m2:
+                    return m2.group(1)
+    except Exception:
+        pass
+    return None
+
+
+def normalize_and_resolve_facebook_url(url):
+    """Validates any Facebook Marketplace /item/ or mobile /share/ URL and resolves its clean canonical URL."""
+    raw = (url or "").strip()
+    if not raw or not is_facebook_url(raw):
+        return None, None, "Not a valid Facebook Marketplace or share URL."
+
+    # 1. Direct /marketplace/item/<id> link (www., m., web., with any tracking query params)
+    direct_id = _extract_fb_item_id(raw)
+    if direct_id:
+        return f"https://www.facebook.com/marketplace/item/{direct_id}/", direct_id, None
+
+    parsed = urllib.parse.urlparse(raw)
+    host = (parsed.hostname or "").lower()
+    path = parsed.path or ""
+    if not (path.startswith("/share/") or host.endswith("fb.me")):
+        return (
+            None,
+            None,
+            "Unsupported Facebook URL. Paste a Marketplace item link (/marketplace/item/...) or mobile share link (/share/...).",
+        )
+
+    # 2. Server-side redirect & HTML resolution for mobile /share/ links (with desktop Chrome UA)
+    desktop_headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-GB,en;q=0.9",
+    }
+    opener = urllib.request.build_opener(_NoRedirectHandler())
+    current_url = raw
+
+    for _ in range(6):
+        req = urllib.request.Request(current_url, headers=desktop_headers)
+        try:
+            with opener.open(req, timeout=12) as resp:
+                # Followed without 3xx -> inspect final URL and HTML body metadata
+                final_id = _extract_fb_item_id(resp.geturl())
+                if final_id:
+                    return f"https://www.facebook.com/marketplace/item/{final_id}/", final_id, None
+
+                html = resp.read(250 * 1024).decode("utf-8", errors="ignore")
+                html_patterns = [
+                    r'<meta[^>]+property=["\']og:url["\'][^>]+content=["\']([^"\']+)["\']',
+                    r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:url["\']',
+                    r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)["\']',
+                    r'(?:/|\\/)marketplace(?:/|\\/)item(?:/|\\/)(\d{8,20})',
+                    r'"listing_id"\s*:\s*"(\d{8,20})"',
+                ]
+                for pat in html_patterns:
+                    m = re.search(pat, html, re.I)
+                    if not m:
+                        continue
+                    candidate = m.group(1)
+                    if candidate.isdigit():
+                        return f"https://www.facebook.com/marketplace/item/{candidate}/", candidate, None
+                    cid = _extract_fb_item_id(candidate.replace("\\/", "/"))
+                    if cid:
+                        return f"https://www.facebook.com/marketplace/item/{cid}/", cid, None
+                break
+
+        except urllib.error.HTTPError as e:
+            loc = e.headers.get("Location") if e.headers else None
+            code = e.code
+            e.close()
+            if code in (301, 302, 303, 307, 308) and loc:
+                next_url = urllib.parse.urljoin(current_url, loc)
+                if urllib.parse.urlparse(next_url).scheme not in ("http", "https"):
+                    break
+                next_id = _extract_fb_item_id(next_url)
+                if next_id:
+                    return f"https://www.facebook.com/marketplace/item/{next_id}/", next_id, None
+                current_url = next_url
+                continue
+            break
+        except Exception:
+            break
+
+    return (
+        None,
+        None,
+        "Could not resolve this Facebook /share/ link to a Marketplace item (it may be expired, a private group post, or blocked by Facebook). Paste the direct /marketplace/item/<id> URL or enter the details manually below.",
+    )
+
+
+def _resolve_uk_location_smart(loc_str):
+    """Resolves either a UK postcode/outcode or a town/city string into (postcode, coords, display_city)."""
+    clean = (loc_str or "").strip()
+    if not clean:
+        return "UK (TBC)", None, ""
+
+    # 1. Direct UK postcode or outcode check (e.g. "LS1 1AA" or "EN9")
+    if re.match(r'^[A-Za-z]{1,2}\d[A-Za-z\d]?(?:\s*\d[A-Za-z]{2})?$', clean):
+        upper_pc = re.sub(r'\s+', ' ', clean.upper()).strip()
+        coords = get_postcode_coords(upper_pc)
+        if coords:
+            return upper_pc, coords, upper_pc
+
+    # 2. Strip trailing country suffixes from Marketplace locations (e.g. "Leeds, United Kingdom")
+    city_clean = re.sub(
+        r',\s*(?:united kingdom|uk|england|scotland|wales|great britain)\s*$',
+        '',
+        clean,
+        flags=re.I,
+    ).strip()
+    pc, coords = geocode_uk_town(city_clean)
+    if not coords and "," in city_clean:
+        # Try last comma component (e.g. "Headingley, Leeds" -> "Leeds")
+        tail = city_clean.split(",")[-1].strip()
+        pc, coords = geocode_uk_town(tail)
+        if coords:
+            city_clean = tail
+    return pc, coords, city_clean
+
+
+def fetch_fb_listing_via_apify(canonical_url, token, actor_id="apify/facebook-marketplace-scraper"):
+    """Runs Apify synchronous dataset endpoint for a single canonical Facebook Marketplace item URL."""
+    actor_slug = (actor_id or "apify/facebook-marketplace-scraper").strip().replace("/", "~")
+    safe_slug = urllib.parse.quote(actor_slug, safe="~-._")
+    endpoint = f"https://api.apify.com/v2/acts/{safe_slug}/run-sync-get-dataset-items?timeout=50"
+
+    payload = json.dumps({
+        "startUrls": [{"url": canonical_url}],
+        "resultsLimit": 1,
+    }).encode("utf-8")
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
 
     try:
-        with sync_playwright() as p:
-            browser = p.chromium.launch(channel="msedge", headless=True)
-            page = browser.new_page(
-                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-            )
-            page.goto(clean_url, wait_until="domcontentloaded", timeout=25000)
-            final_url = page.url
-            if any(term in final_url for term in ["two_step_verification", "checkpoint", "login"]):
-                print("Facebook redirected to login/2FA checkpoint.")
-                browser.close()
-                return None
-
-            content = page.content()
-            browser.close()
-
-        soup = BeautifulSoup(content, 'html.parser')
-        title_el = soup.find('h1')
-        title = title_el.get_text(strip=True) if title_el else "Gibson ES-335 (Facebook Listing)"
-
-        price = 0.0
-        text = soup.get_text()
-        matches = re.findall(r'[£$€]([\d,]+)', text)
-        for m in matches:
-            v = float(m.replace(',', ''))
-            if v > 150:
-                price = v
-                break
-        if price == 0.0:
-            price = 1950.0
-
-        images = [img.get('src') for img in soup.find_all('img') if img.get('src') and 'fbcdn.net' in img.get('src')]
-        image_url = images[0] if images else "https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=600"
-
-        # Determine postcode
-        pc = "HU1 1AA"
-        loc_lower = user_location.lower()
-        city_lookup = {
-            "hull": "HU1 1AA", "beverley": "HU17 8DB", "york": "YO1 7HH", "leeds": "LS1 1AA",
-            "sheffield": "S1 2GE", "grimsby": "DN31 1AA", "scunthorpe": "DN15 6AA",
-            "bristol": "BS1 1AA", "bath": "BA1 1AA", "burnham": "TA8 1PE", "cardiff": "CF10 1AA",
-            "london": "SW1A 1AA", "manchester": "M1 1AE", "birmingham": "B1 1AA"
+        req = urllib.request.Request(endpoint, data=payload, headers=headers, method="POST")
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            body = resp.read().decode("utf-8", errors="ignore")
+        items = json.loads(body) if body else []
+        if not isinstance(items, list) or not items:
+            return None, {
+                "code": "APIFY_EMPTY",
+                "message": "Apify could not extract this Facebook listing (it may be sold, expired, or inside a private group). Enter the listing details manually below.",
+            }
+        first = items[0] if isinstance(items[0], dict) else {}
+        if not first or first.get("error") or first.get("errorDescription"):
+            err_detail = first.get("errorDescription") or first.get("error") or "Listing unavailable"
+            return None, {
+                "code": "APIFY_EMPTY",
+                "message": f"Facebook listing could not be scraped ({err_detail}). Enter the listing details manually below.",
+            }
+        return first, None
+    except urllib.error.HTTPError as e:
+        code = e.code
+        e.close()
+        if code in (401, 403):
+            return None, {
+                "code": "APIFY_AUTH_ERROR",
+                "message": "Apify rejected APIFY_TOKEN (401/403). Verify your Apify token in config.json or environment variables, or enter the listing details manually below.",
+            }
+        if code == 402:
+            return None, {
+                "code": "APIFY_LIMIT_REACHED",
+                "message": "Apify monthly free-tier usage limit reached (402). Enter the listing details manually below.",
+            }
+        if code in (408, 504):
+            return None, {
+                "code": "APIFY_TIMEOUT",
+                "message": f"Apify scraper timed out (HTTP {code}) on Facebook. Enter the listing details manually below.",
+            }
+        return None, {
+            "code": "APIFY_HTTP_ERROR",
+            "message": f"Apify API error (HTTP {code}). Enter the listing details manually below.",
         }
-        for k, v in city_lookup.items():
-            if k in loc_lower:
-                pc = v
-                break
-
-        brand = detect_brand_tier(title)
-        era = detect_era(title)
-        flags = detect_repair_and_case(title)
-        is_lefty = detect_dexterity(title)
-        ship_info = detect_shipping_info(f"Facebook ({user_location})", title, price)
-
-        raw_item = {
-            "id": f"fb_{item_id}",
-            "title": title,
-            "price": price,
-            "source": f"Facebook ({user_location.title()})",
-            "url": clean_url,
-            "image_url": image_url,
-            "postcode": pc,
-            "brand_tier": brand,
-            "year": era["year"],
-            "era_badge": era["badge"],
-            "era_boost": era.get("boost", 0.0),
-            "era_notes": era.get("notes", ""),
-            "has_case": flags["has_case"],
-            "has_repair": flags["has_repair"],
-            "is_left_handed": is_lefty,
-            "shipping_available": ship_info["shipping_available"],
-            "shipping_cost": ship_info["shipping_cost"],
-            "shipping_carrier": ship_info["shipping_carrier"]
-        }
-
-        enriched = enrich_listings([raw_item])
-        return enriched[0] if enriched else None
     except Exception as e:
-        print(f"Error importing FB item {url}: {e}")
+        return None, {
+            "code": "APIFY_TIMEOUT",
+            "message": f"Apify request did not complete ({e}). Enter the listing details manually below.",
+        }
+
+
+def _parse_numeric_price(val):
+    """Safely extracts a float price from Apify price dicts, formatted currency strings, or numbers."""
+    if val is None or isinstance(val, bool):
+        return 0.0
+    if isinstance(val, (int, float)):
+        return round(float(val), 2)
+    if isinstance(val, dict):
+        for key in ("amount", "value", "formatted_amount"):
+            if val.get(key) is not None:
+                parsed = _parse_numeric_price(val[key])
+                if parsed > 0:
+                    return parsed
+        cents = val.get("amount_with_offset_in_cents")
+        if cents is not None:
+            try:
+                return round(float(cents) / 100.0, 2)
+            except (ValueError, TypeError):
+                pass
+        return 0.0
+    m = re.search(r'[\d,]+(?:\.\d+)?', str(val))
+    if not m:
+        return 0.0
+    try:
+        return round(float(m.group(0).replace(",", "")), 2)
+    except ValueError:
+        return 0.0
+
+
+def _extract_apify_location(apify_item):
+    """Extracts human-readable city text and optional (lat, lng) from Apify Marketplace output."""
+    loc_obj = apify_item.get("location")
+    apify_coords = None
+    loc_text = ""
+
+    if isinstance(loc_obj, dict):
+        rg = loc_obj.get("reverse_geocode") or {}
+        if isinstance(rg, dict):
+            cp = rg.get("city_page") or {}
+            if isinstance(cp, dict) and cp.get("display_name"):
+                loc_text = str(cp["display_name"]).strip()
+            elif rg.get("city"):
+                loc_text = str(rg["city"]).strip()
+        if not loc_text:
+            loc_text = str(loc_obj.get("city") or loc_obj.get("display_name") or loc_obj.get("name") or "").strip()
+
+        lat = loc_obj.get("latitude")
+        lng = loc_obj.get("longitude")
+        if lat is None and isinstance(rg, dict):
+            lat = rg.get("latitude")
+            lng = rg.get("longitude")
+        try:
+            if lat is not None and lng is not None:
+                apify_coords = (float(lat), float(lng))
+        except (ValueError, TypeError):
+            apify_coords = None
+    elif isinstance(loc_obj, str):
+        loc_text = loc_obj.strip()
+
+    if not loc_text:
+        lt = apify_item.get("location_text") or apify_item.get("locationName") or ""
+        if isinstance(lt, dict):
+            loc_text = str(lt.get("text") or "").strip()
+        elif isinstance(lt, str):
+            loc_text = lt.strip()
+
+    return loc_text, apify_coords
+
+
+def _map_apify_fb_item_to_raw(apify_item, canonical_url, item_id, user_location=""):
+    """Maps an Apify facebook-marketplace-scraper dataset item into the scanner/Landed Cost raw schema."""
+    title = (
+        apify_item.get("marketplace_listing_title")
+        or apify_item.get("custom_title")
+        or apify_item.get("title")
+        or apify_item.get("name")
+        or ""
+    ).strip()
+
+    price = _parse_numeric_price(apify_item.get("listing_price") or apify_item.get("price"))
+
+    raw_loc_text, apify_coords = _extract_apify_location(apify_item)
+    effective_loc = raw_loc_text or (user_location or "").strip()
+    pc, coords, display_loc = _resolve_uk_location_smart(effective_loc)
+    if not coords and apify_coords:
+        coords = apify_coords
+    if not display_loc:
+        display_loc = user_location.strip() or "UK"
+
+    # Extract primary image URL across common Apify schemas
+    image_url = ""
+    plp = apify_item.get("primary_listing_photo")
+    if isinstance(plp, dict):
+        img_obj = plp.get("image") or {}
+        if isinstance(img_obj, dict):
+            image_url = img_obj.get("uri") or img_obj.get("url") or ""
+        if not image_url:
+            image_url = plp.get("photo_image_url") or plp.get("uri") or plp.get("url") or ""
+    elif isinstance(plp, str):
+        image_url = plp
+
+    if not image_url:
+        photos = apify_item.get("listing_photos") or apify_item.get("images") or []
+        if isinstance(photos, list) and photos:
+            first_photo = photos[0]
+            if isinstance(first_photo, dict):
+                image_url = (first_photo.get("image") or {}).get("uri") or first_photo.get("url") or ""
+            elif isinstance(first_photo, str):
+                image_url = first_photo
+
+    if not image_url:
+        image_url = "https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=600"
+
+    desc_obj = apify_item.get("redacted_description") or apify_item.get("description") or ""
+    if isinstance(desc_obj, dict):
+        desc = str(desc_obj.get("text") or "")
+    else:
+        desc = str(desc_obj or "")
+
+    seller_obj = apify_item.get("marketplace_listing_seller") or apify_item.get("seller") or {}
+    if isinstance(seller_obj, dict):
+        seller_name = str(seller_obj.get("name") or "").strip()
+    else:
+        seller_name = str(seller_obj or apify_item.get("seller_name") or "").strip()
+
+    if not title or price <= 0:
+        return None, {
+            "code": "APIFY_INCOMPLETE",
+            "canonical_url": canonical_url,
+            "message": "Facebook returned partial listing data (missing title or price). Review or fill the missing fields below.",
+            "partial": {
+                "title": title,
+                "price": price if price > 0 else "",
+                "location": display_loc,
+                "canonical_url": canonical_url,
+            },
+        }
+
+    brand = detect_brand_tier(title, desc)
+    era = detect_era(f"{title} {desc}")
+    flags = detect_repair_and_case(title, desc)
+    is_lefty = detect_dexterity(title, desc)
+    ship_info = detect_shipping_info(f"Facebook ({display_loc})", f"{title} {desc}", price)
+
+    raw_item = {
+        "id": f"fb_{item_id}",
+        "title": title,
+        "price": price,
+        "source": f"Facebook ({display_loc})",
+        "url": canonical_url,
+        "image_url": image_url,
+        "postcode": pc,
+        "coords": coords,
+        "brand_tier": brand,
+        "year": era["year"],
+        "era_badge": era["badge"],
+        "era_boost": era.get("boost", 0.0),
+        "era_notes": era.get("notes", ""),
+        "has_case": flags["has_case"],
+        "has_repair": flags["has_repair"],
+        "is_left_handed": is_lefty,
+        "shipping_available": ship_info["shipping_available"],
+        "shipping_cost": ship_info["shipping_cost"],
+        "shipping_carrier": ship_info["shipping_carrier"],
+    }
+    if seller_name:
+        raw_item["seller_name"] = seller_name
+    return raw_item, None
+
+
+def scrape_and_enrich_single_fb(url, user_location=""):
+    """Resolves any Facebook Marketplace /share/ or /item/ URL, scrapes via Apify, and enriches for Landed Cost."""
+    canonical_url, item_id, resolve_err = normalize_and_resolve_facebook_url(url)
+    if resolve_err or not canonical_url:
+        return None, {
+            "code": "FB_URL_RESOLUTION_FAILED",
+            "message": resolve_err or "Could not resolve Facebook URL.",
+        }
+
+    cfg = load_config()
+    apify_cfg = cfg.get("apify") or {}
+    token = (apify_cfg.get("token") or "").strip()
+    actor_id = (apify_cfg.get("actor_id") or "apify/facebook-marketplace-scraper").strip()
+    if not token or "YOUR_APIFY" in token.upper():
+        return None, {
+            "code": "MISSING_APIFY_TOKEN",
+            "canonical_url": canonical_url,
+            "message": (
+                "APIFY_TOKEN is not configured on the local server. Set the APIFY_TOKEN environment variable "
+                "(or add \"apify\": {\"token\": \"...\"} in config.json) to auto-scrape Facebook Marketplace, "
+                "or enter the title and price manually below."
+            ),
+        }
+
+    apify_item, apify_err = fetch_fb_listing_via_apify(canonical_url, token, actor_id=actor_id)
+    if apify_err:
+        apify_err.setdefault("canonical_url", canonical_url)
+        return None, apify_err
+
+    raw_item, map_err = _map_apify_fb_item_to_raw(apify_item, canonical_url, item_id, user_location=user_location)
+    if map_err:
+        return None, map_err
+
+    enriched = enrich_listings([raw_item], skip_model_filter=True)
+    if not enriched:
+        return None, {
+            "code": "ENRICHMENT_FAILED",
+            "canonical_url": canonical_url,
+            "message": "Listing could not be scored by the Landed Cost engine.",
+        }
+    return enriched[0], None
+
+
+def build_manual_deal_item(url="", title="", price=0, location="", has_case=True, has_repair=False, shipping_cost=None, image_url=""):
+    """Builds and enriches a manual/override listing so Landed Cost calculation always works cleanly."""
+    import hashlib
+
+    clean_title = (title or "").strip()
+    try:
+        numeric_price = round(float(price), 2)
+    except (ValueError, TypeError):
+        numeric_price = 0.0
+    if not clean_title or numeric_price <= 0:
         return None
+
+    clean_url = (url or "").strip()
+    is_fb = bool(clean_url and is_facebook_url(clean_url))
+    if is_fb:
+        fb_id = _extract_fb_item_id(clean_url)
+        if fb_id:
+            clean_url = f"https://www.facebook.com/marketplace/item/{fb_id}/"
+            item_id = f"fb_{fb_id}"
+        else:
+            clean_url = clean_url.split("?")[0]
+            digest = hashlib.md5(clean_url.encode("utf-8")).hexdigest()[:10]
+            item_id = f"fb_manual_{digest}"
+    elif clean_url:
+        digest = hashlib.md5(clean_url.encode("utf-8")).hexdigest()[:10]
+        item_id = f"manual_{digest}"
+    else:
+        item_id = f"manual_{int(time.time())}"
+
+    pc, coords, display_loc = _resolve_uk_location_smart(location)
+    loc_label = display_loc or (location or "").strip() or "UK"
+    if is_fb:
+        source_label = f"Facebook ({loc_label})"
+    elif clean_url:
+        host = (urllib.parse.urlparse(clean_url).hostname or "").replace("www.", "")
+        source_label = f"{host} ({loc_label})" if host else f"Manual Import ({loc_label})"
+    else:
+        source_label = f"Manual Import ({loc_label})"
+
+    brand = detect_brand_tier(clean_title)
+    era = detect_era(clean_title)
+    is_lefty = detect_dexterity(clean_title)
+
+    if shipping_cost is not None and str(shipping_cost).strip() != "":
+        try:
+            scost = round(float(shipping_cost), 2)
+            ship_info = {
+                "shipping_available": scost >= 0,
+                "shipping_cost": max(0.0, scost),
+                "shipping_carrier": "Seller Free UK Delivery" if scost == 0 else f"Seller Delivery: £{scost:.2f}",
+            }
+        except (ValueError, TypeError):
+            ship_info = detect_shipping_info(source_label, clean_title, numeric_price)
+    else:
+        ship_info = detect_shipping_info(source_label, clean_title, numeric_price)
+
+    raw_item = {
+        "id": item_id,
+        "title": clean_title,
+        "price": numeric_price,
+        "source": source_label,
+        "url": clean_url or "#",
+        "image_url": (image_url or "").strip() or "https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=600",
+        "postcode": pc,
+        "coords": coords,
+        "brand_tier": brand,
+        "year": era["year"],
+        "era_badge": era["badge"],
+        "era_boost": era.get("boost", 0.0),
+        "era_notes": era.get("notes", ""),
+        "has_case": bool(has_case),
+        "has_repair": bool(has_repair),
+        "is_left_handed": is_lefty,
+        "shipping_available": ship_info["shipping_available"],
+        "shipping_cost": ship_info["shipping_cost"],
+        "shipping_carrier": ship_info["shipping_carrier"],
+    }
+
+    enriched = enrich_listings([raw_item], skip_model_filter=True)
+    return enriched[0] if enriched else None
 
 def parse_gumtree_single(url, user_location="London"):
     """Scrapes a public Gumtree guitar listing and enriches it with travel & deal grading."""
@@ -1655,62 +2075,185 @@ def parse_reverb_single(url):
 class DealRadarServer(SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
         self.send_header('Pragma', 'no-cache')
         self.send_header('Expires', '0')
         super().end_headers()
-        
+
+    def _send_json(self, payload, status=200):
+        res_body = json.dumps(payload).encode('utf-8')
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(res_body)))
+        self.end_headers()
+        self.wfile.write(res_body)
+
+    def _upsert_deal_to_json(self, new_item):
+        filepath = os.path.join(os.path.dirname(__file__), "deals.json")
+        deals = []
+        if os.path.exists(filepath):
+            with open(filepath, "r", encoding="utf-8-sig") as f:
+                deals = json.load(f)
+        new_id = str(new_item.get("id", ""))
+        deals = [d for d in deals if str(d.get("id", "")) != new_id]
+        deals.insert(0, new_item)
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(deals, f, indent=2)
+
+    def _handle_import_request(self, payload):
+        try:
+            target_url = (payload.get("url") or "").strip()
+            loc = (payload.get("location") or "").strip()
+            title = (payload.get("title") or "").strip()
+            raw_price = payload.get("price")
+            is_manual = bool(payload.get("manual")) or (bool(title) and raw_price is not None and str(raw_price).strip() != "")
+
+            if is_manual:
+                try:
+                    price_val = float(raw_price or 0)
+                except (ValueError, TypeError):
+                    price_val = 0.0
+                if not title or price_val <= 0:
+                    self._send_json({
+                        "status": "error",
+                        "code": "INVALID_MANUAL_INPUT",
+                        "message": "Enter both a guitar title and a positive asking price (£) to calculate Landed Cost."
+                    })
+                    return
+
+                has_case = payload.get("has_case", True)
+                if isinstance(has_case, str):
+                    has_case = has_case.strip().lower() not in ("false", "0", "no")
+                has_repair = payload.get("has_repair", False)
+                if isinstance(has_repair, str):
+                    has_repair = has_repair.strip().lower() in ("true", "1", "yes")
+
+                new_item = build_manual_deal_item(
+                    url=target_url,
+                    title=title,
+                    price=price_val,
+                    location=loc,
+                    has_case=bool(has_case),
+                    has_repair=bool(has_repair),
+                    shipping_cost=payload.get("shipping_cost"),
+                    image_url=payload.get("image_url", ""),
+                )
+                if not new_item:
+                    self._send_json({
+                        "status": "error",
+                        "code": "MANUAL_BUILD_FAILED",
+                        "message": "Could not build listing from provided manual details."
+                    })
+                    return
+                self._upsert_deal_to_json(new_item)
+                self._send_json({"status": "ok", "item": new_item})
+                return
+
+            if not target_url:
+                self._send_json({
+                    "status": "error",
+                    "code": "MISSING_URL",
+                    "message": "Paste a listing URL (Reverb, eBay UK, Gumtree, or Facebook Marketplace)."
+                })
+                return
+
+            parsed = urllib.parse.urlparse(target_url)
+            if parsed.scheme not in ("http", "https") or not parsed.netloc:
+                self._send_json({
+                    "status": "error",
+                    "code": "INVALID_URL",
+                    "message": "Please paste a valid http:// or https:// listing URL."
+                })
+                return
+
+            host = (parsed.hostname or "").lower()
+            err_info = None
+            new_item = None
+
+            if "reverb.com" in host:
+                new_item = parse_reverb_single(target_url)
+                if not new_item:
+                    err_info = {
+                        "code": "REVERB_PARSE_ERROR",
+                        "message": "Could not fetch this Reverb listing (check the /item/<id> link or enter details manually below)."
+                    }
+            elif "ebay.co.uk" in host or "ebay.com" in host:
+                new_item = parse_ebay_single(target_url)
+                if not new_item:
+                    err_info = {
+                        "code": "EBAY_PARSE_ERROR",
+                        "message": "Could not fetch this eBay listing (ended/unlisted item, non-UK listing, or API error). Enter details manually below."
+                    }
+            elif "gumtree.com" in host:
+                new_item = parse_gumtree_single(target_url, loc or "London")
+                if not new_item:
+                    err_info = {
+                        "code": "GUMTREE_PARSE_ERROR",
+                        "message": "Could not fetch this Gumtree listing (it may have been removed). Enter details manually below."
+                    }
+            elif is_facebook_url(target_url):
+                new_item, err_info = scrape_and_enrich_single_fb(target_url, loc)
+            else:
+                err_info = {
+                    "code": "UNSUPPORTED_URL",
+                    "message": "Unsupported URL domain. Supported auto-importers: Facebook Marketplace, Reverb, eBay UK, and Gumtree — or enter details manually below."
+                }
+
+            if new_item:
+                self._upsert_deal_to_json(new_item)
+                self._send_json({"status": "ok", "item": new_item})
+                return
+
+            resp_err = {"status": "error", "code": "IMPORT_FAILED", "message": "Could not extract listing details. Enter details manually below."}
+            if err_info:
+                resp_err.update(err_info)
+            self._send_json(resp_err)
+        except Exception as ex:
+            self._send_json({
+                "status": "error",
+                "code": "IMPORT_EXCEPTION",
+                "message": f"Import failed ({ex}). Enter the listing details manually below."
+            })
+
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.end_headers()
+
+    def do_POST(self):
+        try:
+            if self.path.startswith("/api/import_fb") or self.path.startswith("/api/import_deal"):
+                length = int(self.headers.get("Content-Length", "0") or "0")
+                raw_body = self.rfile.read(min(length, 1024 * 1024)).decode("utf-8", errors="ignore") if length > 0 else "{}"
+                payload = json.loads(raw_body) if raw_body.strip() else {}
+                if not isinstance(payload, dict):
+                    payload = {}
+                self._handle_import_request(payload)
+                return
+            self._send_json({"status": "error", "code": "NOT_FOUND", "message": "Endpoint not found"}, status=404)
+        except Exception as e:
+            self._send_json({
+                "status": "error",
+                "code": "BAD_REQUEST",
+                "message": f"Invalid import payload ({e}). Enter details manually below."
+            })
+
     def do_GET(self):
         try:
             if self.path.startswith("/api/import_fb") or self.path.startswith("/api/import_deal"):
                 parsed_url = urllib.parse.urlparse(self.path)
                 qs = urllib.parse.parse_qs(parsed_url.query)
-                target_url = qs.get("url", [""])[0]
-                loc = qs.get("location", [""])[0]
-
-                if target_url:
-                    if "reverb.com" in target_url:
-                        new_item = parse_reverb_single(target_url)
-                    elif "ebay.co.uk" in target_url or "ebay.com" in target_url:
-                        new_item = parse_ebay_single(target_url)
-                    elif "gumtree.com" in target_url:
-                        new_item = parse_gumtree_single(target_url, loc or "Liverpool")
-                    else:
-                        new_item = scrape_and_enrich_single_fb(target_url, loc or "Hull")
-
-                    if new_item:
-                        filepath = os.path.join(os.path.dirname(__file__), "deals.json")
-                        deals = []
-                        if os.path.exists(filepath):
-                            with open(filepath, "r", encoding="utf-8-sig") as f:
-                                deals = json.load(f)
-                        deals.insert(0, new_item)
-                        with open(filepath, "w", encoding="utf-8") as f:
-                            json.dump(deals, f, indent=2)
-
-                        res_body = json.dumps({"status": "ok", "item": new_item}).encode('utf-8')
-                        self.send_response(200)
-                        self.send_header("Content-Type", "application/json; charset=utf-8")
-                        self.send_header("Content-Length", str(len(res_body)))
-                        self.end_headers()
-                        self.wfile.write(res_body)
-                        return
-                    else:
-                        msg = "Facebook security 2FA checkpoint blocked automated parsing. Please view listing directly on Facebook." if "facebook.com" in target_url else "Could not fetch Gumtree listing."
-                        res_body = json.dumps({"status": "error", "message": msg}).encode('utf-8')
-                        self.send_response(200)
-                        self.send_header("Content-Type", "application/json; charset=utf-8")
-                        self.send_header("Content-Length", str(len(res_body)))
-                        self.end_headers()
-                        self.wfile.write(res_body)
-                        return
-
-                res_body = json.dumps({"status": "error", "message": "No URL provided"}).encode('utf-8')
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json; charset=utf-8")
-                self.send_header("Content-Length", str(len(res_body)))
-                self.end_headers()
-                self.wfile.write(res_body)
+                payload = {
+                    "url": qs.get("url", [""])[0],
+                    "location": qs.get("location", [""])[0],
+                    "title": qs.get("title", [""])[0],
+                    "price": qs.get("price", [None])[0],
+                    "manual": qs.get("manual", [""])[0].lower() in ("1", "true", "yes"),
+                    "has_case": qs.get("has_case", ["true"])[0],
+                    "has_repair": qs.get("has_repair", ["false"])[0],
+                }
+                self._handle_import_request(payload)
                 return
 
             if self.path.startswith("/api/remove_deal"):
@@ -1751,7 +2294,7 @@ class DealRadarServer(SimpleHTTPRequestHandler):
                             with open(filepath, "r", encoding="utf-8-sig") as f:
                                 prev = json.load(f)
                                 seen_ids = {d.get("id") for d in enriched}
-                                saved_imports = [d for d in prev if (d.get("id", "").startswith("gumtree_") or d.get("id", "").startswith("fb_")) and d.get("id") not in seen_ids]
+                                saved_imports = [d for d in prev if d.get("id", "").startswith(("gumtree_", "fb_", "manual_")) and d.get("id") not in seen_ids]
                         combined = saved_imports + enriched
                         with open(filepath, "w", encoding="utf-8") as f:
                             json.dump(combined, f, indent=2)
@@ -1806,7 +2349,7 @@ def background_auto_scanner(interval_minutes=30):
                 with open(filepath, "r", encoding="utf-8-sig") as f:
                     prev = json.load(f)
                     seen_ids = {d.get("id") for d in enriched}
-                    saved_imports = [d for d in prev if (d.get("id", "").startswith("gumtree_") or d.get("id", "").startswith("fb_")) and d.get("id") not in seen_ids]
+                    saved_imports = [d for d in prev if d.get("id", "").startswith(("gumtree_", "fb_", "manual_")) and d.get("id") not in seen_ids]
             combined = saved_imports + enriched
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(combined, f, indent=2)
@@ -2038,6 +2581,10 @@ def load_config():
             "app_password": os.environ["GMAIL_APP_PASSWORD"].strip(),
             "min_price_drop": 50,
         }
+    if os.environ.get("APIFY_TOKEN"):
+        cfg.setdefault("apify", {})["token"] = os.environ["APIFY_TOKEN"].strip()
+    if os.environ.get("APIFY_FB_ACTOR_ID"):
+        cfg.setdefault("apify", {})["actor_id"] = os.environ["APIFY_FB_ACTOR_ID"].strip()
     return cfg
 
 def get_ebay_oauth_token(client_id, client_secret):
@@ -2468,7 +3015,7 @@ def main():
                 seen_ids = {d.get("id") for d in enriched}
                 saved_imports = [
                     d for d in prev
-                    if (d.get("id", "").startswith("gumtree_") or d.get("id", "").startswith("fb_"))
+                    if d.get("id", "").startswith(("gumtree_", "fb_", "manual_"))
                     and d.get("id") not in seen_ids
                     and d.get("id") not in blocked_ids
                 ]
