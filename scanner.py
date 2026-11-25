@@ -631,8 +631,53 @@ def init_db():
             lng REAL
         )
     """)
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS scan_state (
+            key TEXT PRIMARY KEY,
+            value TEXT,
+            updated_at TEXT
+        )
+    """)
     conn.commit()
     conn.close()
+
+def _get_scan_state(key):
+    init_db()
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("SELECT value FROM scan_state WHERE key = ?", (key,))
+    row = c.fetchone()
+    conn.close()
+    return row[0] if row else None
+
+def _set_scan_state(key, value):
+    init_db()
+    now_iso = datetime.now(timezone.utc).isoformat()
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute(
+        "INSERT OR REPLACE INTO scan_state (key, value, updated_at) VALUES (?, ?, ?)",
+        (key, str(value), now_iso),
+    )
+    conn.commit()
+    conn.close()
+
+def _get_fb_sweep_timing(interval_hours=23.0):
+    last_str = _get_scan_state("fb_apify_last_run_at")
+    last_dt = _parse_iso_dt(last_str)
+    if not last_dt:
+        return None, None
+    elapsed_hours = (datetime.now(timezone.utc) - last_dt).total_seconds() / 3600.0
+    remaining_hours = max(0.0, float(interval_hours) - elapsed_hours)
+    return elapsed_hours, remaining_hours
+
+def should_run_fb_apify_sweep(interval_hours=23.0, force=False):
+    if force or "--force-fb" in sys.argv:
+        return True
+    elapsed_hours, _ = _get_fb_sweep_timing(interval_hours)
+    if elapsed_hours is None:
+        return True
+    return elapsed_hours >= float(interval_hours)
 
 def geocode_uk_town(locality, region="ENG"):
     """Resolves any UK town/village name to (postcode_or_outcode, (lat, lng)) using region matching."""
@@ -1472,11 +1517,11 @@ def _resolve_uk_location_smart(loc_str):
     ).strip()
     pc, coords = geocode_uk_town(city_clean)
     if not coords and "," in city_clean:
-        # Try last comma component (e.g. "Headingley, Leeds" -> "Leeds")
-        tail = city_clean.split(",")[-1].strip()
-        pc, coords = geocode_uk_town(tail)
-        if coords:
-            city_clean = tail
+        parts = [p.strip() for p in city_clean.split(",") if p.strip()]
+        for candidate in ([parts[0], parts[-1]] if len(parts) > 1 else parts):
+            pc, coords = geocode_uk_town(candidate)
+            if coords:
+                break
     return pc, coords, city_clean
 
 
@@ -2286,18 +2331,9 @@ class DealRadarServer(SimpleHTTPRequestHandler):
                 def run_sweep():
                     try:
                         print("🔍 [Manual Scan] Initiating live UK Reverb + eBay scan...")
-                        live_deals = harvest_all_sources()
+                        live_deals, fb_refreshed = harvest_all_sources(return_meta=True)
                         enriched = enrich_listings(live_deals)
-                        filepath = os.path.join(os.path.dirname(__file__), "deals.json")
-                        saved_imports = []
-                        if os.path.exists(filepath):
-                            with open(filepath, "r", encoding="utf-8-sig") as f:
-                                prev = json.load(f)
-                                seen_ids = {d.get("id") for d in enriched}
-                                saved_imports = [d for d in prev if d.get("id", "").startswith(("gumtree_", "fb_", "manual_")) and d.get("id") not in seen_ids]
-                        combined = saved_imports + enriched
-                        with open(filepath, "w", encoding="utf-8") as f:
-                            json.dump(combined, f, indent=2)
+                        combined = _save_combined_deals(enriched, fb_refreshed=fb_refreshed)
                         check_and_send_alerts(combined)
                         print(f"✓ [Manual Scan] Deals feed updated with {len(combined)} active guitars!")
                     except Exception as ex:
@@ -2341,18 +2377,9 @@ def background_auto_scanner(interval_minutes=30):
         time.sleep(interval_minutes * 60)
         try:
             print(f"\n⏰ [Auto-Scanner] Running {interval_minutes}-minute scheduled live deal sweep...")
-            live_deals = harvest_all_sources()
+            live_deals, fb_refreshed = harvest_all_sources(return_meta=True)
             enriched = enrich_listings(live_deals)
-            filepath = os.path.join(os.path.dirname(__file__), "deals.json")
-            saved_imports = []
-            if os.path.exists(filepath):
-                with open(filepath, "r", encoding="utf-8-sig") as f:
-                    prev = json.load(f)
-                    seen_ids = {d.get("id") for d in enriched}
-                    saved_imports = [d for d in prev if d.get("id", "").startswith(("gumtree_", "fb_", "manual_")) and d.get("id") not in seen_ids]
-            combined = saved_imports + enriched
-            with open(filepath, "w", encoding="utf-8") as f:
-                json.dump(combined, f, indent=2)
+            combined = _save_combined_deals(enriched, fb_refreshed=fb_refreshed)
             check_and_send_alerts(combined)
             print(f"✓ [Auto-Scanner] Deals feed refreshed ({len(combined)} listings active).\n")
         except Exception as e:
@@ -2971,8 +2998,147 @@ def harvest_live_indie_shops():
     print(f"Found {len(harvested)} live in-stock guitars across Independent UK Shops!")
     return harvested
 
-def harvest_all_sources():
-    """Harvests live listings from Independent UK Shops + Reverb UK + eBay UK."""
+def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scraper", results_limit=8, max_charge_usd=0.15):
+    """Throttled UK Facebook Marketplace sweep via Apify (capped to stay inside the $5/mo free tier)."""
+    print("\n📘 Harvesting UK Facebook Marketplace listings via Apify (daily throttled sweep)...")
+    search_urls = [
+        "https://www.facebook.com/marketplace/hull/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/bristol/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/manchester/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/london/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/london/search/?query=gibson%20345&minPrice=600",
+    ]
+
+    actor_slug = (actor_id or "apify/facebook-marketplace-scraper").strip().replace("/", "~")
+    safe_slug = urllib.parse.quote(actor_slug, safe="~-._")
+    endpoint = (
+        f"https://api.apify.com/v2/acts/{safe_slug}/run-sync-get-dataset-items"
+        f"?timeout=120&maxTotalChargeUsd={float(max_charge_usd):.2f}"
+    )
+
+    payload = json.dumps({
+        "startUrls": [{"url": u} for u in search_urls],
+        "resultsLimit": int(results_limit),
+        "includeListingDetails": False,
+    }).encode("utf-8")
+
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+
+    try:
+        req = urllib.request.Request(endpoint, data=payload, headers=headers, method="POST")
+        with urllib.request.urlopen(req, timeout=145) as resp:
+            body = resp.read().decode("utf-8", errors="ignore")
+        raw_items = json.loads(body) if body else []
+        if not isinstance(raw_items, list):
+            raw_items = []
+    except urllib.error.HTTPError as e:
+        code = e.code
+        e.close()
+        if code == 402:
+            print("  ⚠️ Apify free-tier usage limit reached (HTTP 402) — backing off 23h and preserving cached FB listings.")
+            _set_scan_state("fb_apify_last_run_at", datetime.now(timezone.utc).isoformat())
+        else:
+            print(f"  ✗ Error harvesting Facebook Marketplace via Apify (HTTP {code}) — preserving cached FB listings.")
+        return [], False
+    except Exception as e:
+        print(f"  ✗ Error harvesting Facebook Marketplace via Apify ({e}) — preserving cached FB listings.")
+        return [], False
+
+    harvested = []
+    seen_ids = set()
+    bad_terms = ["case only", "pickguard", "wiring", "pickups only", "strap", "knobs", "gig bag only", "epiphone"]
+
+    for it in raw_items:
+        if not isinstance(it, dict) or it.get("error") or it.get("errorDescription"):
+            continue
+
+        raw_id = str(it.get("id") or "").strip()
+        item_id = raw_id if raw_id.isdigit() else _extract_fb_item_id(it.get("listingUrl") or it.get("url") or "")
+        if not item_id or item_id in seen_ids:
+            continue
+
+        # Ensure GBP UK pricing
+        lp = it.get("listing_price") or it.get("price") or {}
+        currency = str(lp.get("currency") or "").upper() if isinstance(lp, dict) else ""
+        fmt_amt = str(lp.get("formatted_amount") or "") if isinstance(lp, dict) else str(lp or "")
+        if currency and currency != "GBP":
+            continue
+        if not currency and fmt_amt and any(sym in fmt_amt for sym in ("$", "€", "CA$", "A$", "USD", "EUR")):
+            continue
+
+        canonical_url = f"https://www.facebook.com/marketplace/item/{item_id}/"
+        raw_item, map_err = _map_apify_fb_item_to_raw(it, canonical_url, item_id, user_location="")
+        if map_err or not raw_item:
+            continue
+
+        if float(raw_item.get("price") or 0) < 600:
+            continue
+
+        tlow = (raw_item.get("title") or "").lower()
+        if any(b in tlow for b in bad_terms) and "elitist" not in tlow:
+            continue
+        if not is_valid_335_model(raw_item.get("title", ""), raw_item.get("brand_tier", "")):
+            continue
+
+        coords = raw_item.get("coords")
+        if coords:
+            lat, lng = coords
+            if not (49.8 <= lat <= 61.0 and -8.5 <= lng <= 2.0):
+                continue
+
+        seen_ids.add(item_id)
+        raw_item["auto_harvested_fb"] = True
+        raw_item["source_type"] = "facebook"
+        harvested.append(raw_item)
+        print(f"  ✓ Live [Facebook UK]: {raw_item['title']} (£{raw_item['price']}) - {raw_item['source']}")
+
+    _set_scan_state("fb_apify_last_run_at", datetime.now(timezone.utc).isoformat())
+    print(f"Found {len(harvested)} valid UK guitars on Facebook Marketplace (from {len(raw_items)} raw Apify items)!")
+    return harvested, True
+
+
+def _save_combined_deals(enriched, fb_refreshed=False):
+    """Merges preserved Gumtree, manual & throttled Facebook Marketplace listings into deals.json."""
+    filepath = os.path.join(os.path.dirname(__file__), "deals.json")
+    blocked_ids = load_blocklist()
+    saved_imports = []
+    if os.path.exists(filepath):
+        try:
+            with open(filepath, "r", encoding="utf-8-sig") as f:
+                prev = json.load(f)
+                seen_ids = {d.get("id") for d in enriched}
+                for d in prev:
+                    did = str(d.get("id", ""))
+                    if did in seen_ids or did in blocked_ids:
+                        continue
+                    if did.startswith(("gumtree_", "manual_")):
+                        saved_imports.append(d)
+                    elif did.startswith("fb_"):
+                        if not d.get("auto_harvested_fb") or not fb_refreshed:
+                            if d.get("postcode") == "UK (TBC)" or not d.get("coords"):
+                                m_loc = re.search(r'\(([^)]+)\)', str(d.get("source", "")))
+                                if m_loc:
+                                    pc_fix, coords_fix, _ = _resolve_uk_location_smart(m_loc.group(1))
+                                    if coords_fix:
+                                        d["postcode"] = pc_fix
+                                        d["coords"] = coords_fix
+                                        fixed_list = enrich_listings([d], skip_model_filter=True)
+                                        if fixed_list:
+                                            d = fixed_list[0]
+                            saved_imports.append(d)
+        except Exception:
+            pass
+    combined_deals = saved_imports + enriched
+    export_deals_json(combined_deals)
+    return combined_deals
+
+
+def harvest_all_sources(force_fb=False, return_meta=False):
+    """Harvests live listings from Independent UK Shops + Reverb UK + eBay UK + throttled daily Facebook UK."""
     deals = harvest_live_indie_shops()
     deals.extend(harvest_live_reverb())
     cfg = load_config()
@@ -2980,6 +3146,32 @@ def harvest_all_sources():
     if ebay_cfg.get("enabled") and ebay_cfg.get("client_id") and "YOUR_EBAY" not in ebay_cfg.get("client_id"):
         ebay_deals = harvest_live_ebay(ebay_cfg["client_id"], ebay_cfg.get("client_secret", ""))
         deals.extend(ebay_deals)
+
+    fb_refreshed = False
+    apify_cfg = cfg.get("apify") or {}
+    apify_token = (apify_cfg.get("token") or "").strip()
+    if apify_token and "YOUR_APIFY" not in apify_token.upper() and apify_cfg.get("daily_sweep_enabled", True):
+        interval_hours = float(apify_cfg.get("sweep_interval_hours", 23))
+        if should_run_fb_apify_sweep(interval_hours=interval_hours, force=force_fb):
+            actor_id = (apify_cfg.get("actor_id") or "apify/facebook-marketplace-scraper").strip()
+            results_limit = int(apify_cfg.get("results_limit", 8))
+            max_charge = float(apify_cfg.get("max_total_charge_usd", 0.15))
+            fb_deals, fb_ok = harvest_live_facebook_apify(
+                apify_token,
+                actor_id=actor_id,
+                results_limit=results_limit,
+                max_charge_usd=max_charge,
+            )
+            if fb_ok:
+                deals.extend(fb_deals)
+                fb_refreshed = True
+        else:
+            elapsed, remaining = _get_fb_sweep_timing(interval_hours)
+            if elapsed is not None:
+                print(f"\n⏭️  Facebook Marketplace daily sweep skipped (last run {elapsed:.1f}h ago; next run in {remaining:.1f}h).")
+
+    if return_meta:
+        return deals, fb_refreshed
     return deals
 
 def main():
@@ -2998,32 +3190,13 @@ def main():
             start_server(port)
             return
 
-    # Harvest from all live sources (Independent UK Shops + Reverb UK + eBay UK)
-    all_live_deals = harvest_all_sources()
+    # Harvest from all live sources (Independent UK Shops + Reverb UK + eBay UK + throttled daily Facebook UK)
+    all_live_deals, fb_refreshed = harvest_all_sources(return_meta=True)
 
     print(f"\nTotal live active UK guitars: {len(all_live_deals)}")
     enriched = enrich_listings(all_live_deals)
 
-    # Preserve any imported Gumtree & FB deals across runs (excluding blocklisted fakes)
-    filepath = os.path.join(os.path.dirname(__file__), "deals.json")
-    blocked_ids = load_blocklist()
-    saved_imports = []
-    if os.path.exists(filepath):
-        try:
-            with open(filepath, "r", encoding="utf-8-sig") as f:
-                prev = json.load(f)
-                seen_ids = {d.get("id") for d in enriched}
-                saved_imports = [
-                    d for d in prev
-                    if d.get("id", "").startswith(("gumtree_", "fb_", "manual_"))
-                    and d.get("id") not in seen_ids
-                    and d.get("id") not in blocked_ids
-                ]
-        except Exception:
-            pass
-
-    combined_deals = saved_imports + enriched
-    export_deals_json(combined_deals)
+    combined_deals = _save_combined_deals(enriched, fb_refreshed=fb_refreshed)
     check_and_send_alerts(combined_deals)
 
     if "--serve" in sys.argv:
