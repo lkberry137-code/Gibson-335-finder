@@ -663,7 +663,7 @@ def _set_scan_state(key, value):
     conn.commit()
     conn.close()
 
-def _get_fb_sweep_timing(interval_hours=23.0):
+def _get_fb_sweep_timing(interval_hours=47.0):
     last_str = _get_scan_state("fb_apify_last_run_at")
     last_dt = _parse_iso_dt(last_str)
     if not last_dt:
@@ -672,7 +672,7 @@ def _get_fb_sweep_timing(interval_hours=23.0):
     remaining_hours = max(0.0, float(interval_hours) - elapsed_hours)
     return elapsed_hours, remaining_hours
 
-def should_run_fb_apify_sweep(interval_hours=23.0, force=False):
+def should_run_fb_apify_sweep(interval_hours=47.0, force=False):
     if force or "--force-fb" in sys.argv:
         return True
     elapsed_hours, _ = _get_fb_sweep_timing(interval_hours)
@@ -3026,14 +3026,16 @@ def harvest_live_indie_shops():
     print(f"Found {len(harvested)} live in-stock guitars across Independent UK Shops!")
     return harvested
 
-def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scraper", results_limit=5, max_charge_usd=0.16):
-    """Throttled UK Facebook Marketplace sweep via Apify (capped to stay inside the $5/mo free tier)."""
-    print("\n📘 Harvesting UK Facebook Marketplace listings via Apify (daily throttled sweep)...")
+def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scraper", results_limit=7, max_charge_usd=0.31):
+    """Throttled 48h UK Facebook Marketplace sweep via Apify (7 verified UK hubs, capped inside $5/mo free tier)."""
+    print("\n📘 Harvesting UK Facebook Marketplace listings via Apify (48h throttled sweep)...")
     search_urls = [
-        "https://www.facebook.com/marketplace/hull/search/?query=gibson%20335&minPrice=600",
-        "https://www.facebook.com/marketplace/newcastle/search/?query=gibson%20335&minPrice=600",
-        "https://www.facebook.com/marketplace/bristol/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/sheffield/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/edinburgh/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/nottingham/search/?query=gibson%20335&minPrice=600",
         "https://www.facebook.com/marketplace/manchester/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/birmingham/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/bristol/search/?query=gibson%20335&minPrice=600",
         "https://www.facebook.com/marketplace/london/search/?query=gibson%20335&minPrice=600",
     ]
 
@@ -3041,7 +3043,7 @@ def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scra
     safe_slug = urllib.parse.quote(actor_slug, safe="~-._")
     endpoint = (
         f"https://api.apify.com/v2/acts/{safe_slug}/run-sync-get-dataset-items"
-        f"?timeout=120&maxTotalChargeUsd={float(max_charge_usd):.2f}"
+        f"?timeout=180&maxTotalChargeUsd={float(max_charge_usd):.2f}"
     )
 
     payload = json.dumps({
@@ -3058,7 +3060,7 @@ def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scra
 
     try:
         req = urllib.request.Request(endpoint, data=payload, headers=headers, method="POST")
-        with urllib.request.urlopen(req, timeout=145) as resp:
+        with urllib.request.urlopen(req, timeout=200) as resp:
             body = resp.read().decode("utf-8", errors="ignore")
         raw_items = json.loads(body) if body else []
         if not isinstance(raw_items, list):
@@ -3067,7 +3069,7 @@ def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scra
         code = e.code
         e.close()
         if code == 402:
-            print("  ⚠️ Apify free-tier usage limit reached (HTTP 402) — backing off 23h and preserving cached FB listings.")
+            print("  ⚠️ Apify free-tier usage limit reached (HTTP 402) — backing off 47h and preserving cached FB listings.")
             _set_scan_state("fb_apify_last_run_at", datetime.now(timezone.utc).isoformat())
         else:
             print(f"  ✗ Error harvesting Facebook Marketplace via Apify (HTTP {code}) — preserving cached FB listings.")
@@ -3179,11 +3181,11 @@ def harvest_all_sources(force_fb=False, return_meta=False):
     apify_cfg = cfg.get("apify") or {}
     apify_token = (apify_cfg.get("token") or "").strip()
     if apify_token and "YOUR_APIFY" not in apify_token.upper() and apify_cfg.get("daily_sweep_enabled", True):
-        interval_hours = float(apify_cfg.get("sweep_interval_hours", 23))
+        interval_hours = float(apify_cfg.get("sweep_interval_hours", 47))
         if should_run_fb_apify_sweep(interval_hours=interval_hours, force=force_fb):
             actor_id = (apify_cfg.get("actor_id") or "apify/facebook-marketplace-scraper").strip()
-            results_limit = int(apify_cfg.get("results_limit", 5))
-            max_charge = float(apify_cfg.get("max_total_charge_usd", 0.16))
+            results_limit = int(apify_cfg.get("results_limit", 7))
+            max_charge = float(apify_cfg.get("max_total_charge_usd", 0.31))
             fb_deals, fb_ok = harvest_live_facebook_apify(
                 apify_token,
                 actor_id=actor_id,
@@ -3196,7 +3198,7 @@ def harvest_all_sources(force_fb=False, return_meta=False):
         else:
             elapsed, remaining = _get_fb_sweep_timing(interval_hours)
             if elapsed is not None:
-                print(f"\n⏭️  Facebook Marketplace daily sweep skipped (last run {elapsed:.1f}h ago; next run in {remaining:.1f}h).")
+                print(f"\n⏭️  Facebook Marketplace 48h sweep skipped (last run {elapsed:.1f}h ago; next run in {remaining:.1f}h).")
 
     if return_meta:
         return deals, fb_refreshed
