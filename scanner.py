@@ -96,7 +96,8 @@ POSTCODE_CACHE = {
     "CV47 0AA": (52.2510, -1.3880), # Southam Warwickshire Rolly's Guitars
     "BN22 9BH": (50.7905, 0.2890),  # Eastbourne Bonners Music
     "BB7 9YE": (53.8220, -2.4080),  # Whalley Lancs Reidys Home of Music
-    "CA3 8UU": (54.9010, -2.9360)   # Carlisle Rainbow Music
+    "CA3 8UU": (54.9010, -2.9360),  # Carlisle Rainbow Music
+    "SR1 1AA": (54.9069, -1.3838)   # Sunderland Tyne & Wear
 }
 
 UK_CITY_POSTCODES = {
@@ -106,7 +107,7 @@ UK_CITY_POSTCODES = {
     "leicester": "LE1 1AA", "lincoln": "LN1 1AA", "liverpool": "L1 8JQ", "manchester": "M1 1AE",
     "bristol": "BS1 1AA", "bath": "BA1 1AA", "cardiff": "CF10 1AA", "south wales": "CF10 1AA",
     "london": "SW1A 1AA", "norwood": "SW1A 1AA", "birmingham": "B1 1AA", "norwich": "NR1 1AA",
-    "colchester": "CO4 9QP", "newcastle": "NE1 1AA", "oxford": "OX1 1AA", "cambridge": "CB1 1AA",
+    "colchester": "CO4 9QP", "newcastle": "NE1 1AA", "sunderland": "SR1 1AA", "oxford": "OX1 1AA", "cambridge": "CB1 1AA",
     "exeter": "EX1 1AA", "plymouth": "PL1 1AA", "southampton": "SO14 1AA", "portsmouth": "PO1 1AA",
     "bournemouth": "BH1 1AA", "farnham": "GU9 7ND", "guildford": "GU1 4RF", "cheltenham": "GL50 1TA",
     "ormskirk": "PR7 1NY", "taunton": "TA1 5LU", "st albans": "AL1 1NG", "eastbourne": "BN22 9BH",
@@ -1648,7 +1649,7 @@ def _extract_apify_location(apify_item):
         loc_text = loc_obj.strip()
 
     if not loc_text:
-        lt = apify_item.get("location_text") or apify_item.get("locationName") or ""
+        lt = apify_item.get("location_text") or apify_item.get("locationText") or apify_item.get("locationName") or ""
         if isinstance(lt, dict):
             loc_text = str(lt.get("text") or "").strip()
         elif isinstance(lt, str):
@@ -1661,23 +1662,37 @@ def _map_apify_fb_item_to_raw(apify_item, canonical_url, item_id, user_location=
     """Maps an Apify facebook-marketplace-scraper dataset item into the scanner/Landed Cost raw schema."""
     title = (
         apify_item.get("marketplace_listing_title")
+        or apify_item.get("listingTitle")
         or apify_item.get("custom_title")
         or apify_item.get("title")
         or apify_item.get("name")
         or ""
     ).strip()
 
-    price = _parse_numeric_price(apify_item.get("listing_price") or apify_item.get("price"))
+    price = _parse_numeric_price(
+        apify_item.get("listing_price") or apify_item.get("listingPrice") or apify_item.get("price")
+    )
 
     raw_loc_text, apify_coords = _extract_apify_location(apify_item)
     effective_loc = raw_loc_text or (user_location or "").strip()
     pc, coords, display_loc = _resolve_uk_location_smart(effective_loc)
-    if not coords and apify_coords:
+    if apify_coords and 49.8 <= apify_coords[0] <= 61.0 and -8.5 <= apify_coords[1] <= 2.0:
         coords = apify_coords
+        try:
+            rev_url = f"https://api.postcodes.io/outcodes?lon={apify_coords[1]}&lat={apify_coords[0]}&limit=1"
+            req = urllib.request.Request(rev_url, headers={"User-Agent": "Gibson335Radar/1.0"})
+            with urllib.request.urlopen(req, timeout=4) as resp:
+                rdata = json.loads(resp.read().decode("utf-8", errors="ignore"))
+            if rdata.get("status") == 200 and rdata.get("result"):
+                rev_pc = rdata["result"][0].get("outcode")
+                if rev_pc:
+                    pc = rev_pc
+        except Exception:
+            pass
     if not display_loc:
         display_loc = user_location.strip() or "UK"
 
-    # Extract primary image URL across common Apify schemas
+    # Extract primary image URL across common Apify snake_case and camelCase schemas
     image_url = ""
     plp = apify_item.get("primary_listing_photo")
     if isinstance(plp, dict):
@@ -1690,7 +1705,7 @@ def _map_apify_fb_item_to_raw(apify_item, canonical_url, item_id, user_location=
         image_url = plp
 
     if not image_url:
-        photos = apify_item.get("listing_photos") or apify_item.get("images") or []
+        photos = apify_item.get("listing_photos") or apify_item.get("listingPhotos") or apify_item.get("images") or []
         if isinstance(photos, list) and photos:
             first_photo = photos[0]
             if isinstance(first_photo, dict):
@@ -1712,6 +1727,17 @@ def _map_apify_fb_item_to_raw(apify_item, canonical_url, item_id, user_location=
         seller_name = str(seller_obj.get("name") or "").strip()
     else:
         seller_name = str(seller_obj or apify_item.get("seller_name") or "").strip()
+
+    published_at = apify_item.get("timestamp")
+    if not published_at and apify_item.get("creation_time") is not None:
+        ct = apify_item.get("creation_time")
+        if isinstance(ct, (int, float)):
+            try:
+                published_at = datetime.fromtimestamp(float(ct), tz=timezone.utc).isoformat()
+            except Exception:
+                published_at = None
+        elif isinstance(ct, str):
+            published_at = ct
 
     if not title or price <= 0:
         return None, {
@@ -1753,6 +1779,8 @@ def _map_apify_fb_item_to_raw(apify_item, canonical_url, item_id, user_location=
         "shipping_cost": ship_info["shipping_cost"],
         "shipping_carrier": ship_info["shipping_carrier"],
     }
+    if published_at:
+        raw_item["published_at"] = published_at
     if seller_name:
         raw_item["seller_name"] = seller_name
     return raw_item, None
@@ -2998,15 +3026,15 @@ def harvest_live_indie_shops():
     print(f"Found {len(harvested)} live in-stock guitars across Independent UK Shops!")
     return harvested
 
-def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scraper", results_limit=8, max_charge_usd=0.15):
+def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scraper", results_limit=5, max_charge_usd=0.16):
     """Throttled UK Facebook Marketplace sweep via Apify (capped to stay inside the $5/mo free tier)."""
     print("\n📘 Harvesting UK Facebook Marketplace listings via Apify (daily throttled sweep)...")
     search_urls = [
         "https://www.facebook.com/marketplace/hull/search/?query=gibson%20335&minPrice=600",
+        "https://www.facebook.com/marketplace/newcastle/search/?query=gibson%20335&minPrice=600",
         "https://www.facebook.com/marketplace/bristol/search/?query=gibson%20335&minPrice=600",
         "https://www.facebook.com/marketplace/manchester/search/?query=gibson%20335&minPrice=600",
         "https://www.facebook.com/marketplace/london/search/?query=gibson%20335&minPrice=600",
-        "https://www.facebook.com/marketplace/london/search/?query=gibson%20345&minPrice=600",
     ]
 
     actor_slug = (actor_id or "apify/facebook-marketplace-scraper").strip().replace("/", "~")
@@ -3062,7 +3090,7 @@ def harvest_live_facebook_apify(token, actor_id="apify/facebook-marketplace-scra
             continue
 
         # Ensure GBP UK pricing
-        lp = it.get("listing_price") or it.get("price") or {}
+        lp = it.get("listing_price") or it.get("listingPrice") or it.get("price") or {}
         currency = str(lp.get("currency") or "").upper() if isinstance(lp, dict) else ""
         fmt_amt = str(lp.get("formatted_amount") or "") if isinstance(lp, dict) else str(lp or "")
         if currency and currency != "GBP":
@@ -3154,8 +3182,8 @@ def harvest_all_sources(force_fb=False, return_meta=False):
         interval_hours = float(apify_cfg.get("sweep_interval_hours", 23))
         if should_run_fb_apify_sweep(interval_hours=interval_hours, force=force_fb):
             actor_id = (apify_cfg.get("actor_id") or "apify/facebook-marketplace-scraper").strip()
-            results_limit = int(apify_cfg.get("results_limit", 8))
-            max_charge = float(apify_cfg.get("max_total_charge_usd", 0.15))
+            results_limit = int(apify_cfg.get("results_limit", 5))
+            max_charge = float(apify_cfg.get("max_total_charge_usd", 0.16))
             fb_deals, fb_ok = harvest_live_facebook_apify(
                 apify_token,
                 actor_id=actor_id,
