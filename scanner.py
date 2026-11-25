@@ -918,10 +918,10 @@ def check_and_send_alerts(enriched_items):
         alert_key = None
         tag = None
 
-        if price_drop >= min_drop:
+        if price_drop >= min_drop and not it.get("is_auction"):
             alert_key = f"drop_{lid}_{int(price)}"
             tag = f"PRICE DROP (−£{int(round(price_drop))})"
-        elif hull_grade == "A+" or som_grade == "A+":
+        elif (hull_grade == "A+" or som_grade == "A+") and not it.get("is_auction"):
             alert_key = f"aplus_{lid}"
             tag = "GRADE A+ STEAL"
 
@@ -1173,7 +1173,7 @@ def load_blocklist():
             pass
     return ids
 
-def detect_fake_risk(title, desc="", price=0, brand="", has_repair=False, year=None):
+def detect_fake_risk(title, desc="", price=0, brand="", has_repair=False, year=None, is_auction=False):
     """Detects counterfeit / Chibson red flags on Gibson ES-335/345 listings."""
     tlow = (title or "").lower()
     combined = f"{title} {desc}".lower()
@@ -1200,8 +1200,8 @@ def detect_fake_risk(title, desc="", price=0, brand="", has_repair=False, year=N
         if kw in tlow:
             reasons.append(msg)
 
-    # 3. Suspiciously cheap Gibson USA ES-335/345 without repair (excluding 335-S solid-body)
-    if "gibson usa" in (brand or "").lower() and not has_repair and "335-s" not in tlow and "studio" not in tlow:
+    # 3. Suspiciously cheap Gibson USA ES-335/345 without repair (excluding 335-S solid-body and live auctions)
+    if not is_auction and "gibson usa" in (brand or "").lower() and not has_repair and "335-s" not in tlow and "studio" not in tlow:
         if price and 0 < float(price) < 1250:
             reasons.append(f"Suspiciously low price (£{int(price)}) for an unrepaired authentic Gibson USA ES-335/345 — inspect carefully")
 
@@ -1216,10 +1216,13 @@ def is_valid_335_model(title, brand=""):
     if blow == "epiphone (exclude)" or ("epiphone" in tlow and "elitist" not in tlow):
         return False
 
-    # Avoid letting unrelated non-ES solid bodies slip in via search queries
+    # Avoid letting unrelated non-ES solid bodies or keyword-stuffed non-335/345 ES models slip in via search queries
     if "gibson" in tlow or "gibson" in blow:
         if not re.search(r'(335|345|355|es[\s-]?\d{3})', tlow):
             return False
+        if re.search(r'\bes[\s-]?(125|135|137|150|175|225|275|295|325|330|333|339)\b', tlow):
+            if not re.search(r'\bes[\s-]?(335|345|355)\b', tlow):
+                return False
 
     # Strict Tokai 335 semi-hollow gate: must be ES-series or 335, never Les Paul/Strat copies
     if "tokai" in tlow or "tokai" in blow:
@@ -1260,7 +1263,8 @@ def enrich_listings(listings, car_mpg=38.0, fuel_price=1.42):
             price=item.get("price", 0),
             brand=brand,
             has_repair=item.get("has_repair", False),
-            year=item.get("year")
+            year=item.get("year"),
+            is_auction=item.get("is_auction", False)
         )
         item["fake_risk"] = fake_risk
         item["fake_reason"] = fake_reason
@@ -1667,6 +1671,8 @@ class DealRadarServer(SimpleHTTPRequestHandler):
                 if target_url:
                     if "reverb.com" in target_url:
                         new_item = parse_reverb_single(target_url)
+                    elif "ebay.co.uk" in target_url or "ebay.com" in target_url:
+                        new_item = parse_ebay_single(target_url)
                     elif "gumtree.com" in target_url:
                         new_item = parse_gumtree_single(target_url, loc or "Liverpool")
                     else:
@@ -2058,6 +2064,134 @@ def get_ebay_oauth_token(client_id, client_secret):
         print(f"  ✗ Error authenticating with eBay API: {e}")
         return None
 
+def _parse_ebay_browse_item(it, min_price=600.0, fallback_url=""):
+    """Normalizes an eBay Browse API item object into a scanner raw listing dict."""
+    item_id = it.get("itemId")
+    if not item_id:
+        return None
+
+    title = (it.get("title") or "").strip()
+    title_lower = title.lower()
+    if any(bad in title_lower for bad in ["case only", "pickguard", "wiring", "pickups only", "strap", "knobs", "epiphone", "love rock", "goldstar", "breezysound", "uls129", "lc-156", "ls115", "ls75"]):
+        if "elitist" not in title_lower:
+            return None
+
+    price_obj = it.get("price") or it.get("currentBidPrice") or {}
+    price_val = price_obj.get("value", "0")
+    try:
+        price = round(float(price_val), 2)
+    except (ValueError, TypeError):
+        return None
+    if price <= 0 or price < min_price:
+        return None
+
+    buying_opts = it.get("buyingOptions") or []
+    is_auction = ("AUCTION" in buying_opts) and ("FIXED_PRICE" not in buying_opts)
+
+    brand = detect_brand_tier(title)
+    if not is_valid_335_model(title, brand):
+        return None
+
+    web_url = it.get("itemWebUrl") or fallback_url
+    image_url = (it.get("image") or {}).get("imageUrl", "")
+    seller_name = (it.get("seller") or {}).get("username", "eBay UK Seller")
+    loc_info = it.get("itemLocation", {}) or {}
+    raw_pc = (loc_info.get("postalCode") or "").strip()
+    city = (loc_info.get("city") or "").strip()
+    if raw_pc:
+        postcode = raw_pc.replace("*", "").strip() or resolve_uk_location_postcode(city, seller_name)
+    else:
+        postcode = resolve_uk_location_postcode(city, seller_name)
+
+    era = detect_era(title)
+    flags = detect_repair_and_case(title)
+    is_lefty = detect_dexterity(title)
+
+    # Scrape exact eBay shipping/delivery cost
+    shipping_opts = it.get("shippingOptions", []) or []
+    shipping_available = False
+    shipping_cost = 0.0
+    shipping_carrier = "Collection in Person Only"
+    if shipping_opts:
+        opt = shipping_opts[0]
+        ship_cost_obj = opt.get("shippingCost", {}) or {}
+        ship_type = opt.get("shippingCostType", "")
+        if "value" in ship_cost_obj:
+            try:
+                shipping_cost = round(float(ship_cost_obj["value"]), 2)
+                shipping_available = True
+                if shipping_cost == 0.0:
+                    shipping_carrier = "Seller Free UK Delivery"
+                else:
+                    shipping_carrier = f"Seller Postage: £{shipping_cost:.2f}"
+            except (ValueError, TypeError):
+                pass
+        elif ship_type == "FIXED":
+            shipping_available = True
+            shipping_cost = 0.0
+            shipping_carrier = "Seller Free UK Delivery"
+
+    source_label = f"eBay UK ({city})" if city else f"eBay UK ({seller_name})"
+
+    return {
+        "id": f"ebay_{item_id}",
+        "title": title,
+        "price": price,
+        "source": source_label,
+        "url": web_url,
+        "image_url": image_url,
+        "postcode": postcode,
+        "brand_tier": brand,
+        "year": era["year"],
+        "era_badge": era["badge"],
+        "era_boost": era.get("boost", 0.0),
+        "era_notes": era.get("notes", ""),
+        "has_case": flags["has_case"],
+        "has_repair": flags["has_repair"],
+        "is_left_handed": is_lefty,
+        "is_auction": is_auction,
+        "buying_options": buying_opts,
+        "shipping_available": shipping_available,
+        "shipping_cost": shipping_cost,
+        "shipping_carrier": shipping_carrier,
+        "published_at": it.get("itemCreationDate")
+    }
+
+def parse_ebay_single(url):
+    """Fetches a single eBay UK listing via Browse API get_item_by_legacy_id and enriches it."""
+    m = re.search(r'/itm/(?:[^/]+/)?(\d{9,15})', url)
+    if not m:
+        return None
+    legacy_id = m.group(1)
+    cfg = load_config()
+    ebay_cfg = cfg.get("ebay", {})
+    cid = ebay_cfg.get("client_id", "")
+    csec = ebay_cfg.get("client_secret", "")
+    if not cid or "YOUR_EBAY" in cid:
+        return None
+    token = get_ebay_oauth_token(cid, csec)
+    if not token:
+        return None
+
+    api_url = f"https://api.ebay.com/buy/browse/v1/item/get_item_by_legacy_id?legacy_item_id={legacy_id}"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "X-EBAY-C-MARKETPLACE-ID": "EBAY_GB",
+        "Accept": "application/json"
+    }
+    try:
+        req = urllib.request.Request(api_url, headers=headers)
+        with urllib.request.urlopen(req, timeout=12) as resp:
+            it = json.loads(resp.read().decode('utf-8'))
+        raw_item = _parse_ebay_browse_item(it, min_price=0.0, fallback_url=url)
+        if not raw_item:
+            return None
+        enriched = enrich_listings([raw_item])
+        return enriched[0] if enriched else None
+    except Exception as e:
+        print(f"Error parsing single eBay listing {url}: {e}")
+        return None
+
 def harvest_live_ebay(client_id, client_secret):
     """Fetches real live Gibson ES-335 & ES-345 items from the official eBay Browse API (eBay UK)."""
     token = get_ebay_oauth_token(client_id, client_secret)
@@ -2065,7 +2199,13 @@ def harvest_live_ebay(client_id, client_secret):
         return []
 
     print("\n🔍 Harvesting live UK items from official eBay Browse API...")
-    queries = ["gibson es-335", "gibson es-345", "orville 335", "heritage h-535", "tokai 335"]
+    queries = [
+        "gibson es-335", "gibson 335",
+        "gibson es-345", "gibson 345",
+        "orville 335",
+        "heritage h-535", "heritage 535",
+        "tokai 335", "tokai es"
+    ]
     harvested = []
     seen_ids = set()
 
@@ -2075,106 +2215,48 @@ def harvest_live_ebay(client_id, client_secret):
         "Accept": "application/json"
     }
 
+    page_size = 200
+    max_offset = 600
+
     for q in queries:
-        params = {
-            "q": q,
-            "category_ids": "3858", # Electric Guitars
-            "filter": "price:[600..],priceCurrency:GBP,itemLocationCountry:GB",
-            "limit": "40"
-        }
-        url = f"https://api.ebay.com/buy/browse/v1/item_summary/search?{urllib.parse.urlencode(params)}"
-        try:
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=12) as resp:
-                data = json.loads(resp.read().decode('utf-8'))
-                for it in data.get("itemSummaries", []):
+        offset = 0
+        while offset < max_offset:
+            params = {
+                "q": q,
+                "category_ids": "3858", # Guitars & Basses (includes 33034 Electric Guitars + semi-hollows)
+                "filter": "price:[600..],priceCurrency:GBP,itemLocationCountry:GB,buyingOptions:{FIXED_PRICE|AUCTION}",
+                "limit": str(page_size),
+                "offset": str(offset)
+            }
+            url = f"https://api.ebay.com/buy/browse/v1/item_summary/search?{urllib.parse.urlencode(params)}"
+            try:
+                req = urllib.request.Request(url, headers=headers)
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    data = json.loads(resp.read().decode('utf-8'))
+                summaries = data.get("itemSummaries", [])
+                if not summaries:
+                    break
+                for it in summaries:
                     item_id = it.get("itemId")
                     if not item_id or item_id in seen_ids:
                         continue
                     seen_ids.add(item_id)
 
-                    title = it.get("title", "")
-                    title_lower = title.lower()
-                    if any(bad in title_lower for bad in ["case only", "pickguard", "wiring", "pickups only", "strap", "knobs", "epiphone", "love rock", "goldstar", "breezysound", "uls129", "lc-156", "ls115", "ls75"]):
-                        if "elitist" not in title_lower:
-                            continue
-
-                    price_val = it.get("price", {}).get("value", "0")
-                    try:
-                        price = round(float(price_val), 2)
-                    except ValueError:
-                        continue
-                    if price < 600:
+                    parsed = _parse_ebay_browse_item(it, min_price=600.0)
+                    if not parsed:
                         continue
 
-                    web_url = it.get("itemWebUrl", "")
-                    image_url = it.get("image", {}).get("imageUrl", "")
-                    seller_name = it.get("seller", {}).get("username", "eBay UK Seller")
-                    loc_info = it.get("itemLocation", {}) or {}
-                    raw_pc = (loc_info.get("postalCode") or "").strip()
-                    city = (loc_info.get("city") or "").strip()
-                    if raw_pc:
-                        postcode = raw_pc.replace("*", "").strip() or resolve_uk_location_postcode(city, seller_name)
-                    else:
-                        postcode = resolve_uk_location_postcode(city, seller_name)
+                    harvested.append(parsed)
+                    auction_tag = " [AUCTION]" if parsed.get("is_auction") else ""
+                    print(f"  ✓ Live [eBay UK]{auction_tag}: {parsed['title']} (£{parsed['price']}) - {parsed['source']}")
 
-                    brand = detect_brand_tier(title)
-                    if brand == "Epiphone (Exclude)":
-                        continue
-                    era = detect_era(title)
-                    flags = detect_repair_and_case(title)
-                    is_lefty = detect_dexterity(title)
-
-                    # Scrape exact eBay shipping/delivery cost
-                    shipping_opts = it.get("shippingOptions", []) or []
-                    shipping_available = False
-                    shipping_cost = 0.0
-                    shipping_carrier = "Collection in Person Only"
-                    if shipping_opts:
-                        opt = shipping_opts[0]
-                        ship_cost_obj = opt.get("shippingCost", {}) or {}
-                        ship_type = opt.get("shippingCostType", "")
-                        if "value" in ship_cost_obj:
-                            try:
-                                shipping_cost = round(float(ship_cost_obj["value"]), 2)
-                                shipping_available = True
-                                if shipping_cost == 0.0:
-                                    shipping_carrier = "Seller Free UK Delivery"
-                                else:
-                                    shipping_carrier = f"Seller Postage: £{shipping_cost:.2f}"
-                            except (ValueError, TypeError):
-                                pass
-                        elif ship_type == "FIXED":
-                            shipping_available = True
-                            shipping_cost = 0.0
-                            shipping_carrier = "Seller Free UK Delivery"
-
-                    source_label = f"eBay UK ({city})" if city else f"eBay UK ({seller_name})"
-
-                    harvested.append({
-                        "id": f"ebay_{item_id}",
-                        "title": title,
-                        "price": price,
-                        "source": source_label,
-                        "url": web_url,
-                        "image_url": image_url,
-                        "postcode": postcode,
-                        "brand_tier": brand,
-                        "year": era["year"],
-                        "era_badge": era["badge"],
-                        "era_boost": era.get("boost", 0.0),
-                        "era_notes": era.get("notes", ""),
-                        "has_case": flags["has_case"],
-                        "has_repair": flags["has_repair"],
-                        "is_left_handed": is_lefty,
-                        "shipping_available": shipping_available,
-                        "shipping_cost": shipping_cost,
-                        "shipping_carrier": shipping_carrier,
-                        "published_at": it.get("itemCreationDate")
-                    })
-                    print(f"  ✓ Live [eBay UK]: {title} (£{price}) - {source_label}")
-        except Exception as e:
-            print(f"  ✗ Error querying eBay for '{q}': {e}")
+                total = int(data.get("total") or 0)
+                offset += len(summaries)
+                if offset >= total or len(summaries) < page_size:
+                    break
+            except Exception as e:
+                print(f"  ✗ Error querying eBay for '{q}' (offset={offset}): {e}")
+                break
 
     print(f"Found {len(harvested)} live guitars on eBay UK!")
     return harvested

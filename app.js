@@ -700,7 +700,7 @@ function renderListings() {
             <div class="text-[10px]">${m.hasKnownLocation ? `${m.oneWayMiles} mi (${m.driveHours}h)` : 'Location TBC'}</div>
           </td>
           <td class="py-2.5 px-2 whitespace-nowrap tabular-nums">
-            <div class="font-semibold text-foreground">£${item.price.toLocaleString()}</div>
+            <div class="font-semibold text-foreground">£${item.price.toLocaleString()}${item.is_auction ? `<span class="inline-flex items-center rounded px-1.5 py-0.2 text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 ml-1">AUCTION</span>` : ''}</div>
             ${item.fake_risk ? `
               <span class="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold bg-cherry text-white shadow-sm" title="${escapeQuotes(item.fake_reason || 'Counterfeit red flag detected')}">
                 <i data-lucide="alert-triangle" class="w-3 h-3"></i>
@@ -801,6 +801,11 @@ function renderListings() {
                 ES-345
               </span>
             ` : ''}
+            ${item.is_auction ? `
+              <span class="inline-flex items-center rounded-md px-2 py-0.5 text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 backdrop-blur-md">
+                AUCTION
+              </span>
+            ` : ''}
             ${item.fake_risk ? `
               <span class="inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[10px] font-bold bg-cherry text-white shadow-sm" title="${escapeQuotes(item.fake_reason || 'Counterfeit red flag detected')}">
                 <i data-lucide="alert-triangle" class="w-3 h-3"></i>
@@ -868,7 +873,7 @@ function renderListings() {
           <!-- Price & Route Comparison Panel -->
           <div class="rounded-lg border border-border bg-background/70 p-3 space-y-2.5 text-xs">
             <div class="flex justify-between items-baseline">
-              <span class="text-muted-foreground">Asking Price</span>
+              <span class="text-muted-foreground">${item.is_auction ? 'Current Bid (Auction)' : 'Asking Price'}</span>
               <div class="flex items-baseline gap-2 tabular-nums">
                 ${priceDrop > 0 && item.initial_price ? `<span class="text-[11px] text-muted-foreground line-through">£${Number(item.initial_price).toLocaleString()}</span>` : ''}
                 <span class="text-foreground font-semibold text-sm">£${item.price.toLocaleString()}</span>
